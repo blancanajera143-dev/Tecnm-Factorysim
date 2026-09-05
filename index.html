@@ -238,6 +238,33 @@
 
   svg.spc text{font-family:'IBM Plex Mono',monospace;}
 
+  /* ---------- FACTORY FLOOR ---------- */
+  .floor-banner{display:none;align-items:center;gap:10px;padding:10px 14px;border-radius:4px;margin-bottom:14px;font-size:13px;}
+  .floor-banner.positive{background:rgba(76,175,106,.12);border:1px solid var(--green);color:var(--green);}
+  .floor-banner.negative{background:rgba(228,87,46,.12);border:1px solid var(--red);color:var(--red);}
+  .floor-banner span:first-child{font-size:20px;}
+  .floor-wrap{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:10px 4px 26px;}
+  .room{
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 10px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 10px),
+      var(--panel-2);
+    border:2px dashed var(--line);border-radius:6px;min-width:150px;max-width:170px;
+    padding:16px 12px 12px;position:relative;flex:0 0 auto;margin-right:14px;transition:border-color .2s, box-shadow .2s;
+  }
+  .room.bottleneck{border-color:var(--red);box-shadow:0 0 0 1px var(--red);}
+  .room .room-label{position:absolute;top:-11px;left:10px;background:var(--bg);padding:0 6px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--amber);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;}
+  .room-connector{align-self:center;font-size:20px;color:var(--amber-dim);flex:0 0 auto;margin:0 -2px 0 -6px;padding-top:4px;}
+  .machine-icon-big{font-size:34px;text-align:center;line-height:1;}
+  .room-icons{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:10px;min-height:30px;align-items:center;}
+  .worker-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto;box-shadow:0 0 0 1px rgba(0,0,0,.3);}
+  .stock-pile{display:flex;flex-wrap:wrap;gap:2px;justify-content:center;font-size:17px;line-height:1.3;min-height:24px;align-items:center;}
+  .room-caption{text-align:center;font-size:10.5px;color:var(--muted);margin-top:8px;line-height:1.4;}
+  .room-title{text-align:center;font-family:'Oswald',sans-serif;font-size:12px;text-transform:uppercase;margin-top:2px;color:var(--paper);}
+  .legend-floor{display:flex;flex-wrap:wrap;gap:14px;}
+  .legend-floor .lf-item{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--paper);}
+  .legend-floor .lf-item .ic{font-size:18px;width:24px;text-align:center;}
+
   footer.credits{margin-top:30px;text-align:center;color:var(--muted);font-size:11.5px;font-family:'IBM Plex Mono',monospace;letter-spacing:.03em;}
 </style>
 </head>
@@ -268,6 +295,7 @@
     <button data-tab="finanzas"><b>04</b>Finanzas</button>
     <button data-tab="resultados"><b>05</b>Resultados y KPI</button>
     <button data-tab="competencia"><b>06</b>Competencia <span class="mono" style="color:var(--amber)">●</span></button>
+    <button data-tab="planta"><b>07</b>Planta virtual</button>
   </nav>
 
   <!-- ============ TAB 0: INSTRUCCIONES ============ -->
@@ -668,6 +696,33 @@
     </div>
   </section>
 
+  <!-- ============ TAB 7: PLANTA VIRTUAL ============ -->
+  <section class="tabpanel" id="tab-planta">
+    <p class="panel-title">Planta virtual</p>
+    <p class="panel-sub">Así se ve tu fábrica con la configuración actual: áreas, trabajadores, maquinaria e inventarios, de izquierda a derecha siguiendo el flujo de producción.</p>
+
+    <div class="card">
+      <h3><span class="tag">VISTA</span> Mapa de tu fábrica</h3>
+      <div class="floor-banner" id="floorEventBanner"></div>
+      <div class="floor-wrap" id="factoryFloor"></div>
+      <p class="note" style="margin-top:6px;">La estación con el borde rojo es tu cuello de botella. El tamaño de las pilas de cajas es proporcional (a escala) a tu inventario, no una cuenta exacta unidad por unidad.</p>
+    </div>
+
+    <div class="card">
+      <h3><span class="tag">LEYENDA</span> Cómo leer el mapa</h3>
+      <div class="legend-floor">
+        <div class="lf-item"><span class="ic">🚚</span> Proveedor entregando materia prima</div>
+        <div class="lf-item"><span class="ic">📦</span> Cajas de inventario (materia prima o producto terminado)</div>
+        <div class="lf-item"><span class="ic">🗑️</span> Unidades defectuosas / merma</div>
+        <div class="lf-item"><span class="ic">🤖⚙️🛠️</span> Maquinaria: alta / media / baja tecnología</div>
+        <div class="lf-item"><span class="ic">👷</span> Operarios (color = nivel: verde experto, ámbar medio, rojo básico)</div>
+        <div class="lf-item"><span class="ic">🦺🌿⚠️</span> Nivel de seguridad y sustentabilidad</div>
+        <div class="lf-item"><span class="ic">🔩🛡️🚫</span> Nivel de mantenimiento</div>
+        <div class="lf-item"><span class="ic">🚛</span> Despacho hacia tu mercado objetivo</div>
+      </div>
+    </div>
+  </section>
+
   <footer class="credits">TECNM FACTORYSIM — COSTEO, RIESGO, FINANZAS Y COMPETENCIA · USO ACADÉMICO · DATOS COMPARTIDOS ENTRE USUARIOS</footer>
 </div>
 
@@ -1032,6 +1087,95 @@
     $('#spcLegend').textContent = 'LCS: '+fmtN(ucl,1)+'% · Media: '+fmtN(mean,1)+'% · LCI: '+fmtN(lcl,1)+'%';
   }
 
+  /* ---------------- FACTORY FLOOR (VISUAL) ---------------- */
+  function laborBadgeColor(id){ return id==='experto' ? 'var(--green)' : id==='basico' ? 'var(--red)' : 'var(--amber)'; }
+  function roomConnector(){ return `<div class="room-connector">➜</div>`; }
+  function renderFactoryFloor(){
+    const el = $('#factoryFloor'); if(!el) return;
+    const supplier = byId(SUPPLIERS, state.supplierId);
+    const labor = byId(LABOR, state.laborId);
+    const machine = byId(MACHINES, state.machineId);
+    const maintenance = byId(MAINTENANCE, state.maintenanceId);
+    const safety = byId(SAFETY, state.safetyId);
+    const r = state.lastResults || {};
+    const cycle = r.cycle || 0;
+    const market = MARKETS.find(m=>m.id===state.targetMarket) || MARKETS[1];
+
+    const mpBoxes = clamp(Math.round((r.ropUnits||0)/40), 2, 10);
+    const ptBoxes = clamp(Math.round((r.sellableUnits||0)/40), 2, 12);
+    const scrapBoxes = clamp(Math.round(((r.batchSize||0)-(r.sellableUnits||0))/40), 0, 6);
+    const risk = r.stockoutRisk||0;
+    const riskClass = risk<20?'low':(risk<50?'mid':'high');
+
+    const supplierRoom = `
+      <div class="room">
+        <div class="room-label">Proveedor</div>
+        <div class="machine-icon-big">🚚</div>
+        <div class="room-title">${supplier.name}</div>
+        <div class="room-caption">${supplier.tier}</div>
+      </div>`;
+
+    const mpRoom = `
+      <div class="room">
+        <div class="room-label">Almacén MP</div>
+        <div class="stock-pile">${'📦'.repeat(mpBoxes)}</div>
+        <div class="room-caption">ROP: ${Math.round(r.ropUnits||0).toLocaleString('es-MX')} u.<br><span class="risk-badge ${riskClass}" style="margin-top:4px;display:inline-block;">Riesgo ${fmtN(risk,0)}%</span></div>
+      </div>`;
+
+    const stationRooms = state.stations.map(s=>{
+      const t = effStdTime(s);
+      const isBottleneck = Math.abs(t-cycle)<0.0001 && cycle>0;
+      const nWorkers = Math.min(s.workers, 8);
+      const workers = Array.from({length:nWorkers}).map(()=>
+        `<div class="worker-icon" style="background:${laborBadgeColor(state.laborId)}" title="${labor.name} — ${labor.tier}">👷</div>`
+      ).join('');
+      const extra = s.workers>8 ? `<div class="note" style="font-size:10px;width:100%;text-align:center;">+${s.workers-8} más</div>` : '';
+      return `<div class="room${isBottleneck?' bottleneck':''}">
+        <div class="room-label">${escapeHtml(s.name)}</div>
+        ${isBottleneck?'<div class="badge-bottleneck">CUELLO DE BOTELLA</div>':''}
+        <div class="machine-icon-big" title="${machine.name} — ${machine.tier}">${machine.icon}</div>
+        <div class="room-icons">${workers}${extra}</div>
+        <div class="room-caption">${fmtN(t,1)} min/u.</div>
+      </div>`;
+    }).join('');
+
+    const qcRoom = `
+      <div class="room">
+        <div class="room-label">Calidad y mantenimiento</div>
+        <div class="machine-icon-big" title="${safety.name}">${safety.icon}<span style="font-size:22px;"> ${maintenance.icon}</span></div>
+        <div class="room-title">${fmtN(r.qualityScore||0,0)} / 100</div>
+        <div class="room-caption">Huella: ${safety.footprint}<br>Mant.: ${maintenance.tier}</div>
+      </div>`;
+
+    const ptRoom = `
+      <div class="room">
+        <div class="room-label">Almacén PT</div>
+        <div class="stock-pile">${'📦'.repeat(ptBoxes)}${'🗑️'.repeat(scrapBoxes)}</div>
+        <div class="room-caption">${(r.sellableUnits||0).toLocaleString('es-MX')} u. vendibles${scrapBoxes>0?'<br>+ merma por defectos':''}</div>
+      </div>`;
+
+    const dispatchRoom = `
+      <div class="room">
+        <div class="room-label">Despacho</div>
+        <div class="machine-icon-big">🚛</div>
+        <div class="room-title">${market.icon} ${market.name}</div>
+        <div class="room-caption">Precio: ${fmt(state.askingPrice||r.salePrice||0)}</div>
+      </div>`;
+
+    el.innerHTML = supplierRoom + roomConnector() + mpRoom + roomConnector() + stationRooms + roomConnector() + qcRoom + roomConnector() + ptRoom + roomConnector() + dispatchRoom;
+
+    const banner = $('#floorEventBanner');
+    if(banner){
+      if(state.activeEvent){
+        banner.style.display = 'flex';
+        banner.className = 'floor-banner ' + (state.activeEvent.positive?'positive':'negative');
+        banner.innerHTML = `<span>${state.activeEvent.icon}</span><span>Evento activo: ${state.activeEvent.title} — ${state.activeEvent.desc}</span>`;
+      } else {
+        banner.style.display = 'none';
+      }
+    }
+  }
+
   /* ---------------- CALCULATIONS ---------------- */
   function recalcAll(full=true){
     const supplier = byId(SUPPLIERS, state.supplierId);
@@ -1185,13 +1329,14 @@
 
     state.lastResults = {
       unitCost, qualityScore, defectRate, sellableUnits, cycle, throughput: throughputEffective, efficiencyScore,
-      batchSize: state.batchSize, salePrice, oee, stockoutRisk,
+      batchSize: state.batchSize, salePrice, oee, stockoutRisk, ropUnits,
       supplierId: state.supplierId, laborId: state.laborId, trainingId: state.trainingId, machineId: state.machineId,
       maintenanceId: state.maintenanceId, safetyId: state.safetyId,
     };
 
     renderPie(mpUnit, moUnit, machineUnit, cifUnit, trainingUnit, maintenanceUnit, safetyUnit);
     renderSPCChart(defectRate*100);
+    renderFactoryFloor();
     if(full){ renderChain(); renderSimStations(); renderStationBars(); renderAllChoiceGroups(); }
   }
 
