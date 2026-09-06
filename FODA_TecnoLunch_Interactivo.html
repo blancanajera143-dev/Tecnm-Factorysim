@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>FODA TecnoLunch — Clasificación interactiva</title>
+<style>
+  :root{
+    --ink:#20303a;
+    --paper:#f6f3ea;
+    --fortaleza:#2f6f4f;
+    --debilidad:#a13d3d;
+    --oportunidad:#2b5f8a;
+    --amenaza:#8a5a1f;
+    --vc:#5a3c8a;
+    --card:#ffffff;
+    --line:#d8d2c2;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.5;
+    padding:28px 16px 60px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+  h1{
+    font-size:1.65rem;
+    font-weight:600;
+    margin:0 0 4px;
+    letter-spacing:.2px;
+  }
+  .subtitle{
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:.88rem;
+    color:#5a6a72;
+    margin:0 0 28px;
+  }
+  #progress{
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:.8rem;
+    color:#6b7a82;
+    margin-bottom:10px;
+  }
+  .bar{
+    height:5px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:26px;
+  }
+  .bar-fill{height:100%;background:var(--ink);width:0%;transition:width .3s ease;}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:26px 24px;
+    margin-bottom:18px;
+  }
+  .item-text{
+    font-size:1.12rem;
+    margin:0 0 20px;
+  }
+  .item-text .tag{
+    display:block;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:.72rem;
+    color:#8a8272;
+    margin-bottom:6px;
+  }
+  .options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  @media (max-width:520px){ .options{grid-template-columns:1fr;} }
+  button.opt{
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:.9rem;
+    text-align:left;
+    padding:12px 14px;
+    border-radius:5px;
+    border:1.5px solid var(--line);
+    background:#fbfaf6;
+    cursor:pointer;
+    transition:transform .08s ease;
+    color:var(--ink);
+  }
+  button.opt:hover{border-color:#b8b09a;}
+  button.opt:active{transform:scale(.98);}
+  button.opt.correct{background:#e5f1e9;border-color:var(--fortaleza);color:var(--fortaleza);font-weight:600;}
+  button.opt.wrong{background:#f6e6e6;border-color:var(--debilidad);color:var(--debilidad);}
+  button.opt[disabled]{cursor:default;}
+
+  .explain{
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:.85rem;
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px dashed var(--line);
+    color:#42525a;
+    display:none;
+  }
+  .explain.show{display:block;}
+  .nextbtn{
+    margin-top:18px;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:.85rem;
+    background:var(--ink);
+    color:var(--paper);
+    border:none;
+    padding:10px 18px;
+    border-radius:4px;
+    cursor:pointer;
+    display:none;
+  }
+  .nextbtn.show{display:inline-block;}
+
+  /* Resultado final */
+  #resultado{display:none;}
+  #resultado.show{display:block;}
+  .score{
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:1rem;
+    margin-bottom:22px;
+  }
+  .score b{font-size:1.4rem;}
+
+  .matriz{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-bottom:22px;
+  }
+  @media (max-width:560px){ .matriz{grid-template-columns:1fr;} }
+  .cuadrante{
+    border-radius:6px;
+    padding:16px 16px 14px;
+    color:#fff;
+  }
+  .cuadrante h3{
+    margin:0 0 8px;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:.85rem;
+    font-weight:700;
+    letter-spacing:.3px;
+  }
+  .cuadrante ul{margin:0;padding-left:18px;font-size:.92rem;}
+  .cuadrante li{margin-bottom:4px;}
+  .c-fortaleza{background:var(--fortaleza);}
+  .c-debilidad{background:var(--debilidad);}
+  .c-oportunidad{background:var(--oportunidad);}
+  .c-amenaza{background:var(--amenaza);}
+
+  .vc-box{
+    background:var(--vc);
+    color:#fff;
+    border-radius:6px;
+    padding:18px 20px;
+    margin-bottom:14px;
+  }
+  .vc-box h3{margin:0 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:.85rem;letter-spacing:.3px;}
+  .vc-box p{margin:0;font-size:.98rem;}
+
+  .distingos{
+    background:#efe9d8;
+    border-radius:6px;
+    padding:16px 20px;
+  }
+  .distingos h3{margin:0 0 8px;font-family:Arial,Helvetica,sans-serif;font-size:.85rem;color:#5a4d2f;letter-spacing:.3px;}
+  .distingos ul{margin:0;padding-left:18px;font-size:.92rem;}
+
+  .restart{
+    margin-top:24px;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:.85rem;
+    background:none;
+    border:1.5px solid var(--ink);
+    color:var(--ink);
+    padding:9px 16px;
+    border-radius:4px;
+    cursor:pointer;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Caso TecnoLunch: clasifica el FODA</h1>
+  <p class="subtitle">Lee cada elemento del caso y decide a qué categoría pertenece. Al final se generará la matriz completa.</p>
+
+  <div id="progress"></div>
+  <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+
+  <div id="quiz"></div>
+
+  <div id="resultado">
+    <div class="score">Resultado: <b id="scoreNum"></b> de <span id="scoreTotal"></span> correctas</div>
+
+    <div class="matriz">
+      <div class="cuadrante c-fortaleza">
+        <h3>FORTALEZAS</h3>
+        <ul>
+          <li>Conocimientos de administración, diseño, programación y marketing</li>
+          <li>Experiencia de un socio en restaurantes</li>
+          <li>Capital inicial de $120,000</li>
+          <li>Aplicación propia para pedidos</li>
+          <li>Personalización de platillos</li>
+        </ul>
+      </div>
+      <div class="cuadrante c-debilidad">
+        <h3>DEBILIDADES</h3>
+        <ul>
+          <li>Poca experiencia en administración de inventarios</li>
+          <li>Presupuesto limitado para publicidad</li>
+          <li>Marca desconocida</li>
+          <li>Dependencia de un solo proveedor</li>
+        </ul>
+      </div>
+      <div class="cuadrante c-oportunidad">
+        <h3>OPORTUNIDADES</h3>
+        <ul>
+          <li>Creciente interés por la alimentación saludable</li>
+          <li>Empresas buscando comida saludable para empleados</li>
+          <li>Sin competidores que personalicen platillos por app</li>
+        </ul>
+      </div>
+      <div class="cuadrante c-amenaza">
+        <h3>AMENAZAS</h3>
+        <ul>
+          <li>Posible entrada de una cadena nacional</li>
+          <li>Incremento de precios de insumos</li>
+          <li>Aparición de nuevos competidores</li>
+          <li>Mayor capacidad publicitaria de grandes empresas</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vc-box">
+      <h3>VENTAJA COMPETITIVA</h3>
+      <p>Personalización de platillos mediante tecnología (app), combinada con información nutricional visible: una mezcla que ningún competidor local ofrece actualmente.</p>
+    </div>
+
+    <div class="distingos">
+      <h3>DISTINGOS COMPETITIVOS</h3>
+      <ul>
+        <li>Asesoría personalizada para seleccionar alimentos</li>
+        <li>Seguimiento a clientes frecuentes</li>
+        <li>Programa de recompensas</li>
+        <li>Descuentos para estudiantes</li>
+      </ul>
+    </div>
+
+    <button class="restart" id="restartBtn">Volver a intentar</button>
+  </div>
+</div>
+
+<script>
+const itemsSource = [
+  {t:"Conocimientos de administración, diseño, programación y marketing digital del equipo fundador.", cat:"F", exp:"Es un recurso interno con el que ya cuenta el equipo."},
+  {t:"Uno de los socios trabajó tres años en un restaurante y conoce los procesos de preparación y atención al cliente.", cat:"F", exp:"Es experiencia interna que aporta valor al proyecto."},
+  {t:"Cuentan con un capital inicial de $120,000 para iniciar operaciones.", cat:"F", exp:"Es un recurso financiero propio de la empresa."},
+  {t:"Desarrollarán una aplicación sencilla para recibir pedidos.", cat:"F", exp:"Es una capacidad tecnológica propia de la empresa."},
+  {t:"Los clientes podrán personalizar sus platillos (bajos en azúcar, vegetarianos, altos en proteína, por calorías).", cat:"F", exp:"Es una característica propia del servicio ya diseñada por la empresa."},
+  {t:"Los estudiantes no tienen experiencia suficiente en administración de inventarios.", cat:"D", exp:"Es una carencia interna del equipo."},
+  {t:"Cuentan con un presupuesto limitado para publicidad.", cat:"D", exp:"Es una limitación de recursos internos."},
+  {t:"Todavía no tienen una marca reconocida en el mercado.", cat:"D", exp:"Es una situación interna: falta de posicionamiento."},
+  {t:"Durante los primeros meses dependerán de un solo proveedor de algunos ingredientes.", cat:"D", exp:"Es una vulnerabilidad interna de la operación."},
+  {t:"Cada vez más personas están interesadas en cuidar su alimentación.", cat:"O", exp:"Es una tendencia favorable del entorno social."},
+  {t:"Varias empresas de la ciudad buscan opciones de comida saludable para sus empleados.", cat:"O", exp:"Es un nuevo segmento de mercado en el entorno."},
+  {t:"Ningún competidor de la zona permite personalizar completamente los platillos desde una app.", cat:"O", exp:"Es un espacio libre en el mercado que la empresa puede aprovechar."},
+  {t:"Una cadena nacional de restaurantes está analizando abrir una sucursal en la ciudad.", cat:"A", exp:"Es un riesgo externo: competidor con más capital y marca reconocida."},
+  {t:"Existe preocupación por el posible incremento en los precios de frutas, verduras y carne.", cat:"A", exp:"Es un factor económico externo que puede afectar los costos."},
+  {t:"Podrían aparecer nuevos competidores interesados en el creciente mercado de comida saludable.", cat:"A", exp:"Es un riesgo externo derivado del atractivo del mercado."},
+  {t:"La cadena nacional cuenta con mayor capital y amplia capacidad de publicidad.", cat:"A", exp:"Es una fortaleza de un competidor externo, por lo tanto un riesgo para TecnoLunch."},
+  {t:"La combinación de personalización de platillos por app + información nutricional, que ningún competidor local ofrece.", cat:"VC", exp:"Es una característica propia del producto/servicio, única en el mercado local: la ventaja competitiva."},
+  {t:"Programa de recompensas para clientes frecuentes.", cat:"DC", exp:"Es un DISTINGO competitivo: un elemento común en el mercado (los programas de recompensas ya existen), al que TecnoLunch da un cuidado especial dentro de su estrategia. No es la ventaja competitiva central."}
+];
+
+const catNames = {F:"Fortaleza", D:"Debilidad", O:"Oportunidad", A:"Amenaza", VC:"Ventaja competitiva", DC:"Distingo competitivo"};
+const optionOrder = ["F","D","O","A","VC","DC"];
+
+let current = 0;
+let score = 0;
+let items = [];
+const quizEl = document.getElementById('quiz');
+const progressEl = document.getElementById('progress');
+const barFill = document.getElementById('barFill');
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function render(){
+  if(current >= items.length){
+    finish();
+    return;
+  }
+  const it = items[current];
+  progressEl.textContent = `Elemento ${current+1} de ${items.length}`;
+  barFill.style.width = (current/items.length*100)+'%';
+
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  const p = document.createElement('p');
+  p.className = 'item-text';
+  p.innerHTML = `<span class="tag">Clasifica este elemento del caso:</span>${it.t}`;
+  card.appendChild(p);
+
+  const opts = document.createElement('div');
+  opts.className = 'options';
+
+  shuffle(optionOrder).forEach(key=>{
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.textContent = catNames[key];
+    b.onclick = () => choose(key, it, b, opts, card);
+    opts.appendChild(b);
+  });
+  card.appendChild(opts);
+
+  const exp = document.createElement('div');
+  exp.className = 'explain';
+  exp.textContent = it.exp;
+  card.appendChild(exp);
+
+  const next = document.createElement('button');
+  next.className = 'nextbtn';
+  next.textContent = current === items.length-1 ? 'Ver matriz final' : 'Siguiente';
+  next.onclick = () => { current++; quizEl.innerHTML=''; render(); };
+  card.appendChild(next);
+
+  quizEl.innerHTML = '';
+  quizEl.appendChild(card);
+}
+
+function choose(key, it, btn, optsContainer, card){
+  const buttons = optsContainer.querySelectorAll('button');
+  buttons.forEach(b=>b.disabled = true);
+
+  const correct = key === it.cat;
+
+  if(correct){
+    btn.classList.add('correct');
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    buttons.forEach(b=>{ if(b.textContent === catNames[it.cat]) b.classList.add('correct'); });
+  }
+
+  card.querySelector('.explain').classList.add('show');
+  card.querySelector('.nextbtn').classList.add('show');
+}
+
+function finish(){
+  progressEl.textContent = 'Completado';
+  barFill.style.width = '100%';
+  quizEl.innerHTML = '';
+  document.getElementById('scoreNum').textContent = score;
+  document.getElementById('scoreTotal').textContent = items.length;
+  document.getElementById('resultado').classList.add('show');
+}
+
+document.getElementById('restartBtn').onclick = () => {
+  current = 0; score = 0;
+  items = shuffle(itemsSource);
+  document.getElementById('resultado').classList.remove('show');
+  render();
+};
+
+items = shuffle(itemsSource);
+render();
+</script>
+</body>
+</html>
