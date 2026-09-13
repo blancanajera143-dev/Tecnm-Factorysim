@@ -207,6 +207,10 @@
   .status-badge.ended{background:rgba(228,87,46,.15);color:var(--red);border:1px solid var(--red);}
   .status-badge.idle{background:rgba(139,147,160,.15);color:var(--muted);border:1px solid var(--line);}
 
+  .db-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:20px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;}
+  .db-badge.ok{background:rgba(76,175,106,.15);color:var(--green);border:1px solid var(--green);}
+  .db-badge.bad{background:rgba(228,87,46,.15);color:var(--red);border:1px solid var(--red);}
+  .db-badge .dot2{width:8px;height:8px;border-radius:50%;background:currentColor;}
   .admin-box{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line);}
   .toggle-row{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:4px;}
 
@@ -266,6 +270,39 @@
   .legend-floor .lf-item .ic{font-size:18px;width:24px;text-align:center;}
 
   footer.credits{margin-top:30px;text-align:center;color:var(--muted);font-size:11.5px;font-family:'IBM Plex Mono',monospace;letter-spacing:.03em;}
+
+  /* ---------- TEACHER PANEL ---------- */
+  .status-pill{font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:3px 9px;border-radius:12px;white-space:nowrap;}
+  .status-pill.st-none{background:rgba(139,147,160,.12);color:var(--muted);border:1px solid var(--line);}
+  .status-pill.st-progress{background:rgba(242,183,5,.15);color:var(--amber);border:1px solid var(--amber);}
+  .status-pill.st-sent{background:rgba(76,175,106,.15);color:var(--green);border:1px solid var(--green);}
+  table.teach{width:100%;border-collapse:collapse;font-size:12.5px;}
+  table.teach th{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:0 7px 8px;border-bottom:1px solid var(--line);}
+  table.teach td{padding:7px;border-bottom:1px solid var(--line);}
+  table.teach tr.stale{opacity:.55;}
+
+  .ficha{
+    background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:18px 20px;margin-bottom:16px;
+    page-break-inside:avoid;
+  }
+  .ficha-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--amber);padding-bottom:10px;margin-bottom:12px;}
+  .ficha-head .fh-name{font-family:'Oswald',sans-serif;font-size:19px;text-transform:uppercase;color:var(--paper);}
+  .ficha-head .fh-group{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .ficha-rank{text-align:right;}
+  .ficha-rank .fr-num{font-family:'Oswald',sans-serif;font-size:28px;color:var(--amber);line-height:1;}
+  .ficha-rank .fr-lb{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+  .ficha-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .ficha-block h5{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin:0 0 8px;}
+  .ficha-block .kv{font-size:12.5px;padding:4px 0;}
+  @media (max-width:820px){.ficha-grid{grid-template-columns:1fr;}}
+
+  @media print{
+    body *{visibility:hidden;}
+    #fichasPrintArea, #fichasPrintArea *{visibility:visible;}
+    #fichasPrintArea{position:absolute;left:0;top:0;width:100%;}
+    .ficha{page-break-after:always;border:none;}
+    .app > .topbar, .app > nav.tabs, footer.credits{display:none !important;}
+  }
 </style>
 </head>
 <body>
@@ -296,6 +333,7 @@
     <button data-tab="resultados"><b>05</b>Resultados y KPI</button>
     <button data-tab="competencia"><b>06</b>Competencia <span class="mono" style="color:var(--amber)">●</span></button>
     <button data-tab="planta"><b>07</b>Planta virtual</button>
+    <button data-tab="profesor"><b>08</b>Panel del profesor 👨‍🏫</button>
   </nav>
 
   <!-- ============ TAB 0: INSTRUCCIONES ============ -->
@@ -630,6 +668,19 @@
     <p class="panel-title">Competencia entre equipos</p>
     <p class="panel-sub">Regístrate, configura tu producción, elige un mercado y compite contra reloj. Al finalizar, solo algunos equipos lograrán vender.</p>
 
+    <div class="card" id="dbStatusCard">
+      <h3><span class="tag">CONEXIÓN</span> Base de datos compartida</h3>
+      <div id="dbBadgeWrap"></div>
+      <div id="dbConfigForm" style="display:none;margin-top:12px;">
+        <p class="note">Este simulador necesita una base de datos compartida (gratuita) para que el registro de equipos, las ofertas y el cronómetro funcionen fuera de Claude. Pega aquí la URL de tu Realtime Database de Firebase para probarla en este navegador. <b style="color:var(--amber)">Para que funcione automáticamente con tus 50 equipos, pide al profesor que la pegue directamente en el código antes de publicar (ver comentario FIREBASE_DB_URL en el archivo).</b></p>
+        <div class="form-row"><label for="dbUrlInput">Firebase Database URL</label><input id="dbUrlInput" type="text" placeholder="https://tu-proyecto-default-rtdb.firebaseio.com"></div>
+        <div class="btn-row" style="margin-top:0;">
+          <button class="btn amber" id="saveDbUrlBtn">Guardar y conectar (solo este navegador)</button>
+        </div>
+        <div class="form-msg" id="dbMsg"></div>
+      </div>
+    </div>
+
     <div class="card">
       <div class="status-badge idle" id="statusBadge">Sin competencia activa</div>
       <div class="countdown-box">
@@ -723,6 +774,39 @@
     </div>
   </section>
 
+  <!-- ============ TAB 8: PANEL DEL PROFESOR ============ -->
+  <section class="tabpanel" id="tab-profesor">
+    <p class="panel-title">Panel del profesor</p>
+    <p class="panel-sub">Monitorea en vivo a todos los equipos registrados (se hayan o no inscrito a la competencia), calcula el ranking final y genera la ficha técnica de cada participante.</p>
+
+    <div class="card" id="teacherLockedCard">
+      <h3><span class="tag">ACCESO</span> Modo profesor</h3>
+      <label class="toggle-row"><input type="checkbox" id="profesorToggle2"> Activar modo profesor / anfitrión</label>
+      <p class="note" style="margin-top:6px;">Es el mismo interruptor que en la pestaña 06 · Competencia — actívalo desde cualquiera de las dos y queda activo en ambas.</p>
+    </div>
+
+    <div id="teacherPanelContent" style="display:none;">
+      <div class="card">
+        <h3><span class="tag">EN VIVO</span> Avance de todos los equipos</h3>
+        <div class="btn-row" style="margin-top:0;margin-bottom:10px;">
+          <button class="btn ghost" id="refreshTeacherBtn">↻ Actualizar avance</button>
+          <span class="note" id="teacherCount"></span>
+        </div>
+        <div id="teacherWrap"><div class="lb-empty">Cargando…</div></div>
+      </div>
+
+      <div class="card">
+        <h3><span class="tag">FINAL</span> Cálculo de ranking y fichas técnicas</h3>
+        <p class="note">Genera una ficha técnica por cada equipo registrado (haya vendido o no) con su lugar, su configuración completa y sus métricas — lista para imprimir o guardar como PDF.</p>
+        <div class="btn-row" style="margin-top:0;">
+          <button class="btn amber" id="genFichasBtn">📄 Calcular ranking y generar fichas técnicas</button>
+          <button class="btn ghost" id="printFichasBtn" style="display:none;">🖨️ Imprimir / guardar como PDF</button>
+        </div>
+        <div id="fichasWrap" style="margin-top:16px;"></div>
+      </div>
+    </div>
+  </section>
+
   <footer class="credits">TECNM FACTORYSIM — COSTEO, RIESGO, FINANZAS Y COMPETENCIA · USO ACADÉMICO · DATOS COMPARTIDOS ENTRE USUARIOS</footer>
 </div>
 
@@ -806,6 +890,7 @@
     targetMarket:'estandar', askingPrice: 0, askingTouched:false,
     lastResults: {},
     compConfig: null,
+    teacherMode: false,
   };
   let currentAccount = null;
 
@@ -816,7 +901,78 @@
   const clamp = (n,a,b)=>Math.max(a,Math.min(b,n));
   const byId = (arr,id)=> arr.find(x=>x.id===id) || arr[0];
   function escapeHtml(s){ return (s||'').toString().replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
-  function hasStorage(){ return typeof window.storage !== 'undefined' && window.storage; }
+  /* ================================================================
+     BASE DE DATOS COMPARTIDA (Firebase Realtime Database)
+     ----------------------------------------------------------------
+     Este simulador necesita un lugar compartido donde guardar cuentas,
+     ofertas y el cronómetro de la competencia para que funcione fuera
+     de Claude (por ejemplo, publicado en GitHub Pages).
+
+     PASOS PARA ACTIVARLO (una sola vez, lo hace el profesor):
+     1. Ve a https://console.firebase.google.com y crea un proyecto
+        gratuito (no pide tarjeta).
+     2. En el menú lateral entra a "Realtime Database" → "Crear base
+        de datos" → elige cualquier región → inicia en "modo de
+        prueba" (reglas abiertas de lectura/escritura).
+     3. Copia la URL que te da, algo como:
+        https://tu-proyecto-default-rtdb.firebaseio.com
+     4. Pégala abajo en la constante FIREBASE_DB_URL, entre las
+        comillas, y guarda el archivo antes de subirlo a GitHub.
+        Así TODOS los que abran tu página (hasta 50 equipos + tú)
+        comparten automáticamente la misma base de datos, sin que
+        nadie tenga que configurar nada en su navegador.
+
+     Nota de seguridad: el "modo de prueba" de Firebase es de lectura
+     y escritura abiertas para cualquiera que tenga la URL. Es
+     apropiado para una dinámica de clase de corta duración, pero no
+     guardes ahí información sensible ni la dejes así por meses.
+  ================================================================ */
+  const FIREBASE_DB_URL = ""; // <-- pega aquí tu URL de Firebase antes de publicar, ej: "https://tu-proyecto-default-rtdb.firebaseio.com"
+  const LOCAL_DB_KEY = 'tecnm_factorysim_db_url';
+
+  function getDbUrl(){
+    if(FIREBASE_DB_URL && FIREBASE_DB_URL.trim()) return FIREBASE_DB_URL.trim().replace(/\/+$/,'');
+    try{ const local = localStorage.getItem(LOCAL_DB_KEY); if(local && local.trim()) return local.trim().replace(/\/+$/,''); }catch(err){}
+    return '';
+  }
+  function setLocalDbUrl(url){ try{ localStorage.setItem(LOCAL_DB_KEY, (url||'').trim()); }catch(err){} }
+  function isDbHardcoded(){ return !!(FIREBASE_DB_URL && FIREBASE_DB_URL.trim()); }
+  function keyToPath(key){ return key.split(':').join('/'); }
+
+  const FB = {
+    async get(key){
+      const base = getDbUrl(); if(!base) throw new Error('sin-base-de-datos');
+      const res = await fetch(`${base}/${keyToPath(key)}.json`);
+      if(!res.ok) throw new Error('fb-get-failed');
+      const data = await res.json();
+      if(data===null || data===undefined) return null;
+      return { key, value: JSON.stringify(data) };
+    },
+    async set(key, value){
+      const base = getDbUrl(); if(!base) throw new Error('sin-base-de-datos');
+      let obj; try{ obj = JSON.parse(value); }catch(err){ obj = value; }
+      const res = await fetch(`${base}/${keyToPath(key)}.json`, { method:'PUT', body: JSON.stringify(obj) });
+      if(!res.ok) throw new Error('fb-set-failed');
+      return { key, value };
+    },
+    async delete(key){
+      const base = getDbUrl(); if(!base) throw new Error('sin-base-de-datos');
+      const res = await fetch(`${base}/${keyToPath(key)}.json`, { method:'DELETE' });
+      if(!res.ok) throw new Error('fb-delete-failed');
+      return { key, deleted:true };
+    },
+    async list(prefix){
+      const base = getDbUrl(); if(!base) throw new Error('sin-base-de-datos');
+      const parentPath = prefix.replace(/:$/,'');
+      const res = await fetch(`${base}/${parentPath}.json?shallow=true`);
+      if(!res.ok) throw new Error('fb-list-failed');
+      const data = await res.json();
+      const keys = data ? Object.keys(data).map(k=> parentPath+':'+k) : [];
+      return { keys };
+    }
+  };
+
+  function hasStorage(){ return !!getDbUrl(); }
   function slugify(name){
     let s = name.toString().toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
     if(!s) s = 'equipo-'+Math.random().toString(36).slice(2,7);
@@ -831,7 +987,8 @@
       $$('.tabpanel').forEach(p=>p.classList.remove('active'));
       btn.classList.add('active');
       $('#tab-'+btn.dataset.tab).classList.add('active');
-      if(btn.dataset.tab==='competencia'){ loadLeaderboard(); loadCompConfig(); }
+      if(btn.dataset.tab==='competencia'){ renderDbStatus(); loadLeaderboard(); loadCompConfig(); }
+      if(btn.dataset.tab==='profesor'){ if(state.teacherMode) loadTeacherPanel(); }
     });
   });
 
@@ -1337,6 +1494,7 @@
     renderPie(mpUnit, moUnit, machineUnit, cifUnit, trainingUnit, maintenanceUnit, safetyUnit);
     renderSPCChart(defectRate*100);
     renderFactoryFloor();
+    scheduleProgressSave();
     if(full){ renderChain(); renderSimStations(); renderStationBars(); renderAllChoiceGroups(); }
   }
 
@@ -1358,6 +1516,34 @@
   }
 
   /* ---------------- COMPETENCIA: sesión / cuentas ---------------- */
+  function renderDbStatus(){
+    const wrap = $('#dbBadgeWrap'); const form = $('#dbConfigForm');
+    if(!wrap) return;
+    if(hasStorage()){
+      wrap.innerHTML = `<span class="db-badge ok"><span class="dot2"></span>Conectado${isDbHardcoded()?' (configurado en el archivo)':' (guardado en este navegador)'}</span>`;
+      form.style.display = isDbHardcoded() ? 'none' : 'block';
+    } else {
+      wrap.innerHTML = `<span class="db-badge bad"><span class="dot2"></span>Sin conectar — el registro, las ofertas y el cronómetro no funcionarán hasta configurar una base de datos</span>`;
+      form.style.display = 'block';
+    }
+    const input = $('#dbUrlInput');
+    if(input && !isDbHardcoded()){
+      try{ input.value = localStorage.getItem(LOCAL_DB_KEY) || ''; }catch(err){}
+    }
+  }
+  const saveDbBtn = document.getElementById('saveDbUrlBtn');
+  if(saveDbBtn){
+    saveDbBtn.addEventListener('click', ()=>{
+      const msg = $('#dbMsg');
+      const url = ($('#dbUrlInput').value||'').trim();
+      if(!/^https?:\/\/.+/.test(url)){ showMsg(msg,'error','Pega una URL válida, por ejemplo https://tu-proyecto-default-rtdb.firebaseio.com'); return; }
+      setLocalDbUrl(url);
+      showMsg(msg,'ok','Guardada. Conectando…');
+      renderDbStatus();
+      loadCompConfig(); loadLeaderboard();
+    });
+  }
+
   function setSessionUI(){
     if(currentAccount){
       $('#sessionPill').style.display = 'flex'; $('#sessionName').textContent = currentAccount.name;
@@ -1380,17 +1566,17 @@
     $('#loginBtn').disabled = true; showMsg(msg,'info','Conectando…');
     try{
       let existing = null;
-      try{ const res = await window.storage.get(key, true); existing = res ? JSON.parse(res.value) : null; }catch(err){ existing = null; }
+      try{ const res = await FB.get(key); existing = res ? JSON.parse(res.value) : null; }catch(err){ existing = null; }
       if(existing){
         if(existing.pin !== pin){ showMsg(msg,'error','Ese equipo ya está registrado con otro PIN.'); $('#loginBtn').disabled=false; return; }
         existing.group = group || existing.group || '';
         currentAccount = {slug, name: existing.name, group: existing.group, pin};
-        await window.storage.set(key, JSON.stringify(existing), true);
+        await FB.set(key, JSON.stringify(existing));
         showMsg(msg,'ok','Sesión iniciada. Bienvenido de nuevo, '+existing.name+'.');
         paintMyOffer(existing.offer);
       } else {
         const entry = {name, group, pin, offer:null, updatedAt:null};
-        await window.storage.set(key, JSON.stringify(entry), true);
+        await FB.set(key, JSON.stringify(entry));
         currentAccount = {slug, name, group, pin};
         showMsg(msg,'ok','Equipo registrado. Configura tu producción y envía tu oferta cuando quieras.');
         paintMyOffer(null);
@@ -1454,7 +1640,7 @@
     const key = 'accounts:'+currentAccount.slug;
     try{
       let entry;
-      try{ const res = await window.storage.get(key, true); entry = res ? JSON.parse(res.value) : null; }catch(err){ entry=null; }
+      try{ const res = await FB.get(key); entry = res ? JSON.parse(res.value) : null; }catch(err){ entry=null; }
       if(!entry) entry = {name: currentAccount.name, group: currentAccount.group, pin: currentAccount.pin, offer:null, updatedAt:null};
       const r = state.lastResults;
       entry.offer = {
@@ -1467,7 +1653,7 @@
         submittedAt: Date.now(),
       };
       entry.updatedAt = Date.now();
-      await window.storage.set(key, JSON.stringify(entry), true);
+      await FB.set(key, JSON.stringify(entry));
       showMsg(msg,'ok','¡Oferta enviada! Se actualiza tu configuración disponible para el mercado.');
       paintMyOffer(entry.offer);
       loadLeaderboard();
@@ -1476,13 +1662,38 @@
   }
   $('#submitOfferBtn').addEventListener('click', submitOffer);
 
+  /* ---------------- LIVE PROGRESS AUTOSAVE (para el panel del profesor) ---------------- */
+  let lastProgressSaveAt = 0;
+  let progressSaveTimer = null;
+  function scheduleProgressSave(){
+    if(!currentAccount || !hasStorage()) return;
+    const now = Date.now();
+    const wait = Math.max(0, 6000 - (now - lastProgressSaveAt));
+    if(progressSaveTimer) clearTimeout(progressSaveTimer);
+    progressSaveTimer = setTimeout(saveProgressSnapshot, wait);
+  }
+  async function saveProgressSnapshot(){
+    if(!currentAccount || !hasStorage()) return;
+    lastProgressSaveAt = Date.now();
+    const r = state.lastResults || {};
+    const progress = {
+      targetMarket: state.targetMarket, askingPrice: state.askingPrice || r.salePrice || 0,
+      unitCost: r.unitCost, qualityScore: r.qualityScore, defectRate: r.defectRate,
+      efficiencyScore: r.efficiencyScore, oee: r.oee,
+      supplierId: r.supplierId, laborId: r.laborId, trainingId: r.trainingId, machineId: r.machineId,
+      maintenanceId: r.maintenanceId, safetyId: r.safetyId,
+      updatedAt: Date.now(),
+    };
+    try{ await FB.set('accounts:'+currentAccount.slug+':progress', JSON.stringify(progress)); }catch(err){ /* silencioso */ }
+  }
+
   /* ---------------- LEADERBOARD (EN VIVO) ---------------- */
   async function fetchAllAccounts(){
-    const listRes = await window.storage.list('accounts:', true);
+    const listRes = await FB.list('accounts:');
     const keys = (listRes && listRes.keys) ? listRes.keys : [];
     const entries = [];
     for(const k of keys){
-      try{ const r = await window.storage.get(k, true); if(r && r.value) entries.push(JSON.parse(r.value)); }catch(err){}
+      try{ const r = await FB.get(k); if(r && r.value) entries.push(JSON.parse(r.value)); }catch(err){}
     }
     return entries;
   }
@@ -1577,12 +1788,163 @@
   }
   $('#computeFinalBtn').addEventListener('click', computeFinalResults);
 
+  /* ---------------- PANEL DEL PROFESOR ---------------- */
+  function timeAgo(ts){
+    if(!ts) return '—';
+    const s = Math.max(0, Math.floor((Date.now()-ts)/1000));
+    if(s<60) return 'hace '+s+' s';
+    const m = Math.floor(s/60); if(m<60) return 'hace '+m+' min';
+    const h = Math.floor(m/60); if(h<24) return 'hace '+h+' h';
+    return 'hace '+Math.floor(h/24)+' d';
+  }
+  function teamStatusInfo(e){
+    if(e.offer) return {label:'Oferta enviada', cls:'st-sent', ts:e.offer.submittedAt};
+    if(e.progress) return {label:'Configurando…', cls:'st-progress', ts:e.progress.updatedAt};
+    return {label:'Registrado, sin actividad', cls:'st-none', ts:e.updatedAt};
+  }
+  async function loadTeacherPanel(){
+    const wrap = $('#teacherWrap');
+    if(!hasStorage()){ wrap.innerHTML = '<div class="lb-empty">Base de datos no conectada — revisa la pestaña Competencia.</div>'; return; }
+    wrap.innerHTML = '<div class="lb-empty">Cargando avance de los equipos…</div>';
+    try{
+      const entries = await fetchAllAccounts();
+      $('#teacherCount').textContent = entries.length + ' equipo(s) registrado(s)';
+      if(entries.length===0){ wrap.innerHTML = '<div class="lb-empty">Todavía no se ha registrado ningún equipo.</div>'; return; }
+      entries.sort((a,b)=>{
+        const ta = teamStatusInfo(a).ts||0, tb = teamStatusInfo(b).ts||0;
+        return tb-ta;
+      });
+      const rows = entries.map(e=>{
+        const st = teamStatusInfo(e);
+        const data = e.offer || e.progress || null;
+        const stale = st.ts ? (Date.now()-st.ts) > 15*60*1000 : true;
+        const mk = data ? (MARKETS.find(m=>m.id===data.targetMarket)||{}).name || data.targetMarket : '—';
+        return `<tr class="${stale?'stale':''}">
+          <td>${escapeHtml(e.name)}</td>
+          <td class="mono" style="color:var(--muted)">${e.group?escapeHtml(e.group):'—'}</td>
+          <td><span class="status-pill ${st.cls}">${st.label}</span></td>
+          <td class="mono">${mk}</td>
+          <td class="mono">${data&&data.qualityScore!=null?fmtN(data.qualityScore,0):'—'}</td>
+          <td class="mono">${data&&data.unitCost!=null?fmt(data.unitCost):'—'}</td>
+          <td class="mono" style="color:var(--amber)">${data&&data.efficiencyScore!=null?fmtN(data.efficiencyScore,1):'—'}</td>
+          <td class="mono" style="color:var(--muted)">${timeAgo(st.ts)}</td>
+        </tr>`;
+      }).join('');
+      wrap.innerHTML = `<div style="overflow-x:auto;"><table class="teach">
+        <thead><tr><th>Equipo</th><th>Grupo</th><th>Estado</th><th>Mercado</th><th>Calidad</th><th>Costo u.</th><th>Score</th><th>Última actividad</th></tr></thead>
+        <tbody>${rows}</tbody></table></div>`;
+    }catch(err){ wrap.innerHTML = '<div class="lb-empty">No se pudo cargar el avance. Intenta de nuevo.</div>'; }
+  }
+  $('#refreshTeacherBtn').addEventListener('click', loadTeacherPanel);
+  setInterval(()=>{ if(state.teacherMode && document.getElementById('tab-profesor').classList.contains('active')) loadTeacherPanel(); }, 15000);
+
+  function configSummaryHtml(d){
+    const supplier = byId(SUPPLIERS, d.supplierId), labor = byId(LABOR, d.laborId), training = byId(TRAININGS, d.trainingId);
+    const machine = byId(MACHINES, d.machineId), maintenance = byId(MAINTENANCE, d.maintenanceId), safety = byId(SAFETY, d.safetyId);
+    return `
+      <div class="kv"><span>Proveedor</span><b>${supplier.name} (${supplier.tier})</b></div>
+      <div class="kv"><span>Mano de obra</span><b>${labor.name}</b></div>
+      <div class="kv"><span>Capacitación</span><b>${training.name}</b></div>
+      <div class="kv"><span>Maquinaria</span><b>${machine.name}</b></div>
+      <div class="kv"><span>Mantenimiento</span><b>${maintenance.name}</b></div>
+      <div class="kv"><span>Seguridad</span><b>${safety.name}</b></div>`;
+  }
+
+  async function generateFichas(){
+    const wrap = $('#fichasWrap');
+    if(!hasStorage()){ wrap.innerHTML = '<div class="lb-empty">Base de datos no conectada.</div>'; return; }
+    wrap.innerHTML = '<div class="lb-empty">Calculando ranking y armando fichas…</div>';
+    $('#printFichasBtn').style.display = 'none';
+    try{
+      const entries = await fetchAllAccounts();
+      if(entries.length===0){ wrap.innerHTML = '<div class="lb-empty">Todavía no hay equipos registrados.</div>'; return; }
+
+      // ---- selección de mercados (solo entre quienes SÍ enviaron oferta) ----
+      const withOffer = entries.filter(e=>e.offer);
+      const winnersBySlot = {};
+      MARKETS.forEach(m=>{
+        let candidates = withOffer.filter(e=> e.offer.targetMarket===m.id && e.offer.qualityScore>=m.minQuality);
+        if(m.id==='premium') candidates.sort((a,b)=> b.offer.qualityScore-a.offer.qualityScore || a.offer.askingPrice-b.offer.askingPrice);
+        else if(m.id==='estandar') candidates.sort((a,b)=> (b.offer.qualityScore/Math.max(0.01,b.offer.askingPrice)) - (a.offer.qualityScore/Math.max(0.01,a.offer.askingPrice)));
+        else candidates.sort((a,b)=> a.offer.askingPrice-b.offer.askingPrice || b.offer.qualityScore-a.offer.qualityScore);
+        candidates.slice(0, m.capacity).forEach(w=> winnersBySlot[w.name+'|'+(w.group||'')] = m);
+      });
+
+      // ---- ranking general de eficiencia (solo quienes enviaron oferta obtienen lugar oficial) ----
+      const ranked = withOffer.slice().sort((a,b)=> b.offer.efficiencyScore - a.offer.efficiencyScore);
+      const rankOf = {};
+      ranked.forEach((e,i)=> rankOf[e.name+'|'+(e.group||'')] = i+1);
+
+      // orden final de fichas: primero los que tienen lugar (por lugar), luego el resto por nombre
+      const sinOferta = entries.filter(e=>!e.offer);
+      const ordered = [...ranked, ...sinOferta];
+
+      const totalConLugar = ranked.length;
+      const now = new Date().toLocaleString('es-MX');
+
+      const fichasHtml = ordered.map(e=>{
+        const key = e.name+'|'+(e.group||'');
+        const rank = rankOf[key] || null;
+        const won = winnersBySlot[key];
+        const data = e.offer || e.progress || null;
+        const dataLabel = e.offer ? '' : (e.progress ? '<p class="note" style="color:var(--amber);">⚠️ Este equipo no llegó a enviar su oferta final — se muestra su última configuración registrada.</p>' : '<p class="note" style="color:var(--red);">⚠️ Este equipo no registró ninguna configuración.</p>');
+        const rankBlock = rank
+          ? `<div class="fr-num">#${rank}</div><div class="fr-lb">de ${totalConLugar} con oferta</div>`
+          : `<div class="fr-num" style="color:var(--muted);font-size:16px;">Sin<br>clasificar</div>`;
+        const resultLine = e.offer
+          ? (won ? `<span class="badge-sold">✅ Vendió en ${won.name}</span>` : '<span class="badge-nosold">❌ No vendió</span>')
+          : '<span class="badge-nosold">— No participó en la selección de mercado</span>';
+        const metrics = data ? `
+          <div class="kv"><span>Calidad del producto</span><b>${fmtN(data.qualityScore,0)} / 100</b></div>
+          <div class="kv"><span>Costo unitario</span><b>${fmt(data.unitCost)}</b></div>
+          <div class="kv"><span>Tasa de defectos</span><b>${fmtN((data.defectRate||0)*100,1)}%</b></div>
+          <div class="kv"><span>OEE</span><b>${data.oee!=null?fmtN(data.oee*100,1)+'%':'—'}</b></div>
+          <div class="kv"><span>Score de eficiencia</span><b>${fmtN(data.efficiencyScore,1)}</b></div>
+          <div class="kv"><span>Precio ofertado</span><b>${fmt(data.askingPrice||0)}</b></div>
+          <div class="kv"><span>Mercado objetivo</span><b>${(MARKETS.find(m=>m.id===data.targetMarket)||{}).name || data.targetMarket || '—'}</b></div>
+        ` : '<p class="note">Sin datos disponibles.</p>';
+        const configBlock = data ? configSummaryHtml(data) : '';
+
+        return `<div class="ficha">
+          <div class="ficha-head">
+            <div><div class="fh-name">${escapeHtml(e.name)}</div><div class="fh-group">${e.group?escapeHtml(e.group):'Sin grupo asignado'} · Ficha generada: ${now}</div></div>
+            <div class="ficha-rank">${rankBlock}</div>
+          </div>
+          <p style="margin:0 0 12px;">${resultLine}</p>
+          ${dataLabel}
+          <div class="ficha-grid">
+            <div class="ficha-block"><h5>Configuración de producción</h5>${configBlock}</div>
+            <div class="ficha-block"><h5>Métricas de desempeño</h5>${metrics}</div>
+          </div>
+        </div>`;
+      }).join('');
+
+      wrap.innerHTML = `<div id="fichasPrintArea">
+        <div class="callout">Se generaron <b>${ordered.length}</b> fichas técnicas. <b>${totalConLugar}</b> equipos alcanzaron a enviar oferta y obtuvieron un lugar oficial en el ranking de eficiencia.</div>
+        ${fichasHtml}
+      </div>`;
+      $('#printFichasBtn').style.display = 'inline-block';
+    }catch(err){ wrap.innerHTML = '<div class="lb-empty">No se pudieron generar las fichas. Intenta de nuevo.</div>'; }
+  }
+  $('#genFichasBtn').addEventListener('click', generateFichas);
+  $('#printFichasBtn').addEventListener('click', ()=> window.print());
+
   /* ---------------- COMPETITION TIMER ---------------- */
-  $('#profesorToggle').addEventListener('change', e=>{ $('#adminPanel').style.display = e.target.checked ? 'block' : 'none'; });
+  function setTeacherMode(on){
+    state.teacherMode = on;
+    $('#profesorToggle').checked = on;
+    $('#profesorToggle2').checked = on;
+    $('#adminPanel').style.display = on ? 'block' : 'none';
+    $('#teacherLockedCard').style.display = on ? 'none' : 'block';
+    $('#teacherPanelContent').style.display = on ? 'block' : 'none';
+    if(on) loadTeacherPanel();
+  }
+  $('#profesorToggle').addEventListener('change', e=>{ setTeacherMode(e.target.checked); });
+  $('#profesorToggle2').addEventListener('change', e=>{ setTeacherMode(e.target.checked); });
 
   async function loadCompConfig(){
     if(!hasStorage()) return;
-    try{ const res = await window.storage.get('competition:config', true); state.compConfig = res ? JSON.parse(res.value) : null; }
+    try{ const res = await FB.get('competition:config'); state.compConfig = res ? JSON.parse(res.value) : null; }
     catch(err){ state.compConfig = null; }
     tickCountdown();
   }
@@ -1618,22 +1980,22 @@
     const unit = $('#durUnit').value;
     const ms = unit==='dias' ? val*86400000 : val*3600000;
     const cfg = {startAt: Date.now(), endAt: Date.now()+ms, durationValue: val, durationUnit: unit};
-    try{ await window.storage.set('competition:config', JSON.stringify(cfg), true); state.compConfig = cfg; tickCountdown(); }
+    try{ await FB.set('competition:config', JSON.stringify(cfg)); state.compConfig = cfg; tickCountdown(); }
     catch(err){ alert('No se pudo iniciar la competencia. Intenta de nuevo.'); }
   });
   $('#resetCompBtn').addEventListener('click', async ()=>{
     if(!hasStorage()) return;
-    try{ await window.storage.delete('competition:config', true); }catch(err){}
+    try{ await FB.delete('competition:config'); }catch(err){}
     state.compConfig = null; tickCountdown();
   });
   $('#wipeOffersBtn').addEventListener('click', async ()=>{
     if(!hasStorage()) return;
     if(!confirm('¿Borrar TODAS las ofertas de todos los equipos? Las cuentas se conservan, pero perderán su oferta enviada.')) return;
     try{
-      const entries = await window.storage.list('accounts:', true);
+      const entries = await FB.list('accounts:');
       const keys = (entries && entries.keys) ? entries.keys : [];
       for(const k of keys){
-        try{ const r = await window.storage.get(k, true); if(r && r.value){ const e = JSON.parse(r.value); e.offer=null; await window.storage.set(k, JSON.stringify(e), true); } }catch(err){}
+        try{ const r = await FB.get(k); if(r && r.value){ const e = JSON.parse(r.value); e.offer=null; await FB.set(k, JSON.stringify(e)); } }catch(err){}
       }
       loadLeaderboard(); $('#finalResultsWrap').innerHTML='';
       alert('Ofertas borradas.');
@@ -1646,6 +2008,7 @@
   renderStations();
   renderMarketChoices();
   renderMarketsInfo();
+  renderDbStatus();
   renderEventCard();
   recalcAll();
   setSessionUI();
