@@ -1517,17 +1517,23 @@
 
   /* ---------------- COMPETENCIA: sesión / cuentas ---------------- */
   function renderDbStatus(){
-    const wrap = $('#dbBadgeWrap'); const form = $('#dbConfigForm');
+    const wrap = $('#dbBadgeWrap'); const form = $('#dbConfigForm'); const card = $('#dbStatusCard');
     if(!wrap) return;
+    if(isDbHardcoded() && hasStorage()){
+      // URL ya está fija en el archivo: no hay nada que configurar, se oculta por completo.
+      if(card) card.style.display = 'none';
+      return;
+    }
+    if(card) card.style.display = 'block';
     if(hasStorage()){
-      wrap.innerHTML = `<span class="db-badge ok"><span class="dot2"></span>Conectado${isDbHardcoded()?' (configurado en el archivo)':' (guardado en este navegador)'}</span>`;
-      form.style.display = isDbHardcoded() ? 'none' : 'block';
+      wrap.innerHTML = `<span class="db-badge ok"><span class="dot2"></span>Conectado (guardado en este navegador)</span>`;
+      form.style.display = 'block';
     } else {
       wrap.innerHTML = `<span class="db-badge bad"><span class="dot2"></span>Sin conectar — el registro, las ofertas y el cronómetro no funcionarán hasta configurar una base de datos</span>`;
       form.style.display = 'block';
     }
     const input = $('#dbUrlInput');
-    if(input && !isDbHardcoded()){
+    if(input){
       try{ input.value = localStorage.getItem(LOCAL_DB_KEY) || ''; }catch(err){}
     }
   }
