@@ -8,11 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#11151b; --panel:#1a212a; --panel-2:#212a35; --paper:#ece7dc; --paper-dim:#d9d2c2;
-    --ink:#20241f; --muted:#8b93a0; --line:#2b3440;
-    --amber:#f2b705; --amber-dim:#8a6c14; --teal:#33d9c4; --teal-dim:#1c7d71;
-    --red:#e4572e; --green:#4caf6a; --gold:#f2b705; --silver:#c7cdd6; --bronze:#c07a3d;
-    --violet:#a78bfa; --orange:#ff8c42; --blue:#5b8def;
+    --bg:#0b1220; --panel:#131f34; --panel-2:#192a46; --paper:#eef1f5; --paper-dim:#d7dee6;
+    --ink:#16233a; --muted:#8b96ab; --line:#2a3c5c;
+    --amber:#4C7BD9; --amber-dim:#1f3a68; --teal:#8b9bb5; --teal-dim:#33455f;
+    --red:#e4572e; --green:#4caf6a; --gold:#d9b23e; --silver:#c7cdd6; --bronze:#c07a3d;
+    --violet:#7c93c9; --orange:#c9975a; --blue:#5b8def;
     --radius:3px;
   }
   *{box-sizing:border-box;}
@@ -40,6 +40,12 @@
   .session-pill{display:flex;align-items:center;gap:8px;background:var(--panel-2);border:1px solid var(--teal-dim);padding:7px 12px;border-radius:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;}
   .session-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--green);}
   .session-pill button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:11px;text-decoration:underline;padding:0;}
+  .fixed-badge{background:var(--panel-2);border:1px solid var(--line);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:14px;padding:7px 12px;border-radius:var(--radius);text-align:center;white-space:nowrap;}
+  .budget-pill{display:flex;align-items:center;gap:6px;background:var(--panel-2);border:1px solid var(--amber-dim);padding:8px 14px;border-radius:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;flex-wrap:wrap;}
+  .budget-pill .bp-label{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.04em;}
+  .budget-pill .bp-amount{color:var(--amber);font-weight:600;}
+  .budget-pill .bp-amount.over{color:var(--red);}
+  .budget-pill .bp-sep{color:var(--muted);}
 
   nav.tabs{display:flex;gap:2px;overflow-x:auto;margin-bottom:22px;border-bottom:1px solid var(--line);}
   nav.tabs button{background:transparent;border:none;color:var(--muted);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.03em;padding:12px 14px;white-space:nowrap;border-bottom:2px solid transparent;transition:color .15s, border-color .15s;}
@@ -63,7 +69,7 @@
   .chain-row{display:flex;align-items:center;min-width:max-content;gap:0;}
   .node{background:var(--paper);color:var(--ink);border-radius:2px;padding:12px 14px;min-width:112px;text-align:center;position:relative;box-shadow:0 3px 0 rgba(0,0,0,.35);}
   .node.selected{outline:2px solid var(--amber);outline-offset:2px;}
-  .node .k{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;color:#6b6455;text-transform:uppercase;}
+  .node .k{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;color:#5a6b85;text-transform:uppercase;}
   .node .v{font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;margin-top:3px;text-transform:uppercase;}
   .node.cluster{background:var(--panel-2);color:var(--paper);border:1px dashed var(--line);padding:10px;}
   .cluster-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--amber);text-transform:uppercase;margin-bottom:8px;text-align:center;}
@@ -90,8 +96,8 @@
 
   .btn{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase;background:var(--teal-dim);color:#eafffb;border:1px solid var(--teal);border-radius:2px;padding:8px 14px;cursor:pointer;transition:background .15s;}
   .btn:hover{background:var(--teal);color:#04211d;}
-  .btn.amber{background:var(--amber-dim);border-color:var(--amber);color:#2a1e00;}
-  .btn.amber:hover{background:var(--amber);color:#1a1200;}
+  .btn.amber{background:var(--amber-dim);border-color:var(--amber);color:#eaf0ff;}
+  .btn.amber:hover{background:var(--amber);color:#0b1220;}
   .btn.ghost{background:transparent;color:var(--muted);border-color:var(--line);}
   .btn.ghost:hover{color:var(--paper);border-color:var(--paper);}
   .btn.danger{background:transparent;color:var(--red);border-color:var(--red);}
@@ -172,7 +178,7 @@
   table.lb td{padding:7px;border-bottom:1px solid var(--line);}
   table.lb tr.me{background:rgba(51,217,196,.08);}
   .rank-pill{font-family:'IBM Plex Mono',monospace;font-size:12px;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--panel-2);color:var(--muted);}
-  .rank-pill.r1{background:var(--gold);color:#1a1200;}
+  .rank-pill.r1{background:var(--gold);color:#2a2100;}
   .rank-pill.r2{background:var(--silver);color:#1a1200;}
   .rank-pill.r3{background:var(--bronze);color:#1a1200;}
   .lb-empty{padding:24px;text-align:center;color:var(--muted);font-size:13px;}
@@ -315,8 +321,15 @@
       <p class="brand-eyebrow" style="margin-top:6px;letter-spacing:.08em;color:var(--muted);">Simulador de línea de producción — costeo, riesgo, finanzas y competencia</p>
     </div>
     <div class="topcontrols">
-      <div class="field-mini"><label for="batchSize">Lote (u.)</label><input id="batchSize" type="number" min="1" step="1" value="500"></div>
+      <div class="field-mini"><label>Lote (fijo)</label><div class="fixed-badge">1,000 pzas</div></div>
       <div class="field-mini"><label for="marginInput">Margen (%)</label><input id="marginInput" type="number" min="0" step="1" value="35"></div>
+      <div class="budget-pill" id="budgetPillTop">
+        <span class="bp-label">Presupuesto</span>
+        <span class="bp-amount" id="bpAmountTop">$1,000,000.00</span>
+        <span class="bp-sep">·</span>
+        <span class="bp-label">Saldo</span>
+        <span class="bp-amount" id="bpBalanceTop">$1,000,000.00</span>
+      </div>
       <div class="field-mini"><label for="speedSelect">Velocidad sim.</label>
         <select id="speedSelect"><option value="2200">Lenta</option><option value="1000" selected>Normal</option><option value="380">Rápida</option></select>
       </div>
@@ -419,7 +432,13 @@
   <!-- ============ TAB 2: CONFIGURACIÓN DE PRODUCCIÓN ============ -->
   <section class="tabpanel" id="tab-costeo">
     <p class="panel-title">Configuración de producción</p>
-    <p class="panel-sub">Combina proveedor, mano de obra, capacitación, maquinaria, mantenimiento y seguridad. Todo se usa en conjunto para tu costo, tiempo y calidad finales.</p>
+    <p class="panel-sub">Combina proveedor, mano de obra, capacitación, maquinaria, mantenimiento y seguridad. Todo se usa en conjunto para tu costo, tiempo y calidad finales — y todo sale del mismo presupuesto de $1,000,000.</p>
+
+    <div class="card">
+      <h3><span class="tag">💰</span> Tu presupuesto — lote fijo de 1,000 piezas</h3>
+      <div id="budgetCardWrap"></div>
+      <p class="note" style="margin-top:10px;">Cada equipo inicia con $1,000,000.00 de presupuesto virtual. De ahí se paga TODO: materia prima (según el proveedor elegido), mano de obra, capacitación, maquinaria, mantenimiento, seguridad y gastos indirectos de fabricación — el saldo baja en tiempo real conforme eliges cada opción. El lote siempre es de 1,000 piezas, sin excepción.</p>
+    </div>
 
     <div class="card">
       <h3><span class="tag">01</span> Materia prima — receta base</h3>
@@ -541,7 +560,7 @@
 
     <div class="card">
       <h3><span class="tag">02</span> Flujo de efectivo del lote</h3>
-      <div class="field-mini" style="width:220px;margin-bottom:14px;"><label for="cashInitial">Efectivo inicial disponible</label><input id="cashInitial" type="number" min="0" step="100" value="80000" style="width:100%;"></div>
+      <div class="field-mini" style="width:260px;margin-bottom:14px;"><label for="cashInitial">Presupuesto inicial (fijo por reglamento)</label><input id="cashInitial" type="number" min="0" step="100" value="1000000" style="width:100%;" disabled></div>
       <div class="grid-2">
         <div>
           <div class="kv plain"><span>Efectivo inicial</span><b id="cfInitial">—</b></div>
@@ -704,11 +723,11 @@
 
     <div class="login-grid">
       <div class="card" id="loginCard">
-        <h3><span class="tag">CUENTA</span> Registro / inicio de sesión de equipo</h3>
-        <div class="form-row"><label for="accName">Nombre de equipo o alumno</label><input id="accName" type="text" maxlength="40" placeholder="Ej. Equipo Kaizen"></div>
-        <div class="form-row"><label for="accGroup">Grupo / sección (opcional)</label><input id="accGroup" type="text" maxlength="30" placeholder="Ej. IND-402"></div>
-        <div class="form-row"><label for="accPin">PIN de 4 dígitos</label><input id="accPin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></div>
-        <div class="btn-row"><button class="btn amber" id="loginBtn">Registrarme / iniciar sesión</button></div>
+        <h3><span class="tag">CUENTA</span> Inicio de sesión</h3>
+        <p class="note" style="margin-top:-6px;margin-bottom:12px;">Usa el usuario y la contraseña que te asignó tu profesor. Si no tienes uno, pídeselo antes de continuar.</p>
+        <div class="form-row"><label for="accName">Usuario</label><input id="accName" type="text" maxlength="40" placeholder="Ej. Equipo-01"></div>
+        <div class="form-row"><label for="accPin">Contraseña</label><input id="accPin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></div>
+        <div class="btn-row"><button class="btn amber" id="loginBtn">Iniciar sesión</button></div>
         <div class="form-msg" id="loginMsg"></div>
       </div>
 
@@ -787,6 +806,33 @@
 
     <div id="teacherPanelContent" style="display:none;">
       <div class="card">
+        <h3><span class="tag">CUENTAS</span> Asignar cuentas de acceso a los participantes</h3>
+        <p class="note">Los participantes NO se registran solos: tú les creas su usuario y contraseña aquí, y se los entregas para que inicien sesión en la pestaña 06 · Competencia.</p>
+        <div class="grid-2" style="margin-top:12px;">
+          <div>
+            <h4 style="font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;color:var(--teal);margin:0 0 10px;">Crear una cuenta</h4>
+            <div class="form-row"><label for="newAccName">Usuario (equipo o alumno)</label><input id="newAccName" type="text" maxlength="40" placeholder="Ej. Equipo-01"></div>
+            <div class="form-row"><label for="newAccGroup">Grupo / sección (opcional)</label><input id="newAccGroup" type="text" maxlength="30" placeholder="Ej. IND-402"></div>
+            <div class="form-row"><label for="newAccPin">Contraseña (4 dígitos)</label><input id="newAccPin" type="text" inputmode="numeric" maxlength="4" placeholder="1234"></div>
+            <div class="btn-row" style="margin-top:0;">
+              <button class="btn ghost" id="genPinBtn">🎲 Generar</button>
+              <button class="btn amber" id="createAccBtn">➕ Crear cuenta</button>
+            </div>
+            <div class="form-msg" id="createAccMsg"></div>
+          </div>
+          <div>
+            <h4 style="font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;color:var(--teal);margin:0 0 10px;">Generar varias cuentas a la vez (hasta 50)</h4>
+            <div class="form-row"><label for="bulkCount">Cantidad</label><input id="bulkCount" type="number" min="1" max="50" value="10"></div>
+            <div class="form-row"><label for="bulkPrefix">Prefijo de usuario</label><input id="bulkPrefix" type="text" value="Equipo"></div>
+            <div class="form-row"><label for="bulkGroup">Grupo (opcional, aplica a todas)</label><input id="bulkGroup" type="text" placeholder="Ej. IND-402"></div>
+            <div class="btn-row" style="margin-top:0;"><button class="btn amber" id="bulkCreateBtn">⚡ Generar cuentas</button></div>
+            <div class="form-msg" id="bulkMsg"></div>
+          </div>
+        </div>
+        <div id="bulkResultsWrap" style="margin-top:14px;"></div>
+      </div>
+
+      <div class="card">
         <h3><span class="tag">EN VIVO</span> Avance de todos los equipos</h3>
         <div class="btn-row" style="margin-top:0;margin-bottom:10px;">
           <button class="btn ghost" id="refreshTeacherBtn">↻ Actualizar avance</button>
@@ -844,6 +890,8 @@
     {id:'media', statekey:'safetyId', name:'Seguridad estándar', tier:'$1,800 por lote', icon:'🦺', cost:1800, accidentProb:0.03, footprint:'Media', qBonus:0, note:'Programa de seguridad activo'},
     {id:'avanzada', statekey:'safetyId', name:'Seguridad avanzada + ISO 14001', tier:'$4,500 por lote', icon:'🌿', cost:4500, accidentProb:0.008, footprint:'Baja', qBonus:3, note:'Certificación ambiental, acceso a mercado verde'},
   ];
+  const BUDGET_TOTAL = 1000000; // presupuesto virtual fijo por equipo
+  const FIXED_BATCH_SIZE = 1000; // el lote de producción siempre es de 1,000 piezas
   const MARKETS = [
     {id:'premium', name:'Mercado Premium', icon:'💎', color:'var(--amber)', minQuality:75, capacity:10, criterion:'Mayor calidad primero; en empate, menor precio.'},
     {id:'estandar', name:'Mercado Estándar', icon:'⚖️', color:'var(--teal)', minQuality:45, capacity:15, criterion:'Mejor relación calidad/precio.'},
@@ -866,7 +914,7 @@
 
   let uid = 1;
   const state = {
-    batchSize: 500, margin: 35,
+    batchSize: 100, margin: 35,
     materials: [
       {id: uid++, name:"Lámina de acero", qty:2, unitCost:45.00},
       {id: uid++, name:"Tornillería", qty:8, unitCost:1.20},
@@ -885,7 +933,7 @@
     learningEnabled:false, lotNumber:1, learningRate:0.90,
     dailyDemand:40, safetyStockDays:3,
     activeEvent:null,
-    cashInitial:80000,
+    cashInitial:1000000,
     downPct:30, interestRate:18, termMonths:24,
     targetMarket:'estandar', askingPrice: 0, askingTouched:false,
     lastResults: {},
@@ -927,7 +975,7 @@
      apropiado para una dinámica de clase de corta duración, pero no
      guardes ahí información sensible ni la dejes así por meses.
   ================================================================ */
-  const FIREBASE_DB_URL = "https://miregistro-9115a-default-rtdb.firebaseio.com"; // <-- pega aquí tu URL de Firebase antes de publicar, ej: "https://tu-proyecto-default-rtdb.firebaseio.com"
+  const FIREBASE_DB_URL = ""; // <-- pega aquí tu URL de Firebase antes de publicar, ej: "https://tu-proyecto-default-rtdb.firebaseio.com"
   const LOCAL_DB_KEY = 'tecnm_factorysim_db_url';
 
   function getDbUrl(){
@@ -993,7 +1041,6 @@
   });
 
   /* ---------------- TOP CONTROLS ---------------- */
-  $('#batchSize').addEventListener('input', e=>{ state.batchSize = Math.max(1, parseFloat(e.target.value)||1); recalcAll(); });
   $('#marginInput').addEventListener('input', e=>{ state.margin = parseFloat(e.target.value)||0; recalcAll(); });
   $('#speedSelect').addEventListener('change', e=>{ state.simSpeed = parseInt(e.target.value); });
   $$('input[name=cifBase]').forEach(r=> r.addEventListener('change', e=>{ state.cifBase = e.target.value; recalcAll(); }));
@@ -1333,6 +1380,33 @@
     }
   }
 
+  /* ---------------- PRESUPUESTO FIJO ($1,000,000 · lote de 1,000 pzas) ---------------- */
+  function renderBudget(unitCost){
+    const totalCost = unitCost * FIXED_BATCH_SIZE;
+    const balance = BUDGET_TOTAL - totalCost;
+    const over = balance < 0;
+    const pctUsed = clamp((totalCost/BUDGET_TOTAL)*100, 0, 100);
+
+    const setAmt = (id, val, markOver)=>{
+      const el = $(id); if(!el) return;
+      el.textContent = fmt(val);
+      if(markOver) el.classList.toggle('over', over);
+    };
+    setAmt('#bpAmountTop', BUDGET_TOTAL, false);
+    setAmt('#bpBalanceTop', balance, true);
+
+    const wrap = $('#budgetCardWrap');
+    if(wrap){
+      wrap.innerHTML = `
+        <div class="kv"><span>Presupuesto virtual asignado</span><b>${fmt(BUDGET_TOTAL)}</b></div>
+        <div class="kv"><span>Costo total de tu lote (1,000 pzas, con tu configuración actual)</span><b>${fmt(totalCost)}</b></div>
+        <div class="kv" style="border-bottom:none;"><span style="font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:14px;">Saldo disponible</span><b style="font-size:18px;color:${over?'var(--red)':'var(--green)'}">${fmt(balance)}</b></div>
+        <div class="qbar-track" style="margin-top:10px;"><div class="qbar-fill" style="width:${pctUsed}%;background:${over?'var(--red)':pctUsed>85?'var(--amber)':'var(--green)'}"></div></div>
+        ${over ? '<p class="note" style="color:var(--red);margin-top:8px;">⚠️ Tu configuración excede tu presupuesto. No podrás enviar tu oferta a la competencia hasta ajustarla.</p>' : ''}
+      `;
+    }
+  }
+
   /* ---------------- CALCULATIONS ---------------- */
   function recalcAll(full=true){
     const supplier = byId(SUPPLIERS, state.supplierId);
@@ -1494,14 +1568,15 @@
     renderPie(mpUnit, moUnit, machineUnit, cifUnit, trainingUnit, maintenanceUnit, safetyUnit);
     renderSPCChart(defectRate*100);
     renderFactoryFloor();
+    renderBudget(unitCost);
     scheduleProgressSave();
     if(full){ renderChain(); renderSimStations(); renderStationBars(); renderAllChoiceGroups(); }
   }
 
   function renderPie(mp, mo, mach, cif, tr, mnt, saf){
     const parts = [
-      {label:'Materia prima', val:mp, color:'#f2b705'},
-      {label:'Mano de obra', val:mo, color:'#33d9c4'},
+      {label:'Materia prima', val:mp, color:'#4C7BD9'},
+      {label:'Mano de obra', val:mo, color:'#8b9bb5'},
       {label:'Maquinaria', val:mach, color:'#a78bfa'},
       {label:'CIF', val:cif, color:'#e4572e'},
       {label:'Capacitación', val:tr, color:'#4caf6a'},
@@ -1560,38 +1635,34 @@
     }
   }
 
-  async function registerOrLogin(){
+  async function loginUser(){
     const msg = $('#loginMsg'); msg.className = 'form-msg';
     if(!hasStorage()){ showMsg(msg,'error','El almacenamiento no está disponible en este entorno.'); return; }
     const name = $('#accName').value.trim();
-    const group = $('#accGroup').value.trim();
     const pin = $('#accPin').value.trim();
-    if(name.length<2){ showMsg(msg,'error','Escribe un nombre de equipo de al menos 2 caracteres.'); return; }
-    if(!/^[0-9]{4}$/.test(pin)){ showMsg(msg,'error','El PIN debe ser de 4 dígitos numéricos.'); return; }
+    if(name.length<2){ showMsg(msg,'error','Escribe tu usuario.'); return; }
+    if(!/^[0-9]{4}$/.test(pin)){ showMsg(msg,'error','La contraseña debe ser de 4 dígitos numéricos.'); return; }
     const slug = slugify(name); const key = 'accounts:'+slug;
     $('#loginBtn').disabled = true; showMsg(msg,'info','Conectando…');
     try{
       let existing = null;
       try{ const res = await FB.get(key); existing = res ? JSON.parse(res.value) : null; }catch(err){ existing = null; }
-      if(existing){
-        if(existing.pin !== pin){ showMsg(msg,'error','Ese equipo ya está registrado con otro PIN.'); $('#loginBtn').disabled=false; return; }
-        existing.group = group || existing.group || '';
-        currentAccount = {slug, name: existing.name, group: existing.group, pin};
-        await FB.set(key, JSON.stringify(existing));
-        showMsg(msg,'ok','Sesión iniciada. Bienvenido de nuevo, '+existing.name+'.');
-        paintMyOffer(existing.offer);
-      } else {
-        const entry = {name, group, pin, offer:null, updatedAt:null};
-        await FB.set(key, JSON.stringify(entry));
-        currentAccount = {slug, name, group, pin};
-        showMsg(msg,'ok','Equipo registrado. Configura tu producción y envía tu oferta cuando quieras.');
-        paintMyOffer(null);
+      if(!existing){
+        showMsg(msg,'error','Ese usuario no existe. Pide tus datos de acceso a tu profesor.');
+        $('#loginBtn').disabled = false; return;
       }
+      if(existing.pin !== pin){
+        showMsg(msg,'error','Contraseña incorrecta.');
+        $('#loginBtn').disabled = false; return;
+      }
+      currentAccount = {slug, name: existing.name, group: existing.group||'', pin};
+      showMsg(msg,'ok','Sesión iniciada. Bienvenido, '+existing.name+'.');
+      paintMyOffer(existing.offer);
       setSessionUI(); loadLeaderboard();
     }catch(err){ showMsg(msg,'error','No se pudo conectar al almacenamiento. Intenta de nuevo.'); }
     $('#loginBtn').disabled = false;
   }
-  $('#loginBtn').addEventListener('click', registerOrLogin);
+  $('#loginBtn').addEventListener('click', loginUser);
   $('#logoutBtn').addEventListener('click', ()=>{ currentAccount = null; setSessionUI(); $('#loginMsg').className='form-msg'; $('#accPin').value=''; });
 
   /* ---------------- MARKET CHOICE UI ---------------- */
@@ -1641,6 +1712,11 @@
     if(!currentAccount || !hasStorage()){ showMsg(msg,'error','Inicia sesión primero.'); return; }
     if(state.compConfig && state.compConfig.endAt && Date.now()>state.compConfig.endAt){
       showMsg(msg,'error','La competencia ya terminó. Tu oferta ya no puede enviarse.'); return;
+    }
+    const totalCost = (state.lastResults.unitCost||0) * FIXED_BATCH_SIZE;
+    if(totalCost > BUDGET_TOTAL){
+      showMsg(msg,'error','Tu configuración cuesta '+fmt(totalCost)+', y tu presupuesto es de '+fmt(BUDGET_TOTAL)+'. Ajusta tu configuración en la pestaña 02 antes de enviar tu oferta.');
+      return;
     }
     $('#submitOfferBtn').disabled = true; showMsg(msg,'info','Enviando oferta…');
     const key = 'accounts:'+currentAccount.slug;
@@ -1795,6 +1871,70 @@
   $('#computeFinalBtn').addEventListener('click', computeFinalResults);
 
   /* ---------------- PANEL DEL PROFESOR ---------------- */
+  /* ---------------- GESTIÓN DE CUENTAS (asignadas por el profesor) ---------------- */
+  function randomPin(){ return String(Math.floor(1000 + Math.random()*9000)); }
+  $('#genPinBtn').addEventListener('click', ()=>{ $('#newAccPin').value = randomPin(); });
+
+  $('#createAccBtn').addEventListener('click', async ()=>{
+    const msg = $('#createAccMsg');
+    if(!hasStorage()){ showMsg(msg,'error','Base de datos no conectada.'); return; }
+    const name = $('#newAccName').value.trim();
+    const group = $('#newAccGroup').value.trim();
+    const pin = $('#newAccPin').value.trim();
+    if(name.length<2){ showMsg(msg,'error','Escribe un nombre de usuario de al menos 2 caracteres.'); return; }
+    if(!/^[0-9]{4}$/.test(pin)){ showMsg(msg,'error','La contraseña debe ser de 4 dígitos (o usa "Generar").'); return; }
+    const slug = slugify(name); const key = 'accounts:'+slug;
+    $('#createAccBtn').disabled = true; showMsg(msg,'info','Creando…');
+    try{
+      const existing = await FB.get(key).catch(()=>null);
+      if(existing){ showMsg(msg,'error','Ya existe una cuenta con ese usuario.'); $('#createAccBtn').disabled=false; return; }
+      const entry = {name, group, pin, offer:null, progress:null, createdAt: Date.now(), createdBy:'admin'};
+      await FB.set(key, JSON.stringify(entry));
+      showMsg(msg,'ok','Cuenta creada: usuario "'+name+'", contraseña "'+pin+'". Entrégasela al equipo.');
+      $('#newAccName').value=''; $('#newAccGroup').value=''; $('#newAccPin').value='';
+      loadTeacherPanel();
+    }catch(err){ showMsg(msg,'error','No se pudo crear la cuenta. Intenta de nuevo.'); }
+    $('#createAccBtn').disabled = false;
+  });
+
+  $('#bulkCreateBtn').addEventListener('click', async ()=>{
+    const msg = $('#bulkMsg'); const wrap = $('#bulkResultsWrap');
+    if(!hasStorage()){ showMsg(msg,'error','Base de datos no conectada.'); return; }
+    const count = clamp(parseInt($('#bulkCount').value)||0, 1, 50);
+    const prefix = ($('#bulkPrefix').value.trim() || 'Equipo');
+    const group = $('#bulkGroup').value.trim();
+    $('#bulkCreateBtn').disabled = true; showMsg(msg,'info','Generando cuentas…'); wrap.innerHTML='';
+    const created = []; const skipped = [];
+    try{
+      for(let i=1;i<=count;i++){
+        const name = `${prefix}-${String(i).padStart(2,'0')}`;
+        const slug = slugify(name); const key = 'accounts:'+slug;
+        const existing = await FB.get(key).catch(()=>null);
+        if(existing){ skipped.push(name); continue; }
+        const pin = randomPin();
+        const entry = {name, group, pin, offer:null, progress:null, createdAt: Date.now(), createdBy:'admin'};
+        await FB.set(key, JSON.stringify(entry));
+        created.push({name, pin, group});
+      }
+      showMsg(msg,'ok', created.length+' cuenta(s) creada(s)'+(skipped.length?(', '+skipped.length+' ya existían y se dejaron igual'):'')+'.');
+      if(created.length){
+        wrap.innerHTML = `<div style="overflow-x:auto;"><table class="teach">
+          <thead><tr><th>Usuario</th><th>Contraseña</th><th>Grupo</th></tr></thead>
+          <tbody>${created.map(c=>`<tr><td class="mono">${escapeHtml(c.name)}</td><td class="mono" style="color:var(--amber)">${c.pin}</td><td class="mono" style="color:var(--muted)">${c.group?escapeHtml(c.group):'—'}</td></tr>`).join('')}</tbody>
+        </table></div>
+        <p class="note" style="margin-top:8px;">📋 Copia esta lista (selecciónala y Ctrl+C) para repartirla a tus equipos antes de que se pierda de vista.</p>`;
+      }
+      loadTeacherPanel();
+    }catch(err){ showMsg(msg,'error','Ocurrió un error generando las cuentas. Revisa cuántas se alcanzaron a crear en el avance de equipos.'); }
+    $('#bulkCreateBtn').disabled = false;
+  });
+
+  async function deleteAccountBySlug(slug, name){
+    if(!confirm('¿Eliminar la cuenta "'+name+'"? Esto borra su usuario, contraseña, progreso y oferta.')) return;
+    try{ await FB.delete('accounts:'+slug); loadTeacherPanel(); }
+    catch(err){ alert('No se pudo eliminar la cuenta.'); }
+  }
+
   function timeAgo(ts){
     if(!ts) return '—';
     const s = Math.max(0, Math.floor((Date.now()-ts)/1000));
@@ -1834,13 +1974,18 @@
           <td class="mono">${data&&data.unitCost!=null?fmt(data.unitCost):'—'}</td>
           <td class="mono" style="color:var(--amber)">${data&&data.efficiencyScore!=null?fmtN(data.efficiencyScore,1):'—'}</td>
           <td class="mono" style="color:var(--muted)">${timeAgo(st.ts)}</td>
+          <td><button class="btn-remove" data-del-slug="${slugify(e.name)}" data-del-name="${escapeHtml(e.name)}" title="Eliminar cuenta">✕</button></td>
         </tr>`;
       }).join('');
       wrap.innerHTML = `<div style="overflow-x:auto;"><table class="teach">
-        <thead><tr><th>Equipo</th><th>Grupo</th><th>Estado</th><th>Mercado</th><th>Calidad</th><th>Costo u.</th><th>Score</th><th>Última actividad</th></tr></thead>
+        <thead><tr><th>Equipo</th><th>Grupo</th><th>Estado</th><th>Mercado</th><th>Calidad</th><th>Costo u.</th><th>Score</th><th>Última actividad</th><th></th></tr></thead>
         <tbody>${rows}</tbody></table></div>`;
     }catch(err){ wrap.innerHTML = '<div class="lb-empty">No se pudo cargar el avance. Intenta de nuevo.</div>'; }
   }
+  $('#teacherWrap').addEventListener('click', e=>{
+    const btn = e.target.closest('[data-del-slug]'); if(!btn) return;
+    deleteAccountBySlug(btn.dataset.delSlug, btn.dataset.delName);
+  });
   $('#refreshTeacherBtn').addEventListener('click', loadTeacherPanel);
   setInterval(()=>{ if(state.teacherMode && document.getElementById('tab-profesor').classList.contains('active')) loadTeacherPanel(); }, 15000);
 
