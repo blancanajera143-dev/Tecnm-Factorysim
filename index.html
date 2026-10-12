@@ -845,6 +845,23 @@
   <footer class="credits">TECNM FACTORYSIM v2.0 · 11-OCT-2026 — TORNEO DE 4 COMPETENCIAS, PARTICIPACIÓN DE MERCADO Y FINANCIAMIENTO · USO ACADÉMICO</footer>
 </div>
 
+<!-- Firebase para guardar equipos, ofertas y resultados en la web -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* =====================================================================
+   CONFIGURACIÓN DE FIREBASE
+   Proyecto: MiRegistro · Realtime Database.
+   Con databaseURL basta para conectar. Los datos de este simulador se
+   guardan en la carpeta DATA_ROOT, separados de los de versiones anteriores.
+   Para cambiar de proyecto, pega aquí tu bloque firebaseConfig completo.
+   ===================================================================== */
+const FIREBASE_CONFIG = {
+  databaseURL: "https://miregistro-9115a-default-rtdb.firebaseio.com"
+};
+const DATA_ROOT = "factorysim_v2";
+</script>
 <script>
 (function(){
   "use strict";
@@ -1481,19 +1498,70 @@
 
   /* =====================================================================
      ALMACENAMIENTO COMPARTIDO
-     1) window.storage (artifacts clásicos), 2) base de datos del artifact
-     publicado en claude.ai, 3) modo local (solo este navegador, para pruebas)
+     1) Firebase Firestore (si FIREBASE_CONFIG está lleno), 2) window.storage,
+     3) base de datos del artifact publicado en claude.ai,
+     4) modo local (solo este navegador, para pruebas)
      ===================================================================== */
   const Store = (function(){
-    let mode = null, db = null;
+    let mode = null, db = null, provider = 'local', firebaseProblem = null;
     const LS = 'factorysim:';
     const docPath = key => { const i = key.indexOf(':'); return key.slice(0,i)+'/'+key.slice(i+1); };
     const clone = v => JSON.parse(JSON.stringify(v));
+    function readConfig(){
+      try{ if(typeof FIREBASE_CONFIG==='object' && FIREBASE_CONFIG) return FIREBASE_CONFIG; }catch(e){}
+      try{ if(typeof firebaseConfig==='object' && firebaseConfig) return firebaseConfig; }catch(e){}
+      return null;
+    }
+    function firebaseConfigured(){
+      const c = readConfig();
+      if(!c) return false;
+      if(c.databaseURL && /^https:\/\//.test(c.databaseURL)) return true;
+      return !!(c.projectId && c.apiKey && !/PEGA_AQUI/.test(c.projectId) && !/PEGA_AQUI/.test(c.apiKey));
+    }
+    /* Adaptador de Realtime Database con la misma forma que usa el resto del código */
+    function rtdbAdapter(rtdb, root){
+      const full = path => (root ? root.replace(/\/+$/,'') + '/' : '') + path;
+      const snap = (id, v) => ({id, exists: v!==null && v!==undefined, data: () => (v===null||v===undefined) ? undefined : v});
+      return {
+        doc(path){
+          const ref = rtdb.ref(full(path)); const id = path.split('/').pop();
+          return {
+            get: async () => { const s = await ref.once('value'); return snap(id, s.val()); },
+            set: v => ref.set(v),
+            delete: () => ref.remove(),
+          };
+        },
+        collection(path){
+          const ref = rtdb.ref(full(path));
+          const q = { get: async () => { const s = await ref.once('value'); const v = s.val() || {}; return {docs: Object.keys(v).map(k=>snap(k, v[k]))}; } };
+          return Object.assign({ limit: () => q }, q);
+        }
+      };
+    }
     async function init(){
+      if(firebaseConfigured()){
+        try{
+          if(!window.firebase) throw new Error('No se pudo cargar la librería de Firebase. Revisa tu conexión a internet.');
+          const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(readConfig());
+          const cfg = readConfig();
+          if(cfg.databaseURL){
+            if(typeof firebase.database!=='function') throw new Error('No se pudo cargar Realtime Database.');
+            let root = 'factorysim_v2'; try{ if(typeof DATA_ROOT==='string') root = DATA_ROOT; }catch(e){}
+            db = rtdbAdapter(firebase.database(app), root);
+          } else {
+            db = firebase.firestore(app);
+          }
+          await Promise.race([
+            db.doc('game/config').get(),   // prueba de conexión y de reglas
+            new Promise((_,rej)=>setTimeout(()=>rej(new Error('sin respuesta de Firebase en 10 s')), 10000))
+          ]);
+          mode='db'; provider='firebase'; return mode;
+        }catch(e){ db = null; firebaseProblem = (e && (e.code || e.message)) || 'error desconocido'; }
+      }
       if(window.storage && typeof window.storage.get==='function'){ mode='legacy'; return mode; }
       if(window.claude && typeof window.claude.use==='function'){
         try{ db = await window.claude.use('db'); }catch(e){ db = null; }
-        if(db){ mode='db'; return mode; }
+        if(db){ mode='db'; provider='claude'; return mode; }
       }
       mode='local'; return mode;
     }
@@ -1501,6 +1569,8 @@
     return {
       ready,
       get mode(){ return mode; },
+      get provider(){ return provider; },
+      get firebaseProblem(){ return firebaseProblem; },
       async get(key){
         await ready;
         if(mode==='legacy'){ try{ const r = await window.storage.get(key,true); return (r&&r.value)?JSON.parse(r.value):null; }catch(e){ return null; } }
@@ -1778,7 +1848,9 @@
     const el = $('#modeBanner');
     if(Store.mode==='local'){
       el.hidden = false;
-      el.innerHTML = '<b>Modo de prueba local:</b> no hay almacenamiento compartido en esta página, así que los equipos, ofertas y resultados solo se guardan en este navegador. Para que todos los equipos compitan juntos, abran la versión publicada del simulador.';
+      el.innerHTML = Store.firebaseProblem
+        ? '<b>No se pudo conectar a Firebase</b> (' + escapeHtml(String(Store.firebaseProblem)) + '). Revisa que la configuración esté completa y que las reglas de Firestore permitan leer y escribir. Mientras tanto, el simulador trabaja en modo local: los datos solo se guardan en este navegador.'
+        : '<b>Modo de prueba local:</b> todavía no hay base de datos configurada, así que los equipos, ofertas y resultados solo se guardan en este navegador. Para que todos los equipos compitan juntos, el profesor debe pegar la configuración de Firebase en el archivo.';
     } else el.hidden = true;
   }
 
