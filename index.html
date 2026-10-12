@@ -8,11 +8,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0b1220; --panel:#131f34; --panel-2:#192a46; --paper:#eef1f5; --paper-dim:#d7dee6;
-    --ink:#16233a; --muted:#8b96ab; --line:#2a3c5c;
-    --amber:#4C7BD9; --amber-dim:#1f3a68; --teal:#8b9bb5; --teal-dim:#33455f;
-    --red:#e4572e; --green:#4caf6a; --gold:#d9b23e; --silver:#c7cdd6; --bronze:#c07a3d;
-    --violet:#7c93c9; --orange:#c9975a; --blue:#5b8def;
+    color-scheme:dark;
+    --bg:#11151b; --panel:#1a212a; --panel-2:#212a35; --paper:#ece7dc; --paper-dim:#d9d2c2;
+    --ink:#20241f; --muted:#8b93a0; --line:#2b3440;
+    --amber:#f2b705; --amber-dim:#8a6c14; --teal:#33d9c4; --teal-dim:#1c7d71;
+    --red:#e4572e; --green:#4caf6a; --gold:#f2b705; --silver:#c7cdd6; --bronze:#c07a3d;
+    --violet:#a78bfa; --orange:#ff8c42; --blue:#5b8def;
     --radius:3px;
   }
   *{box-sizing:border-box;}
@@ -40,12 +41,6 @@
   .session-pill{display:flex;align-items:center;gap:8px;background:var(--panel-2);border:1px solid var(--teal-dim);padding:7px 12px;border-radius:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;}
   .session-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--green);}
   .session-pill button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:11px;text-decoration:underline;padding:0;}
-  .fixed-badge{background:var(--panel-2);border:1px solid var(--line);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:14px;padding:7px 12px;border-radius:var(--radius);text-align:center;white-space:nowrap;}
-  .budget-pill{display:flex;align-items:center;gap:6px;background:var(--panel-2);border:1px solid var(--amber-dim);padding:8px 14px;border-radius:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;flex-wrap:wrap;}
-  .budget-pill .bp-label{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.04em;}
-  .budget-pill .bp-amount{color:var(--amber);font-weight:600;}
-  .budget-pill .bp-amount.over{color:var(--red);}
-  .budget-pill .bp-sep{color:var(--muted);}
 
   nav.tabs{display:flex;gap:2px;overflow-x:auto;margin-bottom:22px;border-bottom:1px solid var(--line);}
   nav.tabs button{background:transparent;border:none;color:var(--muted);cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.03em;padding:12px 14px;white-space:nowrap;border-bottom:2px solid transparent;transition:color .15s, border-color .15s;}
@@ -69,7 +64,7 @@
   .chain-row{display:flex;align-items:center;min-width:max-content;gap:0;}
   .node{background:var(--paper);color:var(--ink);border-radius:2px;padding:12px 14px;min-width:112px;text-align:center;position:relative;box-shadow:0 3px 0 rgba(0,0,0,.35);}
   .node.selected{outline:2px solid var(--amber);outline-offset:2px;}
-  .node .k{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;color:#5a6b85;text-transform:uppercase;}
+  .node .k{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.08em;color:#6b6455;text-transform:uppercase;}
   .node .v{font-family:'Oswald',sans-serif;font-size:13px;font-weight:600;margin-top:3px;text-transform:uppercase;}
   .node.cluster{background:var(--panel-2);color:var(--paper);border:1px dashed var(--line);padding:10px;}
   .cluster-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--amber);text-transform:uppercase;margin-bottom:8px;text-align:center;}
@@ -96,8 +91,8 @@
 
   .btn{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.05em;text-transform:uppercase;background:var(--teal-dim);color:#eafffb;border:1px solid var(--teal);border-radius:2px;padding:8px 14px;cursor:pointer;transition:background .15s;}
   .btn:hover{background:var(--teal);color:#04211d;}
-  .btn.amber{background:var(--amber-dim);border-color:var(--amber);color:#eaf0ff;}
-  .btn.amber:hover{background:var(--amber);color:#0b1220;}
+  .btn.amber{background:var(--amber-dim);border-color:var(--amber);color:#2a1e00;}
+  .btn.amber:hover{background:var(--amber);color:#1a1200;}
   .btn.ghost{background:transparent;color:var(--muted);border-color:var(--line);}
   .btn.ghost:hover{color:var(--paper);border-color:var(--paper);}
   .btn.danger{background:transparent;color:var(--red);border-color:var(--red);}
@@ -178,7 +173,7 @@
   table.lb td{padding:7px;border-bottom:1px solid var(--line);}
   table.lb tr.me{background:rgba(51,217,196,.08);}
   .rank-pill{font-family:'IBM Plex Mono',monospace;font-size:12px;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--panel-2);color:var(--muted);}
-  .rank-pill.r1{background:var(--gold);color:#2a2100;}
+  .rank-pill.r1{background:var(--gold);color:#1a1200;}
   .rank-pill.r2{background:var(--silver);color:#1a1200;}
   .rank-pill.r3{background:var(--bronze);color:#1a1200;}
   .lb-empty{padding:24px;text-align:center;color:var(--muted);font-size:13px;}
@@ -213,10 +208,6 @@
   .status-badge.ended{background:rgba(228,87,46,.15);color:var(--red);border:1px solid var(--red);}
   .status-badge.idle{background:rgba(139,147,160,.15);color:var(--muted);border:1px solid var(--line);}
 
-  .db-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:20px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;}
-  .db-badge.ok{background:rgba(76,175,106,.15);color:var(--green);border:1px solid var(--green);}
-  .db-badge.bad{background:rgba(228,87,46,.15);color:var(--red);border:1px solid var(--red);}
-  .db-badge .dot2{width:8px;height:8px;border-radius:50%;background:currentColor;}
   .admin-box{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line);}
   .toggle-row{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:4px;}
 
@@ -275,40 +266,33 @@
   .legend-floor .lf-item{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--paper);}
   .legend-floor .lf-item .ic{font-size:18px;width:24px;text-align:center;}
 
+  [hidden]{display:none!important;}
+  .comp-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px;}
+  .comp-head .status-badge{margin-bottom:0;}
+  .round-chip{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);border:1px solid var(--amber-dim);padding:4px 11px;border-radius:20px;}
+  .price-live{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--teal);margin-top:4px;}
+  .live-price{font-family:'Oswald',sans-serif;font-size:28px;color:var(--amber);margin-top:6px;font-variant-numeric:tabular-nums;}
+  .num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .sel-inline{background:var(--panel-2);border:1px solid var(--line);color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:7px 9px;border-radius:var(--radius);}
+  .share-row{display:grid;grid-template-columns:minmax(0,1fr) 90px 52px;gap:8px;align-items:center;font-size:12px;padding:5px 0;border-bottom:1px dashed var(--line);}
+  .share-row .wname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .share-row .wval{font-family:'IBM Plex Mono',monospace;color:var(--amber);text-align:right;}
+  .share-track{height:8px;background:var(--panel);border:1px solid var(--line);border-radius:4px;overflow:hidden;}
+  .share-fill{height:100%;}
+  .an-card{background:var(--panel-2);border:1px solid var(--line);border-radius:4px;padding:12px 16px;margin-bottom:10px;}
+  .an-card summary{cursor:pointer;font-family:'Oswald',sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:.03em;color:var(--paper);}
+  .an-card[open] summary{margin-bottom:10px;}
+  .an-head{font-size:14px;color:var(--amber);margin-bottom:6px;}
+  .an-item{display:grid;grid-template-columns:10px minmax(0,1fr);gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13px;line-height:1.55;color:var(--paper);}
+  .an-item b{color:var(--paper);}
+  .an-dot{width:10px;height:10px;border-radius:50%;margin-top:5px;}
+  .an-dot.good{background:var(--green);} .an-dot.warn{background:var(--amber);} .an-dot.bad{background:var(--red);}
+  .an-recs{margin-top:10px;}
+  .an-recs-title{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);}
+  .an-recs ul{margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.6;color:var(--paper);}
+  .kpi-tile .note{margin-top:4px;}
+  .kv.warn b{color:var(--red);}
   footer.credits{margin-top:30px;text-align:center;color:var(--muted);font-size:11.5px;font-family:'IBM Plex Mono',monospace;letter-spacing:.03em;}
-
-  /* ---------- TEACHER PANEL ---------- */
-  .status-pill{font-family:'IBM Plex Mono',monospace;font-size:10.5px;padding:3px 9px;border-radius:12px;white-space:nowrap;}
-  .status-pill.st-none{background:rgba(139,147,160,.12);color:var(--muted);border:1px solid var(--line);}
-  .status-pill.st-progress{background:rgba(242,183,5,.15);color:var(--amber);border:1px solid var(--amber);}
-  .status-pill.st-sent{background:rgba(76,175,106,.15);color:var(--green);border:1px solid var(--green);}
-  table.teach{width:100%;border-collapse:collapse;font-size:12.5px;}
-  table.teach th{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:0 7px 8px;border-bottom:1px solid var(--line);}
-  table.teach td{padding:7px;border-bottom:1px solid var(--line);}
-  table.teach tr.stale{opacity:.55;}
-
-  .ficha{
-    background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:18px 20px;margin-bottom:16px;
-    page-break-inside:avoid;
-  }
-  .ficha-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--amber);padding-bottom:10px;margin-bottom:12px;}
-  .ficha-head .fh-name{font-family:'Oswald',sans-serif;font-size:19px;text-transform:uppercase;color:var(--paper);}
-  .ficha-head .fh-group{font-size:11.5px;color:var(--muted);margin-top:2px;}
-  .ficha-rank{text-align:right;}
-  .ficha-rank .fr-num{font-family:'Oswald',sans-serif;font-size:28px;color:var(--amber);line-height:1;}
-  .ficha-rank .fr-lb{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
-  .ficha-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  .ficha-block h5{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin:0 0 8px;}
-  .ficha-block .kv{font-size:12.5px;padding:4px 0;}
-  @media (max-width:820px){.ficha-grid{grid-template-columns:1fr;}}
-
-  @media print{
-    body *{visibility:hidden;}
-    #fichasPrintArea, #fichasPrintArea *{visibility:visible;}
-    #fichasPrintArea{position:absolute;left:0;top:0;width:100%;}
-    .ficha{page-break-after:always;border:none;}
-    .app > .topbar, .app > nav.tabs, footer.credits{display:none !important;}
-  }
 </style>
 </head>
 <body>
@@ -321,15 +305,8 @@
       <p class="brand-eyebrow" style="margin-top:6px;letter-spacing:.08em;color:var(--muted);">Simulador de línea de producción — costeo, riesgo, finanzas y competencia</p>
     </div>
     <div class="topcontrols">
-      <div class="field-mini"><label>Lote (fijo)</label><div class="fixed-badge">1,000 pzas</div></div>
+      <div class="field-mini"><label for="batchSize">Lote (u.)</label><input id="batchSize" type="number" min="1" step="1" value="500"></div>
       <div class="field-mini"><label for="marginInput">Margen (%)</label><input id="marginInput" type="number" min="0" step="1" value="35"></div>
-      <div class="budget-pill" id="budgetPillTop">
-        <span class="bp-label">Presupuesto</span>
-        <span class="bp-amount" id="bpAmountTop">$1,000,000.00</span>
-        <span class="bp-sep">·</span>
-        <span class="bp-label">Saldo</span>
-        <span class="bp-amount" id="bpBalanceTop">$1,000,000.00</span>
-      </div>
       <div class="field-mini"><label for="speedSelect">Velocidad sim.</label>
         <select id="speedSelect"><option value="2200">Lenta</option><option value="1000" selected>Normal</option><option value="380">Rápida</option></select>
       </div>
@@ -346,7 +323,7 @@
     <button data-tab="resultados"><b>05</b>Resultados y KPI</button>
     <button data-tab="competencia"><b>06</b>Competencia <span class="mono" style="color:var(--amber)">●</span></button>
     <button data-tab="planta"><b>07</b>Planta virtual</button>
-    <button data-tab="profesor"><b>08</b>Panel del profesor 👨‍🏫</button>
+    <button data-tab="empresa"><b>08</b>Mi empresa</button>
   </nav>
 
   <!-- ============ TAB 0: INSTRUCCIONES ============ -->
@@ -358,34 +335,38 @@
       <h3><span class="tag">RUTA</span> Cómo recorrer el simulador</h3>
       <div class="steps">
         <div class="step"><div class="num"></div><div class="txt">
-          <h4>Regístrate como equipo</h4>
-          <p>Ve a <b>06 · Competencia</b> y crea tu cuenta con nombre, grupo y PIN de 4 dígitos. Admite 50+ equipos simultáneos.</p>
+          <h4>Registra tu empresa</h4>
+          <p>En <b>06 · Competencia</b> crea tu cuenta con nombre, grupo y PIN de 4 dígitos. Tu empresa recibe <b>$1,000,000</b> de capital inicial para operar.</p>
         </div></div>
         <div class="step"><div class="num"></div><div class="txt">
           <h4>Configura tu producción</h4>
-          <p>En <b>02 · Configuración</b> combina proveedor, mano de obra, capacitación, maquinaria, <b>mantenimiento</b> y <b>seguridad/sustentabilidad</b>. También puedes activar la <b>curva de aprendizaje</b> y girar un <b>evento aleatorio</b> del turno (precio de insumos, tipo de cambio, ausentismo, fallas, auditorías, demanda...).</p>
+          <p>En <b>02 · Configuración</b> combina proveedor, mano de obra, capacitación, maquinaria, <b>mantenimiento</b> y <b>seguridad/sustentabilidad</b>. Puedes activar la <b>curva de aprendizaje</b> y girar un <b>evento aleatorio</b> del turno.</p>
         </div></div>
         <div class="step"><div class="num"></div><div class="txt">
-          <h4>Revisa tu cadena de suministro y riesgo de desabasto</h4>
-          <p>En <b>01 · Cadena y riesgo</b> visualiza el flujo completo y calcula tu punto de reorden y riesgo de desabasto según el proveedor elegido.</p>
+          <h4>Revisa cadena, tiempos y finanzas</h4>
+          <p>En <b>01</b> calcula tu punto de reorden y riesgo de desabasto, en <b>03</b> corre la línea y en <b>04</b> revisa tu punto de equilibrio y tu flujo de efectivo con el efectivo real de tu empresa.</p>
         </div></div>
         <div class="step"><div class="num"></div><div class="txt">
-          <h4>Simula tiempos y revisa tus finanzas</h4>
-          <p>En <b>03 · Simulación</b> corre la línea. En <b>04 · Finanzas</b> revisa tu punto de equilibrio, tu flujo de efectivo del lote, y compara comprar vs. rentar tu maquinaria.</p>
+          <h4>Elige mercado y precio con la media en vivo</h4>
+          <p>En <b>06 · Competencia</b> ves el <b>precio medio</b> de los mercados de alta calidad, calidad media y bajo costo conforme los equipos suben su producción. Envía tu oferta antes de que termine el cronómetro.</p>
         </div></div>
         <div class="step"><div class="num"></div><div class="txt">
-          <h4>Consulta tu tablero de KPI</h4>
-          <p>En <b>05 · Resultados y KPI</b> revisa costo, calidad, OEE, costo de la calidad y tu carta de control estadístico (SPC).</p>
+          <h4>Todas las empresas venden</h4>
+          <p>Al cerrar cada competencia, el mercado se reparte por <b>participación</b>: precio, calidad y rapidez deciden cuánto vende cada empresa, y todas venden al menos un mínimo. El ranking muestra el <b>valor de la compañía</b> con las ventas ya sumadas.</p>
         </div></div>
         <div class="step"><div class="num"></div><div class="txt">
-          <h4>Elige mercado y compite</h4>
-          <p>En <b>06 · Competencia</b> elige tu mercado, fija tu precio y envía tu oferta antes de que se acabe el cronómetro compartido. Al terminar, no todos los equipos logran vender.</p>
+          <h4>Revisa tu análisis y financia tu operación</h4>
+          <p>En <b>08 · Mi empresa</b> recibes el <b>análisis de tus decisiones</b> de cada competencia y puedes <b>pedir préstamos</b> con interés. Una empresa en quiebra puede financiarse y seguir compitiendo.</p>
+        </div></div>
+        <div class="step"><div class="num"></div><div class="txt">
+          <h4>Cuatro competencias acumulativas</h4>
+          <p>El torneo tiene <b>4 competencias</b>. Tu empresa conserva su valor, su deuda y su historial de una a otra: lo que ganes o pierdas se acumula.</p>
         </div></div>
       </div>
     </div>
 
     <div class="callout">
-      <b>Nota:</b> los datos de cuentas, ofertas y del cronómetro son compartidos entre todos los que abran esta página. El PIN no es un mecanismo de seguridad real: úsalo solo en un salón de clase controlado.
+      <b>Nota:</b> las cuentas, ofertas, resultados y el cronómetro son compartidos entre todos los que abran esta página. El PIN de equipo y la clave del profesor no son un mecanismo de seguridad real: úsalos solo en un salón de clase controlado.
     </div>
   </section>
 
@@ -432,13 +413,7 @@
   <!-- ============ TAB 2: CONFIGURACIÓN DE PRODUCCIÓN ============ -->
   <section class="tabpanel" id="tab-costeo">
     <p class="panel-title">Configuración de producción</p>
-    <p class="panel-sub">Combina proveedor, mano de obra, capacitación, maquinaria, mantenimiento y seguridad. Todo se usa en conjunto para tu costo, tiempo y calidad finales — y todo sale del mismo presupuesto de $1,000,000.</p>
-
-    <div class="card">
-      <h3><span class="tag">💰</span> Tu presupuesto — lote fijo de 1,000 piezas</h3>
-      <div id="budgetCardWrap"></div>
-      <p class="note" style="margin-top:10px;">Cada equipo inicia con $1,000,000.00 de presupuesto virtual. De ahí se paga TODO: materia prima (según el proveedor elegido), mano de obra, capacitación, maquinaria, mantenimiento, seguridad y gastos indirectos de fabricación — el saldo baja en tiempo real conforme eliges cada opción. El lote siempre es de 1,000 piezas, sin excepción.</p>
-    </div>
+    <p class="panel-sub">Combina proveedor, mano de obra, capacitación, maquinaria, mantenimiento y seguridad. Todo se usa en conjunto para tu costo, tiempo y calidad finales.</p>
 
     <div class="card">
       <h3><span class="tag">01</span> Materia prima — receta base</h3>
@@ -560,7 +535,7 @@
 
     <div class="card">
       <h3><span class="tag">02</span> Flujo de efectivo del lote</h3>
-      <div class="field-mini" style="width:260px;margin-bottom:14px;"><label for="cashInitial">Presupuesto inicial (fijo por reglamento)</label><input id="cashInitial" type="number" min="0" step="100" value="1000000" style="width:100%;" disabled></div>
+      <div class="field-mini" style="width:220px;margin-bottom:14px;"><label for="cashInitial" id="cashInitialLabel">Efectivo inicial disponible</label><input id="cashInitial" type="number" min="0" step="100" value="1000000" style="width:100%;"></div>
       <div class="grid-2">
         <div>
           <div class="kv plain"><span>Efectivo inicial</span><b id="cfInitial">—</b></div>
@@ -684,59 +659,87 @@
 
   <!-- ============ TAB 6: COMPETENCIA ============ -->
   <section class="tabpanel" id="tab-competencia">
-    <p class="panel-title">Competencia entre equipos</p>
-    <p class="panel-sub">Regístrate, configura tu producción, elige un mercado y compite contra reloj. Al finalizar, solo algunos equipos lograrán vender.</p>
+    <p class="panel-title">Competencia entre empresas</p>
+    <p class="panel-sub">Cada equipo dirige una empresa con $1,000,000 de capital inicial durante 4 competencias acumulativas. Todas las empresas venden; la participación de mercado depende del precio, la calidad y la rapidez de cada una.</p>
 
-    <div class="card" id="dbStatusCard">
-      <h3><span class="tag">CONEXIÓN</span> Base de datos compartida</h3>
-      <div id="dbBadgeWrap"></div>
-      <div id="dbConfigForm" style="display:none;margin-top:12px;">
-        <p class="note">Este simulador necesita una base de datos compartida (gratuita) para que el registro de equipos, las ofertas y el cronómetro funcionen fuera de Claude. Pega aquí la URL de tu Realtime Database de Firebase para probarla en este navegador. <b style="color:var(--amber)">Para que funcione automáticamente con tus 50 equipos, pide al profesor que la pegue directamente en el código antes de publicar (ver comentario FIREBASE_DB_URL en el archivo).</b></p>
-        <div class="form-row"><label for="dbUrlInput">Firebase Database URL</label><input id="dbUrlInput" type="text" placeholder="https://tu-proyecto-default-rtdb.firebaseio.com"></div>
-        <div class="btn-row" style="margin-top:0;">
-          <button class="btn amber" id="saveDbUrlBtn">Guardar y conectar (solo este navegador)</button>
-        </div>
-        <div class="form-msg" id="dbMsg"></div>
-      </div>
-    </div>
+    <div class="callout" id="modeBanner" hidden></div>
 
     <div class="card">
-      <div class="status-badge idle" id="statusBadge">Sin competencia activa</div>
+      <div class="comp-head">
+        <div class="status-badge idle" id="statusBadge">Sin competencia activa</div>
+        <div class="round-chip mono" id="roundChip">Competencia 1 de 4</div>
+      </div>
       <div class="countdown-box">
         <div class="countdown-digits mono" id="countdownDigits">— — : — — : — —</div>
-        <div class="countdown-label" id="countdownLabel">Esperando a que el profesor inicie la competencia</div>
+        <div class="countdown-label" id="countdownLabel">Esperando a que el profesor inicie la competencia 1</div>
       </div>
       <div class="admin-box">
         <label class="toggle-row"><input type="checkbox" id="profesorToggle"> Modo profesor / anfitrión</label>
-        <div id="adminPanel" style="display:none;margin-top:10px;">
-          <div class="btn-row" style="margin-top:0;">
-            <div class="field-mini"><label>Duración</label><input id="durValue" type="number" min="1" step="1" value="8" style="width:80px;"></div>
-            <div class="field-mini"><label>Unidad</label><select id="durUnit"><option value="horas">Horas</option><option value="dias">Días</option></select></div>
-            <button class="btn amber" id="startCompBtn">▶ Iniciar competencia</button>
-            <button class="btn ghost" id="resetCompBtn">↺ Reiniciar cronómetro</button>
-            <button class="btn danger" id="wipeOffersBtn">🗑 Borrar todas las ofertas</button>
+        <div id="profAuth" hidden>
+          <div class="btn-row" style="margin-top:8px;">
+            <div class="field-mini"><label for="profKey">Clave del profesor</label><input id="profKey" type="password" style="width:180px;"></div>
+            <button class="btn amber" id="profKeyBtn">Entrar</button>
           </div>
-          <p class="note" style="margin-top:8px;">El cronómetro es compartido: todos los equipos que tengan esta página abierta lo verán actualizarse.</p>
+          <p class="note" id="profKeyHint" style="margin-top:6px;"></p>
+          <div class="form-msg" id="profKeyMsg"></div>
+        </div>
+        <div id="adminPanel" hidden>
+          <p class="note mono" id="adminStatus" style="margin:10px 0 0;"></p>
+          <h3 style="margin-top:14px;"><span class="tag">1</span> Cronómetro y cierre</h3>
+          <div class="btn-row" style="margin-top:0;">
+            <div class="field-mini"><label for="durValue">Duración</label><input id="durValue" type="number" min="1" step="1" value="60" style="width:80px;"></div>
+            <div class="field-mini"><label for="durUnit">Unidad</label><select id="durUnit"><option value="minutos" selected>Minutos</option><option value="horas">Horas</option><option value="dias">Días</option></select></div>
+            <button class="btn amber" id="startCompBtn">▶ Iniciar competencia 1</button>
+            <button class="btn ghost" id="endNowBtn">⏹ Terminar tiempo ahora</button>
+          </div>
+          <div class="btn-row">
+            <button class="btn ghost" id="previewBtn">Vista preliminar del mercado</button>
+            <button class="btn amber" id="settleBtn">🏁 Cerrar y liquidar competencia 1</button>
+          </div>
+          <p class="note" style="margin-top:8px;">Liquidar reparte el mercado, cobra producción e intereses, actualiza el valor de cada empresa y genera su análisis. Las empresas conservan su valor para la siguiente competencia.</p>
+          <div id="previewWrap" style="margin-top:12px;"></div>
+
+          <h3 style="margin-top:18px;"><span class="tag">2</span> Parámetros del torneo</h3>
+          <div class="btn-row" id="paramsRow" style="margin-top:0;">
+            <div class="field-mini"><label for="cfgMinSale">Venta mínima (%)</label><input id="cfgMinSale" type="number" min="0" max="100" step="1" value="15"></div>
+            <div class="field-mini"><label for="cfgLoanRate">Interés por comp. (%)</label><input id="cfgLoanRate" type="number" min="0" max="100" step="0.5" value="8"></div>
+            <div class="field-mini"><label for="cfgCredit">Límite de crédito ($)</label><input id="cfgCredit" type="number" min="0" step="50000" value="2000000" style="width:130px;"></div>
+            <button class="btn ghost" id="saveParamsBtn">Guardar parámetros</button>
+          </div>
+
+          <h3 style="margin-top:18px;"><span class="tag">3</span> Análisis de todos los equipos</h3>
+          <select id="anRoundSel" class="sel-inline" hidden></select>
+          <div id="allAnalyses" style="margin-top:10px;"></div>
+
+          <h3 style="margin-top:18px;"><span class="tag">4</span> Mantenimiento</h3>
+          <div class="btn-row" style="margin-top:0;">
+            <button class="btn danger" id="wipeOffersBtn">Borrar ofertas de la competencia actual</button>
+            <button class="btn danger" id="resetTournamentBtn">Reiniciar torneo completo</button>
+          </div>
+          <p class="note" style="margin-top:8px;">Reiniciar el torneo regresa todas las empresas a $1,000,000, borra deudas, historial y análisis, y deja lista la competencia 1. Las cuentas y PIN se conservan.</p>
+          <div class="form-msg" id="adminMsg"></div>
         </div>
       </div>
     </div>
 
     <div class="login-grid">
       <div class="card" id="loginCard">
-        <h3><span class="tag">CUENTA</span> Inicio de sesión</h3>
-        <p class="note" style="margin-top:-6px;margin-bottom:12px;">Usa el usuario y la contraseña que te asignó tu profesor. Si no tienes uno, pídeselo antes de continuar.</p>
-        <div class="form-row"><label for="accName">Usuario</label><input id="accName" type="text" maxlength="40" placeholder="Ej. Equipo-01"></div>
-        <div class="form-row"><label for="accPin">Contraseña</label><input id="accPin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></div>
-        <div class="btn-row"><button class="btn amber" id="loginBtn">Iniciar sesión</button></div>
+        <h3><span class="tag">CUENTA</span> Registro / inicio de sesión de equipo</h3>
+        <div class="form-row"><label for="accName">Nombre de la empresa o equipo</label><input id="accName" type="text" maxlength="40" placeholder="Ej. Equipo Kaizen"></div>
+        <div class="form-row"><label for="accGroup">Grupo / sección (opcional)</label><input id="accGroup" type="text" maxlength="30" placeholder="Ej. IND-402"></div>
+        <div class="form-row"><label for="accPin">PIN de 4 dígitos</label><input id="accPin" type="password" inputmode="numeric" maxlength="4" placeholder="••••"></div>
+        <div class="btn-row"><button class="btn amber" id="loginBtn">Registrarme / iniciar sesión</button></div>
         <div class="form-msg" id="loginMsg"></div>
+        <p class="note" style="margin-top:12px;">Al registrarse, cada empresa recibe <b style="color:var(--amber)">$1,000,000</b> de capital para poner a trabajar la planta. Ese valor se conserva y cambia durante las 4 competencias.</p>
       </div>
 
       <div class="card">
         <h3><span class="tag">MI OFERTA</span> Elige mercado y precio</h3>
         <div id="offerLocked" class="note">Inicia sesión para configurar y enviar tu oferta.</div>
-        <div id="offerForm" style="display:none;">
+        <div id="offerForm" hidden>
           <div class="choice-grid" id="marketChoices" style="grid-template-columns:1fr;gap:8px;margin-bottom:12px;"></div>
           <div class="form-row"><label for="askingPrice">Precio de venta ofertado ($/unidad)</label><input id="askingPrice" type="number" min="0" step="0.01"></div>
+          <div id="offerHelper" style="margin-bottom:10px;"></div>
           <div class="btn-row" style="margin-top:0;">
             <button class="btn ghost" id="useSuggestedBtn">Usar precio sugerido</button>
             <button class="btn amber" id="submitOfferBtn">📤 Enviar / actualizar mi oferta</button>
@@ -747,25 +750,30 @@
       </div>
     </div>
 
-    <div class="card"><h3><span class="tag">MERCADOS</span> Reglas de selección</h3><div class="grid-3" id="marketsInfo"></div></div>
+    <div class="card">
+      <h3><span class="tag">EN VIVO</span> Precio medio por mercado · <span id="liveRoundLabel">Competencia 1 de 4</span></h3>
+      <p class="note" style="margin-top:-6px;">Se actualiza conforme los equipos envían su producción. Úsalo para fijar tu precio frente a la competencia.</p>
+      <div class="grid-3" id="marketsInfo"></div>
+      <div class="callout" style="margin-top:14px;"><b>Cómo se reparte el mercado:</b> todas las empresas venden al menos la venta mínima garantizada de sus unidades vendibles. El resto de la demanda se reparte según el atractivo de cada oferta: precio frente a la media, calidad frente al mínimo del mercado y rapidez de la línea. Si el precio medio de un mercado sube demasiado sobre el costo, la demanda total baja. Las unidades que no se venden se rematan al 30% de su costo.</div>
+    </div>
 
     <div class="card">
-      <h3><span class="tag">EN VIVO</span> Ranking de eficiencia de producción</h3>
+      <h3><span class="tag">RANKING</span> Valor de la compañía</h3>
       <div class="btn-row" style="margin-top:0;margin-bottom:10px;">
-        <button class="btn ghost" id="refreshLbBtn">↻ Actualizar ranking</button>
+        <button class="btn ghost" id="refreshLbBtn">↻ Actualizar</button>
         <span class="note" id="lbCount"></span>
+        <span class="note mono" id="syncNote"></span>
       </div>
       <div id="lbWrap"><div class="lb-empty">Cargando ranking…</div></div>
+      <p class="note" style="margin-top:10px;">Valor de la compañía = efectivo − deuda. Ya incluye las ventas de cada competencia liquidada.</p>
     </div>
 
     <div class="card">
-      <h3><span class="tag">FINAL</span> Resultados de la competencia</h3>
-      <p class="note">Simula la selección de mercado en cualquier momento (vista preliminar) o al terminar el tiempo (resultado oficial).</p>
-      <div class="btn-row" style="margin-top:0;"><button class="btn amber" id="computeFinalBtn">🏁 Calcular resultados finales</button></div>
-      <div id="finalResultsWrap" style="margin-top:16px;"></div>
+      <h3><span class="tag">RESULTADOS</span> Resultados por competencia</h3>
+      <select id="resultsRoundSel" class="sel-inline" hidden></select>
+      <div id="finalResultsWrap" style="margin-top:12px;"></div>
     </div>
   </section>
-
   <!-- ============ TAB 7: PLANTA VIRTUAL ============ -->
   <section class="tabpanel" id="tab-planta">
     <p class="panel-title">Planta virtual</p>
@@ -793,67 +801,48 @@
     </div>
   </section>
 
-  <!-- ============ TAB 8: PANEL DEL PROFESOR ============ -->
-  <section class="tabpanel" id="tab-profesor">
-    <p class="panel-title">Panel del profesor</p>
-    <p class="panel-sub">Monitorea en vivo a todos los equipos registrados (se hayan o no inscrito a la competencia), calcula el ranking final y genera la ficha técnica de cada participante.</p>
 
-    <div class="card" id="teacherLockedCard">
-      <h3><span class="tag">ACCESO</span> Modo profesor</h3>
-      <label class="toggle-row"><input type="checkbox" id="profesorToggle2"> Activar modo profesor / anfitrión</label>
-      <p class="note" style="margin-top:6px;">Es el mismo interruptor que en la pestaña 06 · Competencia — actívalo desde cualquiera de las dos y queda activo en ambas.</p>
-    </div>
+  <!-- ============ TAB 8: MI EMPRESA ============ -->
+  <section class="tabpanel" id="tab-empresa">
+    <p class="panel-title">Mi empresa</p>
+    <p class="panel-sub">Valor de tu compañía, financiamiento, historial de las 4 competencias y el análisis de tus decisiones.</p>
 
-    <div id="teacherPanelContent" style="display:none;">
-      <div class="card">
-        <h3><span class="tag">CUENTAS</span> Asignar cuentas de acceso a los participantes</h3>
-        <p class="note">Los participantes NO se registran solos: tú les creas su usuario y contraseña aquí, y se los entregas para que inicien sesión en la pestaña 06 · Competencia.</p>
-        <div class="grid-2" style="margin-top:12px;">
-          <div>
-            <h4 style="font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;color:var(--teal);margin:0 0 10px;">Crear una cuenta</h4>
-            <div class="form-row"><label for="newAccName">Usuario (equipo o alumno)</label><input id="newAccName" type="text" maxlength="40" placeholder="Ej. Equipo-01"></div>
-            <div class="form-row"><label for="newAccGroup">Grupo / sección (opcional)</label><input id="newAccGroup" type="text" maxlength="30" placeholder="Ej. IND-402"></div>
-            <div class="form-row"><label for="newAccPin">Contraseña (4 dígitos)</label><input id="newAccPin" type="text" inputmode="numeric" maxlength="4" placeholder="1234"></div>
-            <div class="btn-row" style="margin-top:0;">
-              <button class="btn ghost" id="genPinBtn">🎲 Generar</button>
-              <button class="btn amber" id="createAccBtn">➕ Crear cuenta</button>
-            </div>
-            <div class="form-msg" id="createAccMsg"></div>
-          </div>
-          <div>
-            <h4 style="font-family:'Oswald',sans-serif;font-size:13px;text-transform:uppercase;color:var(--teal);margin:0 0 10px;">Generar varias cuentas a la vez (hasta 50)</h4>
-            <div class="form-row"><label for="bulkCount">Cantidad</label><input id="bulkCount" type="number" min="1" max="50" value="10"></div>
-            <div class="form-row"><label for="bulkPrefix">Prefijo de usuario</label><input id="bulkPrefix" type="text" value="Equipo"></div>
-            <div class="form-row"><label for="bulkGroup">Grupo (opcional, aplica a todas)</label><input id="bulkGroup" type="text" placeholder="Ej. IND-402"></div>
-            <div class="btn-row" style="margin-top:0;"><button class="btn amber" id="bulkCreateBtn">⚡ Generar cuentas</button></div>
-            <div class="form-msg" id="bulkMsg"></div>
-          </div>
+    <div class="card" id="myCoLocked"><p class="note" style="margin:0;">Inicia sesión en <b>06 · Competencia</b> para ver tu empresa.</p></div>
+
+    <div id="myCoBody" hidden>
+      <div class="grid-4">
+        <div class="kpi-tile"><div class="lb">Valor de la compañía</div><div class="vv" id="coValue">—</div><div class="note mono" id="coChange"></div></div>
+        <div class="kpi-tile"><div class="lb">Efectivo</div><div class="vv" id="coCash">—</div></div>
+        <div class="kpi-tile"><div class="lb">Deuda</div><div class="vv" id="coDebt">—</div></div>
+        <div class="kpi-tile"><div class="lb">Estado</div><div class="vv" id="coStatus">—</div></div>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <h3><span class="tag">$</span> Financiamiento</h3>
+        <p class="note" id="loanTerms"></p>
+        <div class="callout" id="bankruptNote" hidden><b>Tu empresa necesita financiamiento.</b> Sin efectivo suficiente no puedes producir tu lote. Pide un préstamo para seguir operando; tu valor puede quedar negativo mientras tengas deuda.</div>
+        <div class="btn-row">
+          <div class="field-mini"><label for="loanAmount">Monto ($)</label><input id="loanAmount" type="number" min="0" step="10000" value="100000" style="width:150px;"></div>
+          <button class="btn amber" id="requestLoanBtn">Solicitar préstamo</button>
+          <button class="btn ghost" id="repayLoanBtn">Pagar deuda</button>
         </div>
-        <div id="bulkResultsWrap" style="margin-top:14px;"></div>
+        <div class="form-msg" id="loanMsg"></div>
+        <div id="loanHistory" style="margin-top:12px;"></div>
       </div>
 
       <div class="card">
-        <h3><span class="tag">EN VIVO</span> Avance de todos los equipos</h3>
-        <div class="btn-row" style="margin-top:0;margin-bottom:10px;">
-          <button class="btn ghost" id="refreshTeacherBtn">↻ Actualizar avance</button>
-          <span class="note" id="teacherCount"></span>
-        </div>
-        <div id="teacherWrap"><div class="lb-empty">Cargando…</div></div>
+        <h3><span class="tag">HISTORIAL</span> Las 4 competencias</h3>
+        <div id="coHistory"></div>
       </div>
 
       <div class="card">
-        <h3><span class="tag">FINAL</span> Cálculo de ranking y fichas técnicas</h3>
-        <p class="note">Genera una ficha técnica por cada equipo registrado (haya vendido o no) con su lugar, su configuración completa y sus métricas — lista para imprimir o guardar como PDF.</p>
-        <div class="btn-row" style="margin-top:0;">
-          <button class="btn amber" id="genFichasBtn">📄 Calcular ranking y generar fichas técnicas</button>
-          <button class="btn ghost" id="printFichasBtn" style="display:none;">🖨️ Imprimir / guardar como PDF</button>
-        </div>
-        <div id="fichasWrap" style="margin-top:16px;"></div>
+        <h3><span class="tag">ANÁLISIS</span> Análisis de tus decisiones</h3>
+        <div id="coAnalyses"></div>
       </div>
     </div>
   </section>
 
-  <footer class="credits">TECNM FACTORYSIM — COSTEO, RIESGO, FINANZAS Y COMPETENCIA · USO ACADÉMICO · DATOS COMPARTIDOS ENTRE USUARIOS</footer>
+  <footer class="credits">TECNM FACTORYSIM v2.0 · 11-OCT-2026 — TORNEO DE 4 COMPETENCIAS, PARTICIPACIÓN DE MERCADO Y FINANCIAMIENTO · USO ACADÉMICO</footer>
 </div>
 
 <script>
@@ -890,12 +879,10 @@
     {id:'media', statekey:'safetyId', name:'Seguridad estándar', tier:'$1,800 por lote', icon:'🦺', cost:1800, accidentProb:0.03, footprint:'Media', qBonus:0, note:'Programa de seguridad activo'},
     {id:'avanzada', statekey:'safetyId', name:'Seguridad avanzada + ISO 14001', tier:'$4,500 por lote', icon:'🌿', cost:4500, accidentProb:0.008, footprint:'Baja', qBonus:3, note:'Certificación ambiental, acceso a mercado verde'},
   ];
-  const BUDGET_TOTAL = 1000000; // presupuesto virtual fijo por equipo
-  const FIXED_BATCH_SIZE = 1000; // el lote de producción siempre es de 1,000 piezas
   const MARKETS = [
-    {id:'premium', name:'Mercado Premium', icon:'💎', color:'var(--amber)', minQuality:75, capacity:10, criterion:'Mayor calidad primero; en empate, menor precio.'},
-    {id:'estandar', name:'Mercado Estándar', icon:'⚖️', color:'var(--teal)', minQuality:45, capacity:15, criterion:'Mejor relación calidad/precio.'},
-    {id:'economico', name:'Mercado Económico', icon:'🏷️', color:'var(--green)', minQuality:20, capacity:15, criterion:'Menor precio, cumpliendo calidad mínima.'},
+    {id:'premium', name:'Mercado de alta calidad', short:'Alta calidad', subtitle:'Premium', icon:'💎', color:'var(--amber)', minQuality:75, wq:3.0, wp:1.5, ws:0.6, demandRatio:0.75, refMarkup:1.60, criterion:'Compra por calidad; tolera precios altos.'},
+    {id:'estandar', name:'Mercado de calidad media', short:'Calidad media', subtitle:'Estándar', icon:'⚖️', color:'var(--teal)', minQuality:45, wq:1.5, wp:2.5, ws:0.8, demandRatio:0.80, refMarkup:1.35, criterion:'Busca la mejor relación calidad/precio.'},
+    {id:'economico', name:'Mercado de bajo costo', short:'Bajo costo', subtitle:'Económico', icon:'🏷️', color:'var(--green)', minQuality:20, wq:0.6, wp:3.0, ws:0.8, demandRatio:0.85, refMarkup:1.20, criterion:'Compra por precio; la calidad extra casi no cuenta.'},
   ];
   const EVENTS = [
     {id:'acero', icon:'📈', title:'Alza en el precio del acero', desc:'Tus insumos suben de precio este turno.', mpFactor:1.12, positive:false},
@@ -914,7 +901,7 @@
 
   let uid = 1;
   const state = {
-    batchSize: 100, margin: 35,
+    batchSize: 500, margin: 35,
     materials: [
       {id: uid++, name:"Lámina de acero", qty:2, unitCost:45.00},
       {id: uid++, name:"Tornillería", qty:8, unitCost:1.20},
@@ -938,7 +925,6 @@
     targetMarket:'estandar', askingPrice: 0, askingTouched:false,
     lastResults: {},
     compConfig: null,
-    teacherMode: false,
   };
   let currentAccount = null;
 
@@ -949,78 +935,7 @@
   const clamp = (n,a,b)=>Math.max(a,Math.min(b,n));
   const byId = (arr,id)=> arr.find(x=>x.id===id) || arr[0];
   function escapeHtml(s){ return (s||'').toString().replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
-  /* ================================================================
-     BASE DE DATOS COMPARTIDA (Firebase Realtime Database)
-     ----------------------------------------------------------------
-     Este simulador necesita un lugar compartido donde guardar cuentas,
-     ofertas y el cronómetro de la competencia para que funcione fuera
-     de Claude (por ejemplo, publicado en GitHub Pages).
-
-     PASOS PARA ACTIVARLO (una sola vez, lo hace el profesor):
-     1. Ve a https://console.firebase.google.com y crea un proyecto
-        gratuito (no pide tarjeta).
-     2. En el menú lateral entra a "Realtime Database" → "Crear base
-        de datos" → elige cualquier región → inicia en "modo de
-        prueba" (reglas abiertas de lectura/escritura).
-     3. Copia la URL que te da, algo como:
-        https://tu-proyecto-default-rtdb.firebaseio.com
-     4. Pégala abajo en la constante FIREBASE_DB_URL, entre las
-        comillas, y guarda el archivo antes de subirlo a GitHub.
-        Así TODOS los que abran tu página (hasta 50 equipos + tú)
-        comparten automáticamente la misma base de datos, sin que
-        nadie tenga que configurar nada en su navegador.
-
-     Nota de seguridad: el "modo de prueba" de Firebase es de lectura
-     y escritura abiertas para cualquiera que tenga la URL. Es
-     apropiado para una dinámica de clase de corta duración, pero no
-     guardes ahí información sensible ni la dejes así por meses.
-  ================================================================ */
-  const FIREBASE_DB_URL = "https://miregistro-9115a-default-rtdb.firebaseio.com"; // <-- pega aquí tu URL de Firebase antes de publicar, ej: "https://tu-proyecto-default-rtdb.firebaseio.com"
-  const LOCAL_DB_KEY = 'tecnm_factorysim_db_url';
-
-  function getDbUrl(){
-    if(FIREBASE_DB_URL && FIREBASE_DB_URL.trim()) return FIREBASE_DB_URL.trim().replace(/\/+$/,'');
-    try{ const local = localStorage.getItem(LOCAL_DB_KEY); if(local && local.trim()) return local.trim().replace(/\/+$/,''); }catch(err){}
-    return '';
-  }
-  function setLocalDbUrl(url){ try{ localStorage.setItem(LOCAL_DB_KEY, (url||'').trim()); }catch(err){} }
-  function isDbHardcoded(){ return !!(FIREBASE_DB_URL && FIREBASE_DB_URL.trim()); }
-  function keyToPath(key){ return key.split(':').join('/'); }
-
-  const FB = {
-    async get(key){
-      const base = getDbUrl(); if(!base) throw new Error('sin-base-de-datos');
-      const res = await fetch(`${base}/${keyToPath(key)}.json`);
-      if(!res.ok) throw new Error('fb-get-failed');
-      const data = await res.json();
-      if(data===null || data===undefined) return null;
-      return { key, value: JSON.stringify(data) };
-    },
-    async set(key, value){
-      const base = getDbUrl(); if(!base) throw new Error('sin-base-de-datos');
-      let obj; try{ obj = JSON.parse(value); }catch(err){ obj = value; }
-      const res = await fetch(`${base}/${keyToPath(key)}.json`, { method:'PUT', body: JSON.stringify(obj) });
-      if(!res.ok) throw new Error('fb-set-failed');
-      return { key, value };
-    },
-    async delete(key){
-      const base = getDbUrl(); if(!base) throw new Error('sin-base-de-datos');
-      const res = await fetch(`${base}/${keyToPath(key)}.json`, { method:'DELETE' });
-      if(!res.ok) throw new Error('fb-delete-failed');
-      return { key, deleted:true };
-    },
-    async list(prefix){
-      const base = getDbUrl(); if(!base) throw new Error('sin-base-de-datos');
-      const parentPath = prefix.replace(/:$/,'');
-      const res = await fetch(`${base}/${parentPath}.json?shallow=true`);
-      if(!res.ok) throw new Error('fb-list-failed');
-      const data = await res.json();
-      const keys = data ? Object.keys(data).map(k=> parentPath+':'+k) : [];
-      return { keys };
-    }
-  };
-
-  function hasStorage(){ return !!getDbUrl(); }
+  function hasStorage(){ return typeof window.storage !== 'undefined' && window.storage; }
   function slugify(name){
     let s = name.toString().toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
     if(!s) s = 'equipo-'+Math.random().toString(36).slice(2,7);
@@ -1035,12 +950,12 @@
       $$('.tabpanel').forEach(p=>p.classList.remove('active'));
       btn.classList.add('active');
       $('#tab-'+btn.dataset.tab).classList.add('active');
-      if(btn.dataset.tab==='competencia'){ renderDbStatus(); loadLeaderboard(); loadCompConfig(); }
-      if(btn.dataset.tab==='profesor'){ if(state.teacherMode) loadTeacherPanel(); }
+      if(btn.dataset.tab==='competencia' || btn.dataset.tab==='empresa'){ refreshAll(); }
     });
   });
 
   /* ---------------- TOP CONTROLS ---------------- */
+  $('#batchSize').addEventListener('input', e=>{ state.batchSize = Math.max(1, parseFloat(e.target.value)||1); recalcAll(); });
   $('#marginInput').addEventListener('input', e=>{ state.margin = parseFloat(e.target.value)||0; recalcAll(); });
   $('#speedSelect').addEventListener('change', e=>{ state.simSpeed = parseInt(e.target.value); });
   $$('input[name=cifBase]').forEach(r=> r.addEventListener('change', e=>{ state.cifBase = e.target.value; recalcAll(); }));
@@ -1380,33 +1295,6 @@
     }
   }
 
-  /* ---------------- PRESUPUESTO FIJO ($1,000,000 · lote de 1,000 pzas) ---------------- */
-  function renderBudget(unitCost){
-    const totalCost = unitCost * FIXED_BATCH_SIZE;
-    const balance = BUDGET_TOTAL - totalCost;
-    const over = balance < 0;
-    const pctUsed = clamp((totalCost/BUDGET_TOTAL)*100, 0, 100);
-
-    const setAmt = (id, val, markOver)=>{
-      const el = $(id); if(!el) return;
-      el.textContent = fmt(val);
-      if(markOver) el.classList.toggle('over', over);
-    };
-    setAmt('#bpAmountTop', BUDGET_TOTAL, false);
-    setAmt('#bpBalanceTop', balance, true);
-
-    const wrap = $('#budgetCardWrap');
-    if(wrap){
-      wrap.innerHTML = `
-        <div class="kv"><span>Presupuesto virtual asignado</span><b>${fmt(BUDGET_TOTAL)}</b></div>
-        <div class="kv"><span>Costo total de tu lote (1,000 pzas, con tu configuración actual)</span><b>${fmt(totalCost)}</b></div>
-        <div class="kv" style="border-bottom:none;"><span style="font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:14px;">Saldo disponible</span><b style="font-size:18px;color:${over?'var(--red)':'var(--green)'}">${fmt(balance)}</b></div>
-        <div class="qbar-track" style="margin-top:10px;"><div class="qbar-fill" style="width:${pctUsed}%;background:${over?'var(--red)':pctUsed>85?'var(--amber)':'var(--green)'}"></div></div>
-        ${over ? '<p class="note" style="color:var(--red);margin-top:8px;">⚠️ Tu configuración excede tu presupuesto. No podrás enviar tu oferta a la competencia hasta ajustarla.</p>' : ''}
-      `;
-    }
-  }
-
   /* ---------------- CALCULATIONS ---------------- */
   function recalcAll(full=true){
     const supplier = byId(SUPPLIERS, state.supplierId);
@@ -1563,20 +1451,21 @@
       batchSize: state.batchSize, salePrice, oee, stockoutRisk, ropUnits,
       supplierId: state.supplierId, laborId: state.laborId, trainingId: state.trainingId, machineId: state.machineId,
       maintenanceId: state.maintenanceId, safetyId: state.safetyId,
+      costBreakdown: {mp:mpUnit, mo:moUnit, mach:machineUnit, cif:cifUnit, tr:trainingUnit, mnt:maintenanceUnit, saf:safetyUnit+fineUnit},
+      bottleneckName: bottleneckStation ? bottleneckStation.name : '',
     };
 
     renderPie(mpUnit, moUnit, machineUnit, cifUnit, trainingUnit, maintenanceUnit, safetyUnit);
     renderSPCChart(defectRate*100);
     renderFactoryFloor();
-    renderBudget(unitCost);
-    scheduleProgressSave();
     if(full){ renderChain(); renderSimStations(); renderStationBars(); renderAllChoiceGroups(); }
+    renderOfferHelper();
   }
 
   function renderPie(mp, mo, mach, cif, tr, mnt, saf){
     const parts = [
-      {label:'Materia prima', val:mp, color:'#4C7BD9'},
-      {label:'Mano de obra', val:mo, color:'#8b9bb5'},
+      {label:'Materia prima', val:mp, color:'#f2b705'},
+      {label:'Mano de obra', val:mo, color:'#33d9c4'},
       {label:'Maquinaria', val:mach, color:'#a78bfa'},
       {label:'CIF', val:cif, color:'#e4572e'},
       {label:'Capacitación', val:tr, color:'#4caf6a'},
@@ -1590,581 +1479,824 @@
     $('#pieLegend').innerHTML = parts.map(p=>`<div class="row"><span class="swatch" style="background:${p.color}"></span>${p.label}<span class="val">${fmt(p.val)} (${fmtN(p.val/total*100,0)}%)</span></div>`).join('');
   }
 
-  /* ---------------- COMPETENCIA: sesión / cuentas ---------------- */
-  function renderDbStatus(){
-    const wrap = $('#dbBadgeWrap'); const form = $('#dbConfigForm'); const card = $('#dbStatusCard');
-    if(!wrap) return;
-    if(isDbHardcoded() && hasStorage()){
-      // URL ya está fija en el archivo: no hay nada que configurar, se oculta por completo.
-      if(card) card.style.display = 'none';
-      return;
+  /* =====================================================================
+     ALMACENAMIENTO COMPARTIDO
+     1) window.storage (artifacts clásicos), 2) base de datos del artifact
+     publicado en claude.ai, 3) modo local (solo este navegador, para pruebas)
+     ===================================================================== */
+  const Store = (function(){
+    let mode = null, db = null;
+    const LS = 'factorysim:';
+    const docPath = key => { const i = key.indexOf(':'); return key.slice(0,i)+'/'+key.slice(i+1); };
+    const clone = v => JSON.parse(JSON.stringify(v));
+    async function init(){
+      if(window.storage && typeof window.storage.get==='function'){ mode='legacy'; return mode; }
+      if(window.claude && typeof window.claude.use==='function'){
+        try{ db = await window.claude.use('db'); }catch(e){ db = null; }
+        if(db){ mode='db'; return mode; }
+      }
+      mode='local'; return mode;
     }
-    if(card) card.style.display = 'block';
-    if(hasStorage()){
-      wrap.innerHTML = `<span class="db-badge ok"><span class="dot2"></span>Conectado (guardado en este navegador)</span>`;
-      form.style.display = 'block';
-    } else {
-      wrap.innerHTML = `<span class="db-badge bad"><span class="dot2"></span>Sin conectar — el registro, las ofertas y el cronómetro no funcionarán hasta configurar una base de datos</span>`;
-      form.style.display = 'block';
-    }
-    const input = $('#dbUrlInput');
-    if(input){
-      try{ input.value = localStorage.getItem(LOCAL_DB_KEY) || ''; }catch(err){}
-    }
+    const ready = init();
+    return {
+      ready,
+      get mode(){ return mode; },
+      async get(key){
+        await ready;
+        if(mode==='legacy'){ try{ const r = await window.storage.get(key,true); return (r&&r.value)?JSON.parse(r.value):null; }catch(e){ return null; } }
+        if(mode==='db'){ const s = await db.doc(docPath(key)).get(); return s.exists ? clone(s.data()) : null; }
+        try{ const v = localStorage.getItem(LS+key); return v?JSON.parse(v):null; }catch(e){ return null; }
+      },
+      async set(key, val){
+        await ready;
+        if(mode==='legacy') return window.storage.set(key, JSON.stringify(val), true);
+        if(mode==='db') return db.doc(docPath(key)).set(clone(val));
+        localStorage.setItem(LS+key, JSON.stringify(val));
+      },
+      async del(key){
+        await ready;
+        if(mode==='legacy'){ try{ await window.storage.delete(key,true); }catch(e){} return; }
+        if(mode==='db') return db.doc(docPath(key)).delete();
+        try{ localStorage.removeItem(LS+key); }catch(e){}
+      },
+      async list(prefix){
+        await ready;
+        if(mode==='legacy'){
+          const r = await window.storage.list(prefix+':', true);
+          const keys = (r&&r.keys)?r.keys:[]; const out=[];
+          for(const k of keys){ try{ const g = await window.storage.get(k,true); if(g&&g.value) out.push({key:k, value:JSON.parse(g.value)}); }catch(e){} }
+          return out;
+        }
+        if(mode==='db'){
+          const s = await db.collection(prefix).limit(500).get();
+          return s.docs.filter(d=>d.exists).map(d=>({key:prefix+':'+d.id, value:clone(d.data())}));
+        }
+        const out=[];
+        try{ for(let i=0;i<localStorage.length;i++){ const k = localStorage.key(i); if(k && k.indexOf(LS+prefix+':')===0) out.push({key:k.slice(LS.length), value:JSON.parse(localStorage.getItem(k))}); } }catch(e){}
+        return out;
+      }
+    };
+  })();
+
+  /* =====================================================================
+     REGLAS DEL TORNEO
+     ===================================================================== */
+  const START_CAPITAL = 1000000;
+  const TOTAL_ROUNDS = 4;
+  const SALVAGE_PCT = 0.30;          // remate de unidades no vendidas (% del costo unitario)
+  const DEFAULT_CFG = {round:1, status:'idle', startAt:null, endAt:null, settled:[], minSalePct:15, loanRate:8, creditLimit:2000000, profKey:null};
+
+  function phaseOf(cfg){
+    if(!cfg) return 'idle';
+    if((cfg.settled||[]).includes(cfg.round)) return 'settled';
+    if(cfg.status==='running') return (cfg.endAt && Date.now()>=cfg.endAt) ? 'ended' : 'running';
+    return 'idle';
   }
-  const saveDbBtn = document.getElementById('saveDbUrlBtn');
-  if(saveDbBtn){
-    saveDbBtn.addEventListener('click', ()=>{
-      const msg = $('#dbMsg');
-      const url = ($('#dbUrlInput').value||'').trim();
-      if(!/^https?:\/\/.+/.test(url)){ showMsg(msg,'error','Pega una URL válida, por ejemplo https://tu-proyecto-default-rtdb.firebaseio.com'); return; }
-      setLocalDbUrl(url);
-      showMsg(msg,'ok','Guardada. Conectando…');
-      renderDbStatus();
-      loadCompConfig(); loadLeaderboard();
+  const valueOf = a => (a.cash||0) - (a.debt||0);
+  const mean = arr => arr.length ? arr.reduce((x,y)=>x+y,0)/arr.length : 0;
+  const pct = (n,d=1) => fmtN(n*100,d)+'%';
+  const signed = n => (n>=0?'+':'−') + fmt(Math.abs(n));
+
+  /* ---------- Precio medio en vivo por mercado ---------- */
+  function liveMarketStats(accounts, round){
+    const stats = {};
+    MARKETS.forEach(m=>{
+      const offers = accounts.filter(a=>a.offer && a.offer.round===round && a.offer.targetMarket===m.id).map(a=>a.offer);
+      const prices = offers.map(o=>o.askingPrice);
+      stats[m.id] = {
+        n: offers.length,
+        avgPrice: mean(prices),
+        minPrice: prices.length?Math.min(...prices):0,
+        maxPrice: prices.length?Math.max(...prices):0,
+        avgQuality: mean(offers.map(o=>o.qualityScore)),
+        avgCost: mean(offers.map(o=>o.unitCost)),
+      };
     });
+    return stats;
   }
 
-  function setSessionUI(){
-    if(currentAccount){
-      $('#sessionPill').style.display = 'flex'; $('#sessionName').textContent = currentAccount.name;
-      $('#offerLocked').style.display = 'none'; $('#offerForm').style.display = 'block';
-    } else {
-      $('#sessionPill').style.display = 'none';
-      $('#offerLocked').style.display = 'block'; $('#offerForm').style.display = 'none';
+  /* ---------- Asignación de mercado (participación) ----------
+     Atractivo = calidad^wq × (precio medio / precio)^wp × (rapidez / rapidez media)^ws
+     Todos venden al menos la venta mínima garantizada; el resto de la demanda
+     se reparte según el atractivo, sin pasar de las unidades vendibles. */
+  function clearMarkets(entries, minSalePct){
+    const results = {}; const marketStats = {};
+    MARKETS.forEach(m=>{
+      const P = entries.filter(e=>e.offer.targetMarket===m.id);
+      const st = {n:P.length, avgPrice:0, minPrice:0, maxPrice:0, avgQuality:0, avgCost:0, offered:0, demand:0, sold:0, revenue:0};
+      marketStats[m.id] = st;
+      if(!P.length) return;
+      const prices = P.map(e=>Math.max(0.01, e.offer.askingPrice||0));
+      st.avgPrice = mean(prices); st.minPrice = Math.min(...prices); st.maxPrice = Math.max(...prices);
+      st.avgQuality = mean(P.map(e=>e.offer.qualityScore||0));
+      st.avgCost = mean(P.map(e=>e.offer.unitCost||0));
+      const avgThr = Math.max(0.01, mean(P.map(e=>Math.max(0.01, e.offer.throughput||0))));
+      const work = P.map(e=>{
+        const o = e.offer;
+        let q = clamp((o.qualityScore||0)/100, 0.01, 1);
+        if((o.qualityScore||0) < m.minQuality) q *= 0.2;
+        const price = Math.max(0.01, o.askingPrice||0);
+        const thr = Math.max(0.01, o.throughput||0);
+        const A = Math.pow(q, m.wq) * Math.pow(st.avgPrice/price, m.wp) * Math.pow(thr/avgThr, m.ws);
+        const cap = Math.max(0, Math.floor(o.sellableUnits||0));
+        const floor = Math.floor(cap*minSalePct/100);
+        return {e, A, cap, floor, alloc:0};
+      });
+      st.offered = work.reduce((a,w)=>a+w.cap,0);
+      const refPrice = Math.max(0.01, st.avgCost*m.refMarkup);
+      const priceDemandMult = clamp(Math.pow(refPrice/st.avgPrice, m.wp*0.5), 0.35, 1.15);
+      st.demand = Math.round(st.offered*m.demandRatio*priceDemandMult);
+      let remaining = Math.max(0, st.demand - work.reduce((a,w)=>a+w.floor,0));
+      let active = work.filter(w=>w.cap-w.floor>0);
+      for(let it=0; it<10 && remaining>0.5 && active.length; it++){
+        const sumA = active.reduce((a,w)=>a+w.A,0); if(sumA<=0) break;
+        let used = 0;
+        active.forEach(w=>{ const room = w.cap-w.floor-w.alloc; const give = Math.min(room, remaining*w.A/sumA); w.alloc += give; used += give; });
+        remaining -= used;
+        active = active.filter(w=>w.cap-w.floor-w.alloc>0.5);
+      }
+      work.forEach(w=>{ w.sold = Math.min(w.cap, Math.floor(w.floor+w.alloc)); });
+      st.sold = work.reduce((a,w)=>a+w.sold,0);
+      work.forEach(w=>{
+        const o = w.e.offer;
+        const revenue = w.sold*o.askingPrice;
+        st.revenue += revenue;
+        results[w.e.id] = {
+          market:m.id, attractiveness:w.A, sellable:w.cap, minUnits:w.floor, sold:w.sold,
+          share: st.sold>0 ? w.sold/st.sold : 0, revenue,
+        };
+      });
+    });
+    const totalRevenue = Object.values(results).reduce((a,r)=>a+r.revenue,0);
+    Object.values(results).forEach(r=>{ r.globalShare = totalRevenue>0 ? r.revenue/totalRevenue : 0; });
+    return {results, marketStats, totalRevenue};
+  }
+
+  /* ---------- Análisis de la toma de decisiones ---------- */
+  function buildAnalysis(acct, o, r, st, fin, cfg){
+    const m = MARKETS.find(x=>x.id===o.targetMarket) || MARKETS[1];
+    const items = []; const recs = [];
+    const soldPct = r.sellable>0 ? r.sold/r.sellable : 0;
+    items.push({tone: soldPct>=0.8?'good':soldPct>=0.4?'warn':'bad', title:'Ventas y participación',
+      text:`Vendiste ${r.sold.toLocaleString('es-MX')} de ${r.sellable.toLocaleString('es-MX')} unidades vendibles (${pct(soldPct,0)}). Tu participación en el ${m.name} fue de ${pct(r.share)} y lograste el ${pct(r.globalShare)} de los ingresos de todo el mercado.`});
+
+    const diff = st.avgPrice>0 ? o.askingPrice/st.avgPrice-1 : 0;
+    let ptxt, ptone;
+    if(Math.abs(diff)<0.05){ ptone='good'; ptxt=`Tu precio de ${fmt(o.askingPrice)} quedó en línea con la media del mercado (${fmt(st.avgPrice)}).`; }
+    else if(diff>0){ ptone = diff>0.15?'bad':'warn'; ptxt=`Tu precio de ${fmt(o.askingPrice)} quedó ${pct(diff,0)} arriba de la media (${fmt(st.avgPrice)}). Un precio alto reduce tu atractivo y, con él, tu participación.`; if(soldPct<0.6) recs.push(`Acerca tu precio a la media del mercado (${fmt(st.avgPrice)}) o sube tu calidad para justificar la diferencia.`); }
+    else { ptone='good'; ptxt=`Tu precio de ${fmt(o.askingPrice)} quedó ${pct(Math.abs(diff),0)} abajo de la media (${fmt(st.avgPrice)}), lo que te dio ventaja para ganar participación.`; }
+    const unitMargin = o.askingPrice>0 ? (o.askingPrice-o.unitCost)/o.askingPrice : 0;
+    if(o.askingPrice < o.unitCost){ ptone='bad'; ptxt += ` Sin embargo, vendiste por debajo de tu costo unitario (${fmt(o.unitCost)}): cada unidad vendida restó valor a la empresa.`; recs.push(`Fija un precio mayor a tu costo unitario (${fmt(o.unitCost)}); con margen de 20% serían ${fmt(o.unitCost*1.25)}.`); }
+    else ptxt += ` Tu margen por unidad fue de ${pct(unitMargin,1)}.`;
+    items.push({tone:ptone, title:'Precio', text:ptxt});
+
+    let qtone, qtxt;
+    if(o.qualityScore < m.minQuality){ qtone='bad'; qtxt=`Tu calidad (${fmtN(o.qualityScore,1)} pts) no alcanzó el mínimo del ${m.name} (${m.minQuality} pts), por lo que el mercado redujo tu atractivo en 80%.`; recs.push(`Sube tu calidad al menos ${fmtN(m.minQuality-o.qualityScore,1)} pts (proveedor, mano de obra, capacitación o seguridad ISO 14001), o compite en un mercado con mínimo menor.`); }
+    else if(m.id==='economico' && o.qualityScore >= m.minQuality+35){ qtone='warn'; qtxt=`Tu calidad (${fmtN(o.qualityScore,1)} pts) supera por mucho el mínimo del ${m.name} (${m.minQuality} pts). Este mercado compra por precio, así que esa calidad extra encarece tu costo sin darte ventas.`; recs.push('En el mercado de bajo costo, baja el nivel de proveedor o de mano de obra para reducir tu costo unitario.'); }
+    else { qtone='good'; qtxt=`Tu calidad (${fmtN(o.qualityScore,1)} pts) cumplió el mínimo del ${m.name} (${m.minQuality} pts) con ${fmtN(o.qualityScore-m.minQuality,1)} pts de margen. La media de calidad del mercado fue ${fmtN(st.avgQuality,1)} pts.`; }
+    items.push({tone:qtone, title:'Calidad', text:qtxt});
+
+    const cb = o.costBreakdown || {};
+    const parts = [['Materia prima',cb.mp],['Mano de obra',cb.mo],['Maquinaria',cb.mach],['CIF',cb.cif],['Capacitación',cb.tr],['Mantenimiento',cb.mnt],['Seguridad',cb.saf]].filter(p=>p[1]>0).sort((a,b)=>b[1]-a[1]);
+    const top = parts[0];
+    const costDiff = st.avgCost>0 ? o.unitCost/st.avgCost-1 : 0;
+    items.push({tone: costDiff>0.10?'warn':'good', title:'Costo',
+      text:`Tu costo unitario fue de ${fmt(o.unitCost)} (media de tu mercado: ${fmt(st.avgCost)}, ${costDiff>=0?'+':'−'}${pct(Math.abs(costDiff),0)}).${top?` La partida que más pesó fue ${top[0].toLowerCase()}, con ${pct(top[1]/Math.max(0.01,o.unitCost),0)} del costo.`:''}`});
+
+    const oee = o.oee||0;
+    let prodTxt = `Tu línea produjo ${fmtN(o.throughput||0,1)} u./h con un tiempo de ciclo de ${fmtN(o.cycle||0,1)} min/u.${o.bottleneckName?` El cuello de botella fue ${o.bottleneckName}.`:''} Tu OEE fue de ${pct(oee,1)}.`;
+    if(o.maintenanceId==='ninguno'){ prodTxt += ' Operaste sin mantenimiento, con 25% de probabilidad de un paro de 8 horas.'; recs.push('Agrega mantenimiento preventivo o TPM para reducir paros no programados y subir tu disponibilidad.'); }
+    else if(oee<0.45) recs.push(`Libera el cuello de botella${o.bottleneckName?' ('+o.bottleneckName+')':''}: agrega operarios, sube de nivel la maquinaria o la mano de obra.`);
+    items.push({tone: oee>=0.65?'good':oee>=0.45?'warn':'bad', title:'Producción y rapidez', text:prodTxt});
+
+    const risk = o.stockoutRisk||0;
+    if(risk>=20){
+      items.push({tone: risk>=50?'bad':'warn', title:'Cadena de suministro', text:`Tu riesgo de desabasto fue de ${fmtN(risk,0)}%.`});
+      recs.push('Reduce tu riesgo de desabasto con más días de stock de seguridad o un proveedor más confiable.');
     }
+
+    let ftxt = `Esta competencia dejó una utilidad de ${signed(fin.profit)}: ingresos por ${fmt(r.revenue)}, remate de sobrantes por ${fmt(fin.salvage)}, costo de producción de ${fmt(fin.productionCost)}${fin.interest>0?` e intereses por ${fmt(fin.interest)}`:''}. El valor de tu compañía pasó de ${fmt(fin.valueBefore)} a ${fmt(fin.valueAfter)}.`;
+    const ftone = fin.valueAfter<0 ? 'bad' : fin.profit>=0 ? 'good' : 'warn';
+    if(fin.valueAfter<0){ ftxt += ' Tu empresa está en quiebra técnica: su deuda supera a su efectivo.'; recs.push('Solicita financiamiento en 08 · Mi empresa para producir la siguiente competencia y busca un margen positivo.'); }
+    else if(fin.debt>0 && fin.profit>0) recs.push(`Considera amortizar deuda: cada competencia pagas ${cfg.loanRate}% de interés sobre ${fmt(fin.debt)}.`);
+    items.push({tone:ftone, title:'Finanzas', text:ftxt});
+
+    if(o.eventTitle) items.push({tone: o.eventPositive?'good':'warn', title:'Evento del turno', text:`Produjiste con el evento "${o.eventTitle}" activo.`});
+
+    const headline = fin.profit>=0
+      ? `Competencia ${fin.round}: ganaste ${fmt(fin.profit)} con ${pct(r.share)} del ${m.name}.`
+      : `Competencia ${fin.round}: perdiste ${fmt(Math.abs(fin.profit))} con ${pct(r.share)} del ${m.name}.`;
+    if(!recs.length) recs.push('Mantén la estrategia y prueba mejoras pequeñas en costo o rapidez para ganar más participación.');
+    return {headline, items, recs: recs.slice(0,4)};
   }
 
-  async function loginUser(){
-    const msg = $('#loginMsg'); msg.className = 'form-msg';
-    if(!hasStorage()){ showMsg(msg,'error','El almacenamiento no está disponible en este entorno.'); return; }
+  /* ---------- Liquidación de una competencia (pura: sin escribir) ---------- */
+  function settleAccounts(accounts, cfg){
+    const N = cfg.round;
+    const entries = accounts.filter(a=>a.value.offer && a.value.offer.round===N).map(a=>({id:a.key, offer:a.value.offer}));
+    const cleared = clearMarkets(entries, cfg.minSalePct);
+    const updated = []; const teamRows = [];
+    accounts.forEach(a=>{
+      const acct = JSON.parse(JSON.stringify(a.value));
+      acct.history = acct.history || [];
+      if(acct.history.some(h=>h.round===N)){ updated.push({key:a.key, value:acct}); return; }
+      const valueBefore = valueOf(acct);
+      const interest = Math.round((acct.debt||0)*(cfg.loanRate/100)*100)/100;
+      const r = cleared.results[a.key];
+      if(r){
+        const o = acct.offer;
+        const productionCost = o.unitCost*o.batchSize;
+        const salvage = Math.max(0, r.sellable-r.sold)*o.unitCost*SALVAGE_PCT;
+        const profit = r.revenue + salvage - productionCost - interest;
+        acct.cash = (acct.cash||0) + profit;
+        const fin = {round:N, profit, salvage, productionCost, interest, valueBefore, valueAfter:valueOf(acct), debt:acct.debt||0};
+        const analysis = buildAnalysis(acct, o, r, cleared.marketStats[o.targetMarket], fin, cfg);
+        acct.history.push({
+          round:N, participated:true, market:o.targetMarket, price:o.askingPrice, unitCost:o.unitCost, quality:o.qualityScore,
+          batchSize:o.batchSize, sellable:r.sellable, sold:r.sold, minUnits:r.minUnits, share:r.share, globalShare:r.globalShare,
+          revenue:r.revenue, salvage, productionCost, interest, profit, valueAfter:fin.valueAfter, efficiencyScore:o.efficiencyScore,
+          oee:o.oee, analysis, settledAt:Date.now(),
+        });
+        acct.offer = null;
+        teamRows.push({key:a.key, name:acct.name, group:acct.group||'', market:o.targetMarket, price:o.askingPrice, quality:o.qualityScore,
+          sellable:r.sellable, sold:r.sold, share:r.share, globalShare:r.globalShare, revenue:r.revenue, profit, valueAfter:fin.valueAfter});
+      } else {
+        acct.cash = (acct.cash||0) - interest;
+        const valueAfter = valueOf(acct);
+        acct.history.push({
+          round:N, participated:false, interest, profit:-interest, valueAfter, settledAt:Date.now(),
+          analysis:{headline:`Competencia ${N}: no enviaste oferta.`, items:[{tone:'bad', title:'Sin participación', text:`Tu empresa no envió producción en esta competencia, así que no vendió nada.${interest>0?` Pagó ${fmt(interest)} de intereses por su deuda.`:''} Su valor quedó en ${fmt(valueAfter)}.`}], recs:['Envía tu oferta antes de que termine el cronómetro en la siguiente competencia.']},
+        });
+        if(acct.offer && acct.offer.round===N) acct.offer = null;
+        teamRows.push({key:a.key, name:acct.name, group:acct.group||'', market:null, sold:0, share:0, globalShare:0, revenue:0, profit:-interest, valueAfter});
+      }
+      updated.push({key:a.key, value:acct});
+    });
+    const roundDoc = {round:N, settledAt:Date.now(), minSalePct:cfg.minSalePct, loanRate:cfg.loanRate, marketStats:cleared.marketStats, totalRevenue:cleared.totalRevenue, teams:teamRows};
+    return {updated, roundDoc, cleared};
+  }
+
+  /* =====================================================================
+     ESTADO COMPARTIDO EN LA PÁGINA
+     ===================================================================== */
+  let shared = {cfg:Object.assign({}, DEFAULT_CFG), accounts:[], rounds:{}, loadedAt:0};
+  let myAcct = null;
+  let profUnlocked = false;
+
+  async function loadShared(){
+    try{
+      const [cfg, accts, rounds] = await Promise.all([Store.get('game:config'), Store.list('accounts'), Store.list('rounds')]);
+      shared.cfg = Object.assign({}, DEFAULT_CFG, cfg||{});
+      shared.accounts = accts;
+      shared.rounds = {}; rounds.forEach(r=>{ if(r.value && r.value.round) shared.rounds[r.value.round] = r.value; });
+      shared.loadedAt = Date.now();
+      if(currentAccount){
+        const mine = accts.find(a=>a.key==='accounts:'+currentAccount.slug);
+        if(mine){ myAcct = mine.value; }
+      }
+      return true;
+    }catch(err){ return false; }
+  }
+  async function refreshAll(){
+    const ok = await loadShared();
+    $('#syncNote').textContent = ok ? ('Actualizado ' + new Date().toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit',second:'2-digit'})) : 'No se pudo actualizar. Se intentará de nuevo.';
+    renderCompetition();
+  }
+  function renderCompetition(){
+    tickCountdown();
+    renderSessionPill();
+    renderMarketChoices();
+    renderLivePrices();
+    renderLeaderboard();
+    renderRoundResults();
+    renderMyCompany();
+    renderAdmin();
+    syncCashWithAccount();
+  }
+
+  function modeBanner(){
+    const el = $('#modeBanner');
+    if(Store.mode==='local'){
+      el.hidden = false;
+      el.innerHTML = '<b>Modo de prueba local:</b> no hay almacenamiento compartido en esta página, así que los equipos, ofertas y resultados solo se guardan en este navegador. Para que todos los equipos compitan juntos, abran la versión publicada del simulador.';
+    } else el.hidden = true;
+  }
+
+  /* =====================================================================
+     SESIÓN DE EQUIPO
+     ===================================================================== */
+  function setSessionUI(){
+    const logged = !!currentAccount;
+    $('#offerLocked').hidden = logged; $('#offerForm').hidden = !logged;
+    $('#myCoLocked').hidden = logged; $('#myCoBody').hidden = !logged;
+    renderSessionPill();
+  }
+  function renderSessionPill(){
+    const pill = $('#sessionPill');
+    if(!currentAccount){ pill.style.display='none'; return; }
+    pill.style.display='flex';
+    const v = myAcct ? valueOf(myAcct) : START_CAPITAL;
+    $('#sessionName').textContent = currentAccount.name + ' · ' + fmt(v);
+  }
+
+  async function registerOrLogin(){
+    const msg = $('#loginMsg');
     const name = $('#accName').value.trim();
+    const group = $('#accGroup').value.trim();
     const pin = $('#accPin').value.trim();
-    if(name.length<2){ showMsg(msg,'error','Escribe tu usuario.'); return; }
-    if(!/^[0-9]{4}$/.test(pin)){ showMsg(msg,'error','La contraseña debe ser de 4 dígitos numéricos.'); return; }
+    if(name.length<2){ showMsg(msg,'error','Escribe un nombre de equipo de al menos 2 caracteres.'); return; }
+    if(!/^[0-9]{4}$/.test(pin)){ showMsg(msg,'error','El PIN debe ser de 4 dígitos numéricos.'); return; }
     const slug = slugify(name); const key = 'accounts:'+slug;
     $('#loginBtn').disabled = true; showMsg(msg,'info','Conectando…');
     try{
-      let existing = null;
-      try{ const res = await FB.get(key); existing = res ? JSON.parse(res.value) : null; }catch(err){ existing = null; }
-      if(!existing){
-        showMsg(msg,'error','Ese usuario no existe. Pide tus datos de acceso a tu profesor.');
-        $('#loginBtn').disabled = false; return;
+      const existing = await Store.get(key);
+      if(existing){
+        if(existing.pin !== pin){ showMsg(msg,'error','Ese equipo ya está registrado con otro PIN.'); $('#loginBtn').disabled=false; return; }
+        if(group && group!==existing.group){ existing.group = group; await Store.set(key, existing); }
+        currentAccount = {slug, name:existing.name, group:existing.group||'', pin};
+        myAcct = existing;
+        showMsg(msg,'ok',`Sesión iniciada. Valor actual de ${existing.name}: ${fmt(valueOf(existing))}.`);
+      } else {
+        const entry = {name, group, pin, cash:START_CAPITAL, debt:0, offer:null, history:[], loans:[], createdAt:Date.now()};
+        await Store.set(key, entry);
+        currentAccount = {slug, name, group, pin};
+        myAcct = entry;
+        showMsg(msg,'ok',`Equipo registrado. Tu empresa recibe ${fmt(START_CAPITAL)} de capital inicial para operar.`);
       }
-      if(existing.pin !== pin){
-        showMsg(msg,'error','Contraseña incorrecta.');
-        $('#loginBtn').disabled = false; return;
-      }
-      currentAccount = {slug, name: existing.name, group: existing.group||'', pin};
-      showMsg(msg,'ok','Sesión iniciada. Bienvenido, '+existing.name+'.');
-      paintMyOffer(existing.offer);
-      setSessionUI(); loadLeaderboard();
-    }catch(err){ showMsg(msg,'error','No se pudo conectar al almacenamiento. Intenta de nuevo.'); }
+      setSessionUI(); await refreshAll();
+    }catch(err){ showMsg(msg,'error','No se pudo conectar al almacenamiento compartido. Intenta de nuevo.'); }
     $('#loginBtn').disabled = false;
   }
-  $('#loginBtn').addEventListener('click', loginUser);
-  $('#logoutBtn').addEventListener('click', ()=>{ currentAccount = null; setSessionUI(); $('#loginMsg').className='form-msg'; $('#accPin').value=''; });
+  $('#loginBtn').addEventListener('click', registerOrLogin);
+  $('#logoutBtn').addEventListener('click', ()=>{ currentAccount=null; myAcct=null; setSessionUI(); $('#loginMsg').className='form-msg'; $('#accPin').value=''; renderCompetition(); });
 
-  /* ---------------- MARKET CHOICE UI ---------------- */
+  /* El efectivo del flujo de caja (pestaña 04) es el de la empresa cuando hay sesión */
+  function syncCashWithAccount(){
+    const inp = $('#cashInitial'); const lbl = $('#cashInitialLabel');
+    if(currentAccount && myAcct){
+      state.cashInitial = myAcct.cash||0; inp.value = Math.round(state.cashInitial); inp.disabled = true;
+      lbl.textContent = 'Efectivo disponible de tu empresa';
+    } else { inp.disabled = false; lbl.textContent = 'Efectivo inicial disponible'; }
+    recalcAll(false);
+  }
+
+  /* =====================================================================
+     MERCADOS: elección, precio medio en vivo
+     ===================================================================== */
+  function currentLiveStats(){ return liveMarketStats(shared.accounts.map(a=>a.value), shared.cfg.round); }
   function renderMarketChoices(){
+    const live = currentLiveStats();
     $('#marketChoices').innerHTML = MARKETS.map(m=>{
-      const sel = m.id===state.targetMarket;
+      const sel = m.id===state.targetMarket; const s = live[m.id];
       return `<div class="choice-card${sel?' selected':''}" data-market="${m.id}" style="display:flex;align-items:center;gap:12px;">
         <div class="cc-check"></div>
         <div class="cc-icon">${m.icon}</div>
-        <div style="flex:1;">
+        <div style="flex:1;min-width:0;">
           <div class="cc-name" style="margin-top:0;">${m.name}</div>
-          <div class="cc-note" style="margin-top:2px;">Calidad mín. ${m.minQuality} · cupo ${m.capacity} · ${m.criterion}</div>
+          <div class="cc-note" style="margin-top:2px;">Calidad mín. ${m.minQuality} pts · ${m.criterion}</div>
+          <div class="price-live">${s.n?`Media: ${fmt(s.avgPrice)} · ${s.n} oferta(s)`:'Aún sin ofertas en esta competencia'}</div>
         </div>
       </div>`;
     }).join('');
+    renderOfferHelper();
   }
   $('#marketChoices').addEventListener('click', e=>{
     const card = e.target.closest('.choice-card[data-market]'); if(!card) return;
-    state.targetMarket = card.dataset.market; renderMarketChoices(); renderChain();
+    state.targetMarket = card.dataset.market; renderMarketChoices(); renderChain(); renderFactoryFloor();
   });
-  function renderMarketsInfo(){
-    $('#marketsInfo').innerHTML = MARKETS.map(m=>`
-      <div class="market-card">
+  function renderOfferHelper(){
+    const box = $('#offerHelper'); if(!box) return;
+    const m = MARKETS.find(x=>x.id===state.targetMarket) || MARKETS[1];
+    const s = currentLiveStats()[m.id];
+    const r = state.lastResults||{};
+    const lotCost = (r.unitCost||0)*(r.batchSize||0);
+    const cash = myAcct ? (myAcct.cash||0) : START_CAPITAL;
+    const price = state.askingPrice || r.salePrice || 0;
+    let html = `<div class="kv"><span>Precio medio del ${m.name}</span><b>${s.n?fmt(s.avgPrice):'—'}</b></div>`;
+    if(s.n){
+      const d = price/s.avgPrice-1;
+      html += `<div class="kv plain"><span>Rango de precios (${s.n} oferta${s.n>1?'s':''})</span><b>${fmt(s.minPrice)} – ${fmt(s.maxPrice)}</b></div>`;
+      html += `<div class="kv ${Math.abs(d)<0.05?'good':d>0?'warn':'good'}"><span>Tu precio frente a la media</span><b>${d>=0?'+':'−'}${pct(Math.abs(d),1)}</b></div>`;
+    }
+    html += `<div class="kv plain"><span>Calidad de tu configuración / mínimo</span><b>${fmtN(r.qualityScore||0,1)} / ${m.minQuality}</b></div>`;
+    html += `<div class="kv ${lotCost>cash?'warn':'plain'}"><span>Costo de producir tu lote</span><b>${fmt(lotCost)}</b></div>`;
+    html += `<div class="kv ${cash<0?'warn':'plain'}"><span>Efectivo disponible</span><b>${fmt(cash)}</b></div>`;
+    box.innerHTML = html;
+  }
+  function renderLivePrices(){
+    const live = currentLiveStats();
+    $('#liveRoundLabel').textContent = `Competencia ${shared.cfg.round} de ${TOTAL_ROUNDS}`;
+    $('#marketsInfo').innerHTML = MARKETS.map(m=>{
+      const s = live[m.id];
+      return `<div class="market-card">
         <div class="m-icon">${m.icon}</div>
         <h4 style="color:${m.color}">${m.name}</h4>
-        <div class="m-sub">Calidad mínima: ${m.minQuality} pts · Cupo: ${m.capacity} equipos</div>
-        <div class="note">${m.criterion}</div>
-      </div>`).join('');
+        <div class="m-sub">${m.subtitle} · Calidad mínima ${m.minQuality} pts</div>
+        <div class="live-price">${s.n?fmt(s.avgPrice):'—'}</div>
+        <div class="note mono">precio medio · ${s.n} oferta(s)</div>
+        <div class="kv plain" style="margin-top:8px;"><span>Rango</span><b>${s.n?fmt(s.minPrice)+' – '+fmt(s.maxPrice):'—'}</b></div>
+        <div class="kv plain"><span>Calidad media</span><b>${s.n?fmtN(s.avgQuality,1)+' pts':'—'}</b></div>
+        <p class="note" style="margin:8px 0 0;">${m.criterion}</p>
+      </div>`;
+    }).join('');
   }
 
-  $('#askingPrice').addEventListener('input', e=>{ state.askingPrice = parseFloat(e.target.value)||0; state.askingTouched = true; });
-  $('#useSuggestedBtn').addEventListener('click', ()=>{ state.askingTouched=false; recalcAll(); });
+  $('#askingPrice').addEventListener('input', e=>{ state.askingPrice = parseFloat(e.target.value)||0; state.askingTouched = true; renderOfferHelper(); });
+  $('#useSuggestedBtn').addEventListener('click', ()=>{ state.askingTouched=false; recalcAll(); renderOfferHelper(); });
 
-  function paintMyOffer(offer){
+  function paintMyOffer(){
     const box = $('#myOfferSummary');
+    const offer = myAcct && myAcct.offer && myAcct.offer.round===shared.cfg.round ? myAcct.offer : null;
     if(!offer){ box.style.display='none'; return; }
     box.style.display='block';
     const mk = MARKETS.find(m=>m.id===offer.targetMarket);
-    box.innerHTML = `<b>Tu última oferta enviada:</b><br>
-      Mercado: <b>${mk?mk.name:offer.targetMarket}</b> · Precio: <b>${fmt(offer.askingPrice)}</b> · Calidad: <b>${fmtN(offer.qualityScore,0)}</b> ·
-      Costo unitario: <b>${fmt(offer.unitCost)}</b> · Score de eficiencia: <b>${fmtN(offer.efficiencyScore,1)}</b><br>
-      <span class="note">Enviada: ${offer.submittedAt ? new Date(offer.submittedAt).toLocaleString('es-MX') : '—'}</span>`;
+    box.innerHTML = `<b>Tu oferta de la competencia ${offer.round}:</b><br>
+      ${mk?mk.name:offer.targetMarket} · Precio <b>${fmt(offer.askingPrice)}</b> · Calidad <b>${fmtN(offer.qualityScore,0)}</b> ·
+      Costo unitario <b>${fmt(offer.unitCost)}</b> · ${offer.sellableUnits.toLocaleString('es-MX')} u. vendibles<br>
+      <span class="note">Enviada: ${new Date(offer.submittedAt).toLocaleString('es-MX')}. Puedes reenviarla; solo cuenta la última.</span>`;
   }
 
   async function submitOffer(){
     const msg = $('#offerMsg');
-    if(!currentAccount || !hasStorage()){ showMsg(msg,'error','Inicia sesión primero.'); return; }
-    if(state.compConfig && state.compConfig.endAt && Date.now()>state.compConfig.endAt){
-      showMsg(msg,'error','La competencia ya terminó. Tu oferta ya no puede enviarse.'); return;
-    }
-    const totalCost = (state.lastResults.unitCost||0) * FIXED_BATCH_SIZE;
-    if(totalCost > BUDGET_TOTAL){
-      showMsg(msg,'error','Tu configuración cuesta '+fmt(totalCost)+', y tu presupuesto es de '+fmt(BUDGET_TOTAL)+'. Ajusta tu configuración en la pestaña 02 antes de enviar tu oferta.');
-      return;
-    }
+    if(!currentAccount){ showMsg(msg,'error','Inicia sesión primero.'); return; }
     $('#submitOfferBtn').disabled = true; showMsg(msg,'info','Enviando oferta…');
-    const key = 'accounts:'+currentAccount.slug;
     try{
-      let entry;
-      try{ const res = await FB.get(key); entry = res ? JSON.parse(res.value) : null; }catch(err){ entry=null; }
-      if(!entry) entry = {name: currentAccount.name, group: currentAccount.group, pin: currentAccount.pin, offer:null, updatedAt:null};
+      await loadShared();
+      const cfg = shared.cfg; const ph = phaseOf(cfg);
+      if(ph!=='running'){
+        showMsg(msg,'error', ph==='idle' ? `La competencia ${cfg.round} todavía no inicia. Espera a que el profesor arranque el cronómetro.` : `El tiempo de la competencia ${cfg.round} ya terminó. Ya no se reciben ofertas.`);
+        $('#submitOfferBtn').disabled = false; return;
+      }
+      const key = 'accounts:'+currentAccount.slug;
+      const entry = await Store.get(key);
+      if(!entry){ showMsg(msg,'error','No se encontró tu cuenta. Vuelve a iniciar sesión.'); $('#submitOfferBtn').disabled=false; return; }
       const r = state.lastResults;
+      const price = state.askingPrice || r.salePrice;
+      if(!(price>0)){ showMsg(msg,'error','Escribe un precio de venta mayor a cero.'); $('#submitOfferBtn').disabled=false; return; }
+      const lotCost = r.unitCost*r.batchSize;
+      if(lotCost > (entry.cash||0)){
+        showMsg(msg,'error',`Tu efectivo (${fmt(entry.cash||0)}) no alcanza para producir el lote (${fmt(lotCost)}). Solicita un préstamo en 08 · Mi empresa o reduce el tamaño del lote.`);
+        $('#submitOfferBtn').disabled=false; return;
+      }
+      const ev = state.activeEvent;
       entry.offer = {
-        targetMarket: state.targetMarket, askingPrice: state.askingPrice || r.salePrice,
+        round: cfg.round, targetMarket: state.targetMarket, askingPrice: price,
         unitCost: r.unitCost, qualityScore: r.qualityScore, defectRate: r.defectRate, sellableUnits: r.sellableUnits,
         cycle: r.cycle, throughput: r.throughput, efficiencyScore: r.efficiencyScore, batchSize: r.batchSize,
-        oee: r.oee, stockoutRisk: r.stockoutRisk,
+        oee: r.oee, stockoutRisk: r.stockoutRisk, costBreakdown: r.costBreakdown, bottleneckName: r.bottleneckName,
         supplierId: r.supplierId, laborId: r.laborId, trainingId: r.trainingId, machineId: r.machineId,
         maintenanceId: r.maintenanceId, safetyId: r.safetyId,
+        eventTitle: ev?ev.title:null, eventPositive: ev?!!ev.positive:null,
         submittedAt: Date.now(),
       };
       entry.updatedAt = Date.now();
-      await FB.set(key, JSON.stringify(entry));
-      showMsg(msg,'ok','¡Oferta enviada! Se actualiza tu configuración disponible para el mercado.');
-      paintMyOffer(entry.offer);
-      loadLeaderboard();
+      await Store.set(key, entry);
+      myAcct = entry;
+      showMsg(msg,'ok','Oferta enviada. Tu precio ya cuenta en la media de tu mercado.');
+      await refreshAll(); paintMyOffer();
     }catch(err){ showMsg(msg,'error','No se pudo enviar tu oferta. Intenta de nuevo.'); }
     $('#submitOfferBtn').disabled = false;
   }
   $('#submitOfferBtn').addEventListener('click', submitOffer);
 
-  /* ---------------- LIVE PROGRESS AUTOSAVE (para el panel del profesor) ---------------- */
-  let lastProgressSaveAt = 0;
-  let progressSaveTimer = null;
-  function scheduleProgressSave(){
-    if(!currentAccount || !hasStorage()) return;
-    const now = Date.now();
-    const wait = Math.max(0, 6000 - (now - lastProgressSaveAt));
-    if(progressSaveTimer) clearTimeout(progressSaveTimer);
-    progressSaveTimer = setTimeout(saveProgressSnapshot, wait);
-  }
-  async function saveProgressSnapshot(){
-    if(!currentAccount || !hasStorage()) return;
-    lastProgressSaveAt = Date.now();
-    const r = state.lastResults || {};
-    const progress = {
-      targetMarket: state.targetMarket, askingPrice: state.askingPrice || r.salePrice || 0,
-      unitCost: r.unitCost, qualityScore: r.qualityScore, defectRate: r.defectRate,
-      efficiencyScore: r.efficiencyScore, oee: r.oee,
-      supplierId: r.supplierId, laborId: r.laborId, trainingId: r.trainingId, machineId: r.machineId,
-      maintenanceId: r.maintenanceId, safetyId: r.safetyId,
-      updatedAt: Date.now(),
-    };
-    try{ await FB.set('accounts:'+currentAccount.slug+':progress', JSON.stringify(progress)); }catch(err){ /* silencioso */ }
-  }
-
-  /* ---------------- LEADERBOARD (EN VIVO) ---------------- */
-  async function fetchAllAccounts(){
-    const listRes = await FB.list('accounts:');
-    const keys = (listRes && listRes.keys) ? listRes.keys : [];
-    const entries = [];
-    for(const k of keys){
-      try{ const r = await FB.get(k); if(r && r.value) entries.push(JSON.parse(r.value)); }catch(err){}
-    }
-    return entries;
-  }
-
-  async function loadLeaderboard(){
+  /* =====================================================================
+     RANKING POR VALOR DE LA COMPAÑÍA
+     ===================================================================== */
+  function renderLeaderboard(){
     const wrap = $('#lbWrap');
-    if(!hasStorage()){ wrap.innerHTML = '<div class="lb-empty">Almacenamiento no disponible.</div>'; $('#lbCount').textContent=''; return; }
-    wrap.innerHTML = '<div class="lb-empty">Cargando ranking…</div>';
-    try{
-      const entries = await fetchAllAccounts();
-      $('#lbCount').textContent = entries.length + ' equipo(s) registrado(s)';
-      const withOffer = entries.filter(e=>e.offer);
-      if(withOffer.length===0){ wrap.innerHTML = '<div class="lb-empty">Aún no hay ofertas enviadas.</div>'; return; }
-      withOffer.sort((a,b)=> b.offer.efficiencyScore - a.offer.efficiencyScore);
-      const rows = withOffer.map((e,i)=>{
-        const rank=i+1; const rc = rank===1?'r1':rank===2?'r2':rank===3?'r3':'';
-        const isMe = currentAccount && e.name===currentAccount.name && e.group===currentAccount.group;
-        return `<tr class="${isMe?'me':''}">
-          <td><div class="rank-pill ${rc}">${rank}</div></td>
-          <td>${escapeHtml(e.name)}</td>
-          <td class="mono" style="color:var(--muted)">${e.group?escapeHtml(e.group):'—'}</td>
-          <td class="mono">${fmtN(e.offer.qualityScore,0)}</td>
-          <td class="mono">${fmt(e.offer.unitCost)}</td>
-          <td class="mono">${e.offer.oee!=null?fmtN(e.offer.oee*100,0)+'%':'—'}</td>
-          <td class="mono" style="color:var(--amber)">${fmtN(e.offer.efficiencyScore,1)}</td>
-        </tr>`;
-      }).join('');
-      wrap.innerHTML = `<div style="overflow-x:auto;"><table class="lb">
-        <thead><tr><th>#</th><th>Equipo</th><th>Grupo</th><th>Calidad</th><th>Costo u.</th><th>OEE</th><th>Score</th></tr></thead>
-        <tbody>${rows}</tbody></table></div>`;
-    }catch(err){ wrap.innerHTML = '<div class="lb-empty">No se pudo cargar el ranking. Intenta de nuevo.</div>'; }
+    const list = shared.accounts.map(a=>a.value).filter(Boolean);
+    $('#lbCount').textContent = list.length + ' empresa(s) registrada(s)';
+    if(!list.length){ wrap.innerHTML = '<div class="lb-empty">Aún no hay empresas registradas. Cada equipo se registra arriba y recibe $1,000,000 de capital.</div>'; return; }
+    list.sort((a,b)=> valueOf(b)-valueOf(a));
+    const R = shared.cfg.round;
+    const rows = list.map((e,i)=>{
+      const rank=i+1, rc = rank===1?'r1':rank===2?'r2':rank===3?'r3':'';
+      const v = valueOf(e); const ch = v/START_CAPITAL-1;
+      const last = (e.history||[]).slice(-1)[0];
+      const lm = last && last.market ? MARKETS.find(m=>m.id===last.market) : null;
+      const isMe = currentAccount && e.name===currentAccount.name;
+      const hasOffer = e.offer && e.offer.round===R;
+      const status = v<0 ? '<span class="badge-nosold" style="color:var(--red);border-color:var(--red);">Quiebra técnica</span>' : (e.debt>0 ? '<span class="badge-nosold">Con deuda</span>' : '<span class="badge-sold">Sana</span>');
+      return `<tr class="${isMe?'me':''}">
+        <td><div class="rank-pill ${rc}">${rank}</div></td>
+        <td>${escapeHtml(e.name)}<div class="note mono">${e.group?escapeHtml(e.group):''}</div></td>
+        <td class="mono num" style="color:${v>=START_CAPITAL?'var(--green)':v<0?'var(--red)':'var(--amber)'}">${fmt(v)}</td>
+        <td class="mono num" style="color:${ch>=0?'var(--green)':'var(--red)'}">${ch>=0?'+':'−'}${pct(Math.abs(ch),1)}</td>
+        <td class="mono num">${e.debt>0?fmt(e.debt):'—'}</td>
+        <td class="mono">${last?(lm?`${lm.icon} ${pct(last.share,1)}`:'Sin oferta'):'—'}</td>
+        <td class="mono num">${last?signed(last.profit):'—'}</td>
+        <td class="mono">${hasOffer?'✅':'—'}</td>
+        <td>${status}</td>
+      </tr>`;
+    }).join('');
+    wrap.innerHTML = `<div style="overflow-x:auto;"><table class="lb">
+      <thead><tr><th>#</th><th>Empresa</th><th>Valor de la compañía</th><th>Vs. capital inicial</th><th>Deuda</th><th>Participación última comp.</th><th>Utilidad última comp.</th><th>Oferta comp. ${R}</th><th>Estado</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>`;
   }
-  $('#refreshLbBtn').addEventListener('click', loadLeaderboard);
+  $('#refreshLbBtn').addEventListener('click', refreshAll);
 
-  /* ---------------- FINAL RESULTS ---------------- */
-  async function computeFinalResults(){
-    const wrap = $('#finalResultsWrap');
-    if(!hasStorage()){ wrap.innerHTML = '<div class="lb-empty">Almacenamiento no disponible.</div>'; return; }
-    wrap.innerHTML = '<div class="lb-empty">Calculando…</div>';
-    try{
-      const entries = (await fetchAllAccounts()).filter(e=>e.offer);
-      if(entries.length===0){ wrap.innerHTML = '<div class="lb-empty">Ningún equipo ha enviado su oferta todavía.</div>'; return; }
-
-      const winnersBySlot = {};
-      const marketCardsHtml = MARKETS.map(m=>{
-        let candidates = entries.filter(e=> e.offer.targetMarket===m.id && e.offer.qualityScore>=m.minQuality);
-        if(m.id==='premium') candidates.sort((a,b)=> b.offer.qualityScore-a.offer.qualityScore || a.offer.askingPrice-b.offer.askingPrice);
-        else if(m.id==='estandar') candidates.sort((a,b)=> (b.offer.qualityScore/Math.max(0.01,b.offer.askingPrice)) - (a.offer.qualityScore/Math.max(0.01,a.offer.askingPrice)));
-        else candidates.sort((a,b)=> a.offer.askingPrice-b.offer.askingPrice || b.offer.qualityScore-a.offer.qualityScore);
-        const winners = candidates.slice(0, m.capacity);
-        winners.forEach(w=> winnersBySlot[w.name+'|'+(w.group||'')] = m);
-        const fillPct = Math.min(100, (winners.length/m.capacity)*100);
-        const rowsHtml = winners.length ? winners.map((w,i)=>{
-          const rev = w.offer.sellableUnits*w.offer.askingPrice;
-          return `<div class="win-row"><span class="wname">${i+1}. ${escapeHtml(w.name)}</span><span class="wval">${fmt(rev)}</span></div>`;
-        }).join('') : '<div class="note" style="padding:8px 0;">Nadie calificó todavía para este mercado.</div>';
-        return `<div class="market-card">
-          <div class="m-icon">${m.icon}</div>
-          <h4 style="color:${m.color}">${m.name}</h4>
-          <div class="m-sub">${winners.length} / ${m.capacity} cupos vendidos · ${candidates.length} equipo(s) calificaron</div>
-          <div class="market-fill-track"><div class="market-fill" style="width:${fillPct}%;background:${m.color}"></div></div>
-          <div class="market-results">${rowsHtml}</div>
-        </div>`;
-      }).join('');
-
-      entries.sort((a,b)=> b.offer.efficiencyScore - a.offer.efficiencyScore);
-      const soldCount = Object.keys(winnersBySlot).length;
-      const globalRows = entries.map((e,i)=>{
-        const rank=i+1; const rc = rank===1?'r1':rank===2?'r2':rank===3?'r3':'';
-        const won = winnersBySlot[e.name+'|'+(e.group||'')];
-        const isMe = currentAccount && e.name===currentAccount.name && e.group===currentAccount.group;
-        return `<tr class="${isMe?'me':''}">
-          <td><div class="rank-pill ${rc}">${rank}</div></td>
-          <td>${escapeHtml(e.name)}</td>
-          <td class="mono">${fmtN(e.offer.qualityScore,0)}</td>
-          <td class="mono">${fmtN(e.offer.defectRate*100,1)}%</td>
-          <td class="mono">${e.offer.oee!=null?fmtN(e.offer.oee*100,0)+'%':'—'}</td>
-          <td class="mono" style="color:var(--amber)">${fmtN(e.offer.efficiencyScore,1)}</td>
-          <td>${won ? `<span class="badge-sold">✅ Vendió · ${won.name}</span>` : '<span class="badge-nosold">❌ No vendió</span>'}</td>
-        </tr>`;
-      }).join('');
-
-      wrap.innerHTML = `
-        <div class="callout"><b>${soldCount}</b> de <b>${entries.length}</b> equipos lograron vender su producción (cupo total: ${MARKETS.reduce((a,m)=>a+m.capacity,0)} entre los tres mercados).</div>
-        <div class="grid-3" style="margin-top:14px;">${marketCardsHtml}</div>
-        <h3 style="margin-top:20px;"><span class="tag">RANKING</span> Producción más eficiente (todos los equipos)</h3>
-        <div style="overflow-x:auto;"><table class="lb">
-          <thead><tr><th>#</th><th>Equipo</th><th>Calidad</th><th>Defectos</th><th>OEE</th><th>Score</th><th>Resultado</th></tr></thead>
-          <tbody>${globalRows}</tbody></table></div>
-      `;
-    }catch(err){ wrap.innerHTML = '<div class="lb-empty">No se pudieron calcular los resultados. Intenta de nuevo.</div>'; }
+  /* =====================================================================
+     RESULTADOS DE CADA COMPETENCIA (ya liquidada)
+     ===================================================================== */
+  let resultsRoundView = null;
+  function renderRoundResults(){
+    const wrap = $('#finalResultsWrap'); const sel = $('#resultsRoundSel');
+    const done = Object.keys(shared.rounds).map(Number).sort((a,b)=>a-b);
+    if(!done.length){ sel.innerHTML=''; sel.hidden=true; wrap.innerHTML = '<div class="lb-empty">Todavía no se liquida ninguna competencia. Los resultados aparecen aquí cuando el profesor cierra cada una.</div>'; return; }
+    sel.hidden=false;
+    if(!resultsRoundView || !done.includes(resultsRoundView)) resultsRoundView = done[done.length-1];
+    sel.innerHTML = done.map(n=>`<option value="${n}" ${n===resultsRoundView?'selected':''}>Competencia ${n}</option>`).join('');
+    wrap.innerHTML = roundResultsHtml(shared.rounds[resultsRoundView], false);
   }
-  $('#computeFinalBtn').addEventListener('click', computeFinalResults);
+  $('#resultsRoundSel').addEventListener('change', e=>{ resultsRoundView = +e.target.value; renderRoundResults(); });
 
-  /* ---------------- PANEL DEL PROFESOR ---------------- */
-  /* ---------------- GESTIÓN DE CUENTAS (asignadas por el profesor) ---------------- */
-  function randomPin(){ return String(Math.floor(1000 + Math.random()*9000)); }
-  $('#genPinBtn').addEventListener('click', ()=>{ $('#newAccPin').value = randomPin(); });
-
-  $('#createAccBtn').addEventListener('click', async ()=>{
-    const msg = $('#createAccMsg');
-    if(!hasStorage()){ showMsg(msg,'error','Base de datos no conectada.'); return; }
-    const name = $('#newAccName').value.trim();
-    const group = $('#newAccGroup').value.trim();
-    const pin = $('#newAccPin').value.trim();
-    if(name.length<2){ showMsg(msg,'error','Escribe un nombre de usuario de al menos 2 caracteres.'); return; }
-    if(!/^[0-9]{4}$/.test(pin)){ showMsg(msg,'error','La contraseña debe ser de 4 dígitos (o usa "Generar").'); return; }
-    const slug = slugify(name); const key = 'accounts:'+slug;
-    $('#createAccBtn').disabled = true; showMsg(msg,'info','Creando…');
-    try{
-      const existing = await FB.get(key).catch(()=>null);
-      if(existing){ showMsg(msg,'error','Ya existe una cuenta con ese usuario.'); $('#createAccBtn').disabled=false; return; }
-      const entry = {name, group, pin, offer:null, progress:null, createdAt: Date.now(), createdBy:'admin'};
-      await FB.set(key, JSON.stringify(entry));
-      showMsg(msg,'ok','Cuenta creada: usuario "'+name+'", contraseña "'+pin+'". Entrégasela al equipo.');
-      $('#newAccName').value=''; $('#newAccGroup').value=''; $('#newAccPin').value='';
-      loadTeacherPanel();
-    }catch(err){ showMsg(msg,'error','No se pudo crear la cuenta. Intenta de nuevo.'); }
-    $('#createAccBtn').disabled = false;
-  });
-
-  $('#bulkCreateBtn').addEventListener('click', async ()=>{
-    const msg = $('#bulkMsg'); const wrap = $('#bulkResultsWrap');
-    if(!hasStorage()){ showMsg(msg,'error','Base de datos no conectada.'); return; }
-    const count = clamp(parseInt($('#bulkCount').value)||0, 1, 50);
-    const prefix = ($('#bulkPrefix').value.trim() || 'Equipo');
-    const group = $('#bulkGroup').value.trim();
-    $('#bulkCreateBtn').disabled = true; showMsg(msg,'info','Generando cuentas…'); wrap.innerHTML='';
-    const created = []; const skipped = [];
-    try{
-      for(let i=1;i<=count;i++){
-        const name = `${prefix}-${String(i).padStart(2,'0')}`;
-        const slug = slugify(name); const key = 'accounts:'+slug;
-        const existing = await FB.get(key).catch(()=>null);
-        if(existing){ skipped.push(name); continue; }
-        const pin = randomPin();
-        const entry = {name, group, pin, offer:null, progress:null, createdAt: Date.now(), createdBy:'admin'};
-        await FB.set(key, JSON.stringify(entry));
-        created.push({name, pin, group});
-      }
-      showMsg(msg,'ok', created.length+' cuenta(s) creada(s)'+(skipped.length?(', '+skipped.length+' ya existían y se dejaron igual'):'')+'.');
-      if(created.length){
-        wrap.innerHTML = `<div style="overflow-x:auto;"><table class="teach">
-          <thead><tr><th>Usuario</th><th>Contraseña</th><th>Grupo</th></tr></thead>
-          <tbody>${created.map(c=>`<tr><td class="mono">${escapeHtml(c.name)}</td><td class="mono" style="color:var(--amber)">${c.pin}</td><td class="mono" style="color:var(--muted)">${c.group?escapeHtml(c.group):'—'}</td></tr>`).join('')}</tbody>
-        </table></div>
-        <p class="note" style="margin-top:8px;">📋 Copia esta lista (selecciónala y Ctrl+C) para repartirla a tus equipos antes de que se pierda de vista.</p>`;
-      }
-      loadTeacherPanel();
-    }catch(err){ showMsg(msg,'error','Ocurrió un error generando las cuentas. Revisa cuántas se alcanzaron a crear en el avance de equipos.'); }
-    $('#bulkCreateBtn').disabled = false;
-  });
-
-  async function deleteAccountBySlug(slug, name){
-    if(!confirm('¿Eliminar la cuenta "'+name+'"? Esto borra su usuario, contraseña, progreso y oferta.')) return;
-    try{ await FB.delete('accounts:'+slug); loadTeacherPanel(); }
-    catch(err){ alert('No se pudo eliminar la cuenta.'); }
-  }
-
-  function timeAgo(ts){
-    if(!ts) return '—';
-    const s = Math.max(0, Math.floor((Date.now()-ts)/1000));
-    if(s<60) return 'hace '+s+' s';
-    const m = Math.floor(s/60); if(m<60) return 'hace '+m+' min';
-    const h = Math.floor(m/60); if(h<24) return 'hace '+h+' h';
-    return 'hace '+Math.floor(h/24)+' d';
-  }
-  function teamStatusInfo(e){
-    if(e.offer) return {label:'Oferta enviada', cls:'st-sent', ts:e.offer.submittedAt};
-    if(e.progress) return {label:'Configurando…', cls:'st-progress', ts:e.progress.updatedAt};
-    return {label:'Registrado, sin actividad', cls:'st-none', ts:e.updatedAt};
-  }
-  async function loadTeacherPanel(){
-    const wrap = $('#teacherWrap');
-    if(!hasStorage()){ wrap.innerHTML = '<div class="lb-empty">Base de datos no conectada — revisa la pestaña Competencia.</div>'; return; }
-    wrap.innerHTML = '<div class="lb-empty">Cargando avance de los equipos…</div>';
-    try{
-      const entries = await fetchAllAccounts();
-      $('#teacherCount').textContent = entries.length + ' equipo(s) registrado(s)';
-      if(entries.length===0){ wrap.innerHTML = '<div class="lb-empty">Todavía no se ha registrado ningún equipo.</div>'; return; }
-      entries.sort((a,b)=>{
-        const ta = teamStatusInfo(a).ts||0, tb = teamStatusInfo(b).ts||0;
-        return tb-ta;
-      });
-      const rows = entries.map(e=>{
-        const st = teamStatusInfo(e);
-        const data = e.offer || e.progress || null;
-        const stale = st.ts ? (Date.now()-st.ts) > 15*60*1000 : true;
-        const mk = data ? (MARKETS.find(m=>m.id===data.targetMarket)||{}).name || data.targetMarket : '—';
-        return `<tr class="${stale?'stale':''}">
-          <td>${escapeHtml(e.name)}</td>
-          <td class="mono" style="color:var(--muted)">${e.group?escapeHtml(e.group):'—'}</td>
-          <td><span class="status-pill ${st.cls}">${st.label}</span></td>
-          <td class="mono">${mk}</td>
-          <td class="mono">${data&&data.qualityScore!=null?fmtN(data.qualityScore,0):'—'}</td>
-          <td class="mono">${data&&data.unitCost!=null?fmt(data.unitCost):'—'}</td>
-          <td class="mono" style="color:var(--amber)">${data&&data.efficiencyScore!=null?fmtN(data.efficiencyScore,1):'—'}</td>
-          <td class="mono" style="color:var(--muted)">${timeAgo(st.ts)}</td>
-          <td><button class="btn-remove" data-del-slug="${slugify(e.name)}" data-del-name="${escapeHtml(e.name)}" title="Eliminar cuenta">✕</button></td>
-        </tr>`;
-      }).join('');
-      wrap.innerHTML = `<div style="overflow-x:auto;"><table class="teach">
-        <thead><tr><th>Equipo</th><th>Grupo</th><th>Estado</th><th>Mercado</th><th>Calidad</th><th>Costo u.</th><th>Score</th><th>Última actividad</th><th></th></tr></thead>
-        <tbody>${rows}</tbody></table></div>`;
-    }catch(err){ wrap.innerHTML = '<div class="lb-empty">No se pudo cargar el avance. Intenta de nuevo.</div>'; }
-  }
-  $('#teacherWrap').addEventListener('click', e=>{
-    const btn = e.target.closest('[data-del-slug]'); if(!btn) return;
-    deleteAccountBySlug(btn.dataset.delSlug, btn.dataset.delName);
-  });
-  $('#refreshTeacherBtn').addEventListener('click', loadTeacherPanel);
-  setInterval(()=>{ if(state.teacherMode && document.getElementById('tab-profesor').classList.contains('active')) loadTeacherPanel(); }, 15000);
-
-  function configSummaryHtml(d){
-    const supplier = byId(SUPPLIERS, d.supplierId), labor = byId(LABOR, d.laborId), training = byId(TRAININGS, d.trainingId);
-    const machine = byId(MACHINES, d.machineId), maintenance = byId(MAINTENANCE, d.maintenanceId), safety = byId(SAFETY, d.safetyId);
-    return `
-      <div class="kv"><span>Proveedor</span><b>${supplier.name} (${supplier.tier})</b></div>
-      <div class="kv"><span>Mano de obra</span><b>${labor.name}</b></div>
-      <div class="kv"><span>Capacitación</span><b>${training.name}</b></div>
-      <div class="kv"><span>Maquinaria</span><b>${machine.name}</b></div>
-      <div class="kv"><span>Mantenimiento</span><b>${maintenance.name}</b></div>
-      <div class="kv"><span>Seguridad</span><b>${safety.name}</b></div>`;
-  }
-
-  async function generateFichas(){
-    const wrap = $('#fichasWrap');
-    if(!hasStorage()){ wrap.innerHTML = '<div class="lb-empty">Base de datos no conectada.</div>'; return; }
-    wrap.innerHTML = '<div class="lb-empty">Calculando ranking y armando fichas…</div>';
-    $('#printFichasBtn').style.display = 'none';
-    try{
-      const entries = await fetchAllAccounts();
-      if(entries.length===0){ wrap.innerHTML = '<div class="lb-empty">Todavía no hay equipos registrados.</div>'; return; }
-
-      // ---- selección de mercados (solo entre quienes SÍ enviaron oferta) ----
-      const withOffer = entries.filter(e=>e.offer);
-      const winnersBySlot = {};
-      MARKETS.forEach(m=>{
-        let candidates = withOffer.filter(e=> e.offer.targetMarket===m.id && e.offer.qualityScore>=m.minQuality);
-        if(m.id==='premium') candidates.sort((a,b)=> b.offer.qualityScore-a.offer.qualityScore || a.offer.askingPrice-b.offer.askingPrice);
-        else if(m.id==='estandar') candidates.sort((a,b)=> (b.offer.qualityScore/Math.max(0.01,b.offer.askingPrice)) - (a.offer.qualityScore/Math.max(0.01,a.offer.askingPrice)));
-        else candidates.sort((a,b)=> a.offer.askingPrice-b.offer.askingPrice || b.offer.qualityScore-a.offer.qualityScore);
-        candidates.slice(0, m.capacity).forEach(w=> winnersBySlot[w.name+'|'+(w.group||'')] = m);
-      });
-
-      // ---- ranking general de eficiencia (solo quienes enviaron oferta obtienen lugar oficial) ----
-      const ranked = withOffer.slice().sort((a,b)=> b.offer.efficiencyScore - a.offer.efficiencyScore);
-      const rankOf = {};
-      ranked.forEach((e,i)=> rankOf[e.name+'|'+(e.group||'')] = i+1);
-
-      // orden final de fichas: primero los que tienen lugar (por lugar), luego el resto por nombre
-      const sinOferta = entries.filter(e=>!e.offer);
-      const ordered = [...ranked, ...sinOferta];
-
-      const totalConLugar = ranked.length;
-      const now = new Date().toLocaleString('es-MX');
-
-      const fichasHtml = ordered.map(e=>{
-        const key = e.name+'|'+(e.group||'');
-        const rank = rankOf[key] || null;
-        const won = winnersBySlot[key];
-        const data = e.offer || e.progress || null;
-        const dataLabel = e.offer ? '' : (e.progress ? '<p class="note" style="color:var(--amber);">⚠️ Este equipo no llegó a enviar su oferta final — se muestra su última configuración registrada.</p>' : '<p class="note" style="color:var(--red);">⚠️ Este equipo no registró ninguna configuración.</p>');
-        const rankBlock = rank
-          ? `<div class="fr-num">#${rank}</div><div class="fr-lb">de ${totalConLugar} con oferta</div>`
-          : `<div class="fr-num" style="color:var(--muted);font-size:16px;">Sin<br>clasificar</div>`;
-        const resultLine = e.offer
-          ? (won ? `<span class="badge-sold">✅ Vendió en ${won.name}</span>` : '<span class="badge-nosold">❌ No vendió</span>')
-          : '<span class="badge-nosold">— No participó en la selección de mercado</span>';
-        const metrics = data ? `
-          <div class="kv"><span>Calidad del producto</span><b>${fmtN(data.qualityScore,0)} / 100</b></div>
-          <div class="kv"><span>Costo unitario</span><b>${fmt(data.unitCost)}</b></div>
-          <div class="kv"><span>Tasa de defectos</span><b>${fmtN((data.defectRate||0)*100,1)}%</b></div>
-          <div class="kv"><span>OEE</span><b>${data.oee!=null?fmtN(data.oee*100,1)+'%':'—'}</b></div>
-          <div class="kv"><span>Score de eficiencia</span><b>${fmtN(data.efficiencyScore,1)}</b></div>
-          <div class="kv"><span>Precio ofertado</span><b>${fmt(data.askingPrice||0)}</b></div>
-          <div class="kv"><span>Mercado objetivo</span><b>${(MARKETS.find(m=>m.id===data.targetMarket)||{}).name || data.targetMarket || '—'}</b></div>
-        ` : '<p class="note">Sin datos disponibles.</p>';
-        const configBlock = data ? configSummaryHtml(data) : '';
-
-        return `<div class="ficha">
-          <div class="ficha-head">
-            <div><div class="fh-name">${escapeHtml(e.name)}</div><div class="fh-group">${e.group?escapeHtml(e.group):'Sin grupo asignado'} · Ficha generada: ${now}</div></div>
-            <div class="ficha-rank">${rankBlock}</div>
-          </div>
-          <p style="margin:0 0 12px;">${resultLine}</p>
-          ${dataLabel}
-          <div class="ficha-grid">
-            <div class="ficha-block"><h5>Configuración de producción</h5>${configBlock}</div>
-            <div class="ficha-block"><h5>Métricas de desempeño</h5>${metrics}</div>
-          </div>
-        </div>`;
-      }).join('');
-
-      wrap.innerHTML = `<div id="fichasPrintArea">
-        <div class="callout">Se generaron <b>${ordered.length}</b> fichas técnicas. <b>${totalConLugar}</b> equipos alcanzaron a enviar oferta y obtuvieron un lugar oficial en el ranking de eficiencia.</div>
-        ${fichasHtml}
+  function roundResultsHtml(rd, preview){
+    const teams = rd.teams.slice();
+    const cards = MARKETS.map(m=>{
+      const st = rd.marketStats[m.id] || {n:0};
+      const ts = teams.filter(t=>t.market===m.id).sort((a,b)=>b.share-a.share);
+      const bars = ts.length ? ts.map(t=>`<div class="share-row"><span class="wname">${escapeHtml(t.name)}</span><div class="share-track"><div class="share-fill" style="width:${(t.share*100).toFixed(1)}%;background:${m.color}"></div></div><span class="wval">${pct(t.share,1)}</span></div>`).join('') : '<div class="note" style="padding:8px 0;">Nadie compitió en este mercado.</div>';
+      return `<div class="market-card">
+        <div class="m-icon">${m.icon}</div>
+        <h4 style="color:${m.color}">${m.name}</h4>
+        <div class="m-sub">${st.n||0} empresa(s) · precio medio ${st.n?fmt(st.avgPrice):'—'}</div>
+        <div class="kv plain"><span>Demanda / ofrecido</span><b>${(st.demand||0).toLocaleString('es-MX')} / ${(st.offered||0).toLocaleString('es-MX')} u.</b></div>
+        <div class="kv plain"><span>Vendido</span><b>${(st.sold||0).toLocaleString('es-MX')} u.</b></div>
+        <div class="market-results">${bars}</div>
       </div>`;
-      $('#printFichasBtn').style.display = 'inline-block';
-    }catch(err){ wrap.innerHTML = '<div class="lb-empty">No se pudieron generar las fichas. Intenta de nuevo.</div>'; }
+    }).join('');
+    teams.sort((a,b)=>b.valueAfter-a.valueAfter);
+    const rows = teams.map((t,i)=>{
+      const m = t.market ? MARKETS.find(x=>x.id===t.market) : null;
+      return `<tr>
+        <td><div class="rank-pill ${i===0?'r1':i===1?'r2':i===2?'r3':''}">${i+1}</div></td>
+        <td>${escapeHtml(t.name)}</td>
+        <td>${m?m.icon+' '+m.short:'Sin oferta'}</td>
+        <td class="mono num">${t.price?fmt(t.price):'—'}</td>
+        <td class="mono num">${m?t.sold.toLocaleString('es-MX')+' / '+t.sellable.toLocaleString('es-MX'):'—'}</td>
+        <td class="mono num">${m?pct(t.share,1):'—'}</td>
+        <td class="mono num">${fmt(t.revenue)}</td>
+        <td class="mono num" style="color:${t.profit>=0?'var(--green)':'var(--red)'}">${signed(t.profit)}</td>
+        <td class="mono num" style="color:var(--amber)">${fmt(t.valueAfter)}</td>
+      </tr>`;
+    }).join('');
+    return `${preview?'<div class="callout"><b>Vista preliminar:</b> así quedaría el mercado si se cerrara ahora. No se guardó nada.</div>':`<div class="callout">Competencia <b>${rd.round}</b> liquidada el ${new Date(rd.settledAt).toLocaleString('es-MX')}. Venta mínima garantizada: <b>${rd.minSalePct}%</b> de las unidades vendibles. Ingresos totales del mercado: <b>${fmt(rd.totalRevenue)}</b>.</div>`}
+      <div class="grid-3" style="margin-top:14px;">${cards}</div>
+      <div style="overflow-x:auto;margin-top:16px;"><table class="lb">
+        <thead><tr><th>#</th><th>Empresa</th><th>Mercado</th><th>Precio</th><th>Vendidas / vendibles</th><th>Participación</th><th>Ingresos</th><th>Utilidad</th><th>Valor final</th></tr></thead>
+        <tbody>${rows}</tbody></table></div>`;
   }
-  $('#genFichasBtn').addEventListener('click', generateFichas);
-  $('#printFichasBtn').addEventListener('click', ()=> window.print());
 
-  /* ---------------- COMPETITION TIMER ---------------- */
-  function setTeacherMode(on){
-    state.teacherMode = on;
-    $('#profesorToggle').checked = on;
-    $('#profesorToggle2').checked = on;
-    $('#adminPanel').style.display = on ? 'block' : 'none';
-    $('#teacherLockedCard').style.display = on ? 'none' : 'block';
-    $('#teacherPanelContent').style.display = on ? 'block' : 'none';
-    if(on) loadTeacherPanel();
+  /* =====================================================================
+     MI EMPRESA: valor, financiamiento, historial y análisis
+     ===================================================================== */
+  function analysisHtml(h){
+    const a = h.analysis || {items:[],recs:[]};
+    return `<div class="an-head">${escapeHtml(a.headline||('Competencia '+h.round))}</div>
+      ${a.items.map(it=>`<div class="an-item"><span class="an-dot ${it.tone}"></span><div><b>${escapeHtml(it.title)}.</b> ${escapeHtml(it.text)}</div></div>`).join('')}
+      <div class="an-recs"><div class="an-recs-title">Recomendaciones para la siguiente competencia</div><ul>${a.recs.map(r=>`<li>${escapeHtml(r)}</li>`).join('')}</ul></div>`;
   }
-  $('#profesorToggle').addEventListener('change', e=>{ setTeacherMode(e.target.checked); });
-  $('#profesorToggle2').addEventListener('change', e=>{ setTeacherMode(e.target.checked); });
+  function renderMyCompany(){
+    if(!currentAccount || !myAcct) return;
+    const a = myAcct; const v = valueOf(a); const ch = v/START_CAPITAL-1;
+    $('#coValue').textContent = fmt(v); $('#coValue').style.color = v<0?'var(--red)':v>=START_CAPITAL?'var(--green)':'var(--amber)';
+    $('#coChange').textContent = (ch>=0?'+':'−')+pct(Math.abs(ch),1)+' vs. capital inicial';
+    $('#coCash').textContent = fmt(a.cash||0);
+    $('#coDebt').textContent = fmt(a.debt||0);
+    $('#coStatus').innerHTML = v<0 ? '<span style="color:var(--red)">Quiebra técnica</span>' : (a.cash<0 ? '<span style="color:var(--red)">Sin efectivo</span>' : '<span style="color:var(--green)">Operando</span>');
+    const cfg = shared.cfg;
+    $('#loanTerms').innerHTML = `Interés: <b>${cfg.loanRate}%</b> sobre la deuda al cierre de cada competencia · Límite de crédito: <b>${fmt(cfg.creditLimit)}</b> · Crédito disponible: <b>${fmt(Math.max(0,cfg.creditLimit-(a.debt||0)))}</b>`;
+    $('#bankruptNote').hidden = !(v<0 || (a.cash||0)<=0);
+    const loans = (a.loans||[]).slice().reverse();
+    $('#loanHistory').innerHTML = loans.length ? loans.map(l=>`<div class="win-row"><span class="wname">${l.type==='pago'?'Pago a deuda':'Préstamo'} · comp. ${l.round}</span><span class="wval" style="color:${l.type==='pago'?'var(--green)':'var(--amber)'}">${l.type==='pago'?'−':'+'}${fmt(l.amount)}</span></div>`).join('') : '<p class="note">Sin movimientos de financiamiento.</p>';
 
-  async function loadCompConfig(){
-    if(!hasStorage()) return;
-    try{ const res = await FB.get('competition:config'); state.compConfig = res ? JSON.parse(res.value) : null; }
-    catch(err){ state.compConfig = null; }
-    tickCountdown();
+    const hist = (a.history||[]).slice().sort((x,y)=>x.round-y.round);
+    const rows = [];
+    for(let n=1;n<=TOTAL_ROUNDS;n++){
+      const h = hist.find(x=>x.round===n);
+      if(!h){ rows.push(`<tr><td class="mono">${n}</td><td colspan="6" class="note">${n===cfg.round && phaseOf(cfg)!=='settled'?'En curso':'Pendiente'}</td></tr>`); continue; }
+      const m = h.market ? MARKETS.find(x=>x.id===h.market) : null;
+      rows.push(`<tr><td class="mono">${n}</td><td>${m?m.icon+' '+m.short:'Sin oferta'}</td><td class="mono num">${h.participated?h.sold.toLocaleString('es-MX')+' / '+h.sellable.toLocaleString('es-MX'):'—'}</td><td class="mono num">${h.participated?pct(h.share,1):'—'}</td><td class="mono num">${h.interest?fmt(h.interest):'—'}</td><td class="mono num" style="color:${h.profit>=0?'var(--green)':'var(--red)'}">${signed(h.profit)}</td><td class="mono num" style="color:var(--amber)">${fmt(h.valueAfter)}</td></tr>`);
+    }
+    $('#coHistory').innerHTML = `<div style="overflow-x:auto;"><table class="lb"><thead><tr><th>Comp.</th><th>Mercado</th><th>Vendidas</th><th>Participación</th><th>Intereses</th><th>Utilidad</th><th>Valor al cierre</th></tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
+
+    const an = hist.slice().reverse();
+    $('#coAnalyses').innerHTML = an.length ? an.map((h,i)=>`<details class="an-card" ${i===0?'open':''}><summary>Competencia ${h.round} · ${h.profit>=0?'utilidad':'pérdida'} ${fmt(Math.abs(h.profit))}</summary>${analysisHtml(h)}</details>`).join('')
+      : '<p class="note">Tu primer análisis llega cuando el profesor cierre y liquide la competencia 1.</p>';
+    paintMyOffer();
   }
+
+  async function changeDebt(kind){
+    const msg = $('#loanMsg');
+    if(!currentAccount){ showMsg(msg,'error','Inicia sesión primero.'); return; }
+    const amount = Math.round(parseFloat($('#loanAmount').value)||0);
+    if(amount<=0){ showMsg(msg,'error','Escribe un monto mayor a cero.'); return; }
+    try{
+      await loadShared();
+      const key = 'accounts:'+currentAccount.slug;
+      const acct = await Store.get(key);
+      if(!acct){ showMsg(msg,'error','No se encontró tu cuenta.'); return; }
+      const cfg = shared.cfg;
+      acct.loans = acct.loans||[]; acct.debt = acct.debt||0;
+      if(kind==='loan'){
+        if(acct.debt+amount > cfg.creditLimit){ showMsg(msg,'error',`Rebasas el límite de crédito. Puedes pedir hasta ${fmt(Math.max(0,cfg.creditLimit-acct.debt))}.`); return; }
+        acct.cash += amount; acct.debt += amount;
+        acct.loans.push({type:'prestamo', amount, round:cfg.round, at:Date.now()});
+        showMsg(msg,'ok',`Préstamo aprobado por ${fmt(amount)}. Pagarás ${cfg.loanRate}% de interés sobre tu deuda al cierre de cada competencia.`);
+      } else {
+        if(amount>acct.debt){ showMsg(msg,'error',`Tu deuda es de ${fmt(acct.debt)}; no puedes pagar más que eso.`); return; }
+        if(amount>acct.cash){ showMsg(msg,'error',`Tu efectivo (${fmt(acct.cash)}) no alcanza para ese pago.`); return; }
+        acct.cash -= amount; acct.debt -= amount;
+        acct.loans.push({type:'pago', amount, round:cfg.round, at:Date.now()});
+        showMsg(msg,'ok',`Pagaste ${fmt(amount)} de tu deuda.`);
+      }
+      await Store.set(key, acct); myAcct = acct;
+      await refreshAll();
+    }catch(err){ showMsg(msg,'error','No se pudo registrar el movimiento. Intenta de nuevo.'); }
+  }
+  $('#requestLoanBtn').addEventListener('click', ()=>changeDebt('loan'));
+  $('#repayLoanBtn').addEventListener('click', ()=>changeDebt('repay'));
+
+  /* =====================================================================
+     CRONÓMETRO Y PANEL DEL PROFESOR
+     ===================================================================== */
   function fmt2(n){ return String(Math.max(0,Math.floor(n))).padStart(2,'0'); }
   function tickCountdown(){
+    const cfg = shared.cfg; const ph = phaseOf(cfg);
     const digits = $('#countdownDigits'), label = $('#countdownLabel'), badge = $('#statusBadge');
-    if(!state.compConfig || !state.compConfig.endAt){
-      digits.textContent = '— — : — — : — —'; digits.classList.remove('low');
-      label.textContent = 'Esperando a que el profesor inicie la competencia';
-      badge.className = 'status-badge idle'; badge.textContent = 'Sin competencia activa';
+    $('#roundChip').textContent = `Competencia ${cfg.round} de ${TOTAL_ROUNDS}`;
+    digits.classList.remove('low');
+    if(ph==='settled'){
+      digits.textContent = '00:00:00';
+      badge.className='status-badge ended'; badge.textContent='Competencia liquidada';
+      label.textContent = cfg.round<TOTAL_ROUNDS ? `Resultados listos. Esperando a que el profesor inicie la competencia ${cfg.round+1}.` : 'Torneo terminado. Revisa el ranking final y tu análisis en 08 · Mi empresa.';
       return;
     }
-    const remaining = state.compConfig.endAt - Date.now();
-    if(remaining<=0){
-      digits.textContent = '00:00:00'; digits.classList.remove('low');
-      label.textContent = '¡Tiempo terminado! Calcula los resultados finales abajo.';
-      badge.className = 'status-badge ended'; badge.textContent = 'Competencia finalizada';
+    if(ph==='idle'){
+      digits.textContent='— — : — — : — —';
+      badge.className='status-badge idle'; badge.textContent='Sin competencia activa';
+      label.textContent=`Esperando a que el profesor inicie la competencia ${cfg.round}`;
       return;
     }
+    if(ph==='ended'){
+      digits.textContent='00:00:00';
+      badge.className='status-badge ended'; badge.textContent='Tiempo terminado';
+      label.textContent='Ya no se reciben ofertas. El profesor cerrará y liquidará la competencia.';
+      return;
+    }
+    const remaining = cfg.endAt - Date.now();
     const totalSec = Math.floor(remaining/1000);
     const days = Math.floor(totalSec/86400), hours = Math.floor((totalSec%86400)/3600), mins = Math.floor((totalSec%3600)/60), secs = totalSec%60;
     digits.textContent = days>0 ? `${days}d ${fmt2(hours)}:${fmt2(mins)}:${fmt2(secs)}` : `${fmt2(hours)}:${fmt2(mins)}:${fmt2(secs)}`;
     digits.classList.toggle('low', remaining < 5*60*1000);
-    label.textContent = 'Tiempo restante de la competencia';
-    badge.className = 'status-badge running'; badge.textContent = 'Competencia en curso';
+    label.textContent = `Tiempo restante de la competencia ${cfg.round}`;
+    badge.className='status-badge running'; badge.textContent='Competencia en curso';
   }
-  setInterval(tickCountdown, 1000);
-  setInterval(loadCompConfig, 20000);
+  let lastPhase = null;
+  setInterval(()=>{ tickCountdown(); const ph = phaseOf(shared.cfg); if(lastPhase && ph!==lastPhase) refreshAll(); lastPhase = ph; }, 1000);
+  setInterval(()=>{ if(document.visibilityState!=='hidden') refreshAll(); }, 15000);
+
+  function adminMsg(type, text){ showMsg($('#adminMsg'), type, text); }
+  function armConfirm(btn, run){
+    const label = btn.textContent;
+    btn.addEventListener('click', async ()=>{
+      if(btn.dataset.armed==='1'){ btn.dataset.armed=''; btn.textContent=label; await run(); return; }
+      btn.dataset.armed='1'; btn.textContent='¿Seguro? Pulsa otra vez para confirmar';
+      setTimeout(()=>{ if(btn.dataset.armed==='1'){ btn.dataset.armed=''; btn.textContent=label; } }, 6000);
+    });
+  }
+  async function saveCfg(cfg){ await Store.set('game:config', cfg); shared.cfg = Object.assign({}, DEFAULT_CFG, cfg); }
+
+  $('#profesorToggle').addEventListener('change', e=>{
+    $('#profAuth').hidden = !e.target.checked || profUnlocked;
+    $('#adminPanel').hidden = !e.target.checked || !profUnlocked;
+    renderAdmin();
+  });
+  $('#profKeyBtn').addEventListener('click', async ()=>{
+    const msg = $('#profKeyMsg'); const k = $('#profKey').value.trim();
+    if(k.length<4){ showMsg(msg,'error','La clave debe tener al menos 4 caracteres.'); return; }
+    await loadShared();
+    const cfg = shared.cfg;
+    if(!cfg.profKey){ cfg.profKey = k; try{ await saveCfg(cfg); }catch(err){ showMsg(msg,'error','No se pudo guardar la clave.'); return; } }
+    else if(cfg.profKey!==k){ showMsg(msg,'error','Clave incorrecta.'); return; }
+    profUnlocked = true; $('#profAuth').hidden = true; $('#adminPanel').hidden = false; $('#profKey').value='';
+    renderAdmin();
+  });
+
+  function renderAdmin(){
+    if(!profUnlocked) {
+      $('#profKeyHint').textContent = shared.cfg.profKey ? 'Escribe la clave del profesor.' : 'Primera vez: la clave que escribas quedará como clave del profesor.';
+      return;
+    }
+    const cfg = shared.cfg; const ph = phaseOf(cfg);
+    const startBtn = $('#startCompBtn');
+    if(ph==='settled' && cfg.round>=TOTAL_ROUNDS){ startBtn.disabled = true; startBtn.textContent = 'Torneo terminado'; }
+    else if(ph==='settled'){ startBtn.disabled=false; startBtn.textContent = `▶ Iniciar competencia ${cfg.round+1}`; }
+    else if(ph==='running'){ startBtn.disabled=false; startBtn.textContent = `↻ Reiniciar tiempo de la competencia ${cfg.round}`; }
+    else { startBtn.disabled=false; startBtn.textContent = `▶ Iniciar competencia ${cfg.round}`; }
+    $('#settleBtn').disabled = ph==='settled';
+    $('#settleBtn').textContent = `🏁 Cerrar y liquidar competencia ${cfg.round}`;
+    $('#endNowBtn').disabled = ph!=='running';
+    const offers = shared.accounts.filter(a=>a.value.offer && a.value.offer.round===cfg.round).length;
+    $('#adminStatus').textContent = `${shared.accounts.length} empresa(s) · ${offers} oferta(s) en la competencia ${cfg.round} · fase: ${({idle:'sin iniciar',running:'en curso',ended:'tiempo terminado',settled:'liquidada'})[ph]}`;
+    if(document.activeElement && document.activeElement.closest && document.activeElement.closest('#paramsRow')) {} else {
+      $('#cfgMinSale').value = cfg.minSalePct; $('#cfgLoanRate').value = cfg.loanRate; $('#cfgCredit').value = cfg.creditLimit;
+    }
+    renderAllAnalyses();
+  }
 
   $('#startCompBtn').addEventListener('click', async ()=>{
-    if(!hasStorage()) return;
+    await loadShared();
+    const cfg = shared.cfg; const ph = phaseOf(cfg);
     const val = Math.max(1, parseFloat($('#durValue').value)||1);
     const unit = $('#durUnit').value;
-    const ms = unit==='dias' ? val*86400000 : val*3600000;
-    const cfg = {startAt: Date.now(), endAt: Date.now()+ms, durationValue: val, durationUnit: unit};
-    try{ await FB.set('competition:config', JSON.stringify(cfg)); state.compConfig = cfg; tickCountdown(); }
-    catch(err){ alert('No se pudo iniciar la competencia. Intenta de nuevo.'); }
+    const ms = unit==='dias' ? val*86400000 : unit==='horas' ? val*3600000 : val*60000;
+    if(ph==='settled'){ if(cfg.round>=TOTAL_ROUNDS) return; cfg.round += 1; }
+    cfg.status='running'; cfg.startAt=Date.now(); cfg.endAt=Date.now()+ms;
+    try{ await saveCfg(cfg); adminMsg('ok',`Competencia ${cfg.round} iniciada. Termina a las ${new Date(cfg.endAt).toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'})}.`); }
+    catch(err){ adminMsg('error','No se pudo iniciar la competencia. Intenta de nuevo.'); }
+    refreshAll();
   });
-  $('#resetCompBtn').addEventListener('click', async ()=>{
-    if(!hasStorage()) return;
-    try{ await FB.delete('competition:config'); }catch(err){}
-    state.compConfig = null; tickCountdown();
+  $('#endNowBtn').addEventListener('click', async ()=>{
+    await loadShared(); const cfg = shared.cfg;
+    if(phaseOf(cfg)!=='running') return;
+    cfg.endAt = Date.now();
+    try{ await saveCfg(cfg); adminMsg('ok','Tiempo terminado. Ya no se reciben ofertas.'); }catch(err){ adminMsg('error','No se pudo detener el cronómetro.'); }
+    refreshAll();
   });
-  $('#wipeOffersBtn').addEventListener('click', async ()=>{
-    if(!hasStorage()) return;
-    if(!confirm('¿Borrar TODAS las ofertas de todos los equipos? Las cuentas se conservan, pero perderán su oferta enviada.')) return;
+  $('#saveParamsBtn').addEventListener('click', async ()=>{
+    await loadShared(); const cfg = shared.cfg;
+    cfg.minSalePct = clamp(parseFloat($('#cfgMinSale').value)||0, 0, 100);
+    cfg.loanRate = clamp(parseFloat($('#cfgLoanRate').value)||0, 0, 100);
+    cfg.creditLimit = Math.max(0, parseFloat($('#cfgCredit').value)||0);
+    try{ await saveCfg(cfg); adminMsg('ok','Parámetros guardados.'); }catch(err){ adminMsg('error','No se pudieron guardar los parámetros.'); }
+    refreshAll();
+  });
+  $('#previewBtn').addEventListener('click', async ()=>{
+    await loadShared();
+    const {roundDoc} = settleAccounts(shared.accounts, shared.cfg);
+    $('#previewWrap').innerHTML = roundDoc.teams.some(t=>t.market) ? roundResultsHtml(roundDoc, true) : '<div class="lb-empty">Todavía no hay ofertas en esta competencia.</div>';
+  });
+  armConfirm($('#settleBtn'), async ()=>{
+    adminMsg('info','Liquidando…');
     try{
-      const entries = await FB.list('accounts:');
-      const keys = (entries && entries.keys) ? entries.keys : [];
-      for(const k of keys){
-        try{ const r = await FB.get(k); if(r && r.value){ const e = JSON.parse(r.value); e.offer=null; await FB.set(k, JSON.stringify(e)); } }catch(err){}
-      }
-      loadLeaderboard(); $('#finalResultsWrap').innerHTML='';
-      alert('Ofertas borradas.');
-    }catch(err){ alert('No se pudo completar la operación.'); }
+      await loadShared();
+      const cfg = shared.cfg;
+      if(phaseOf(cfg)==='settled'){ adminMsg('error','Esta competencia ya fue liquidada.'); return; }
+      const {updated, roundDoc} = settleAccounts(shared.accounts, cfg);
+      for(const u of updated){ await Store.set(u.key, u.value); }
+      await Store.set('rounds:r'+cfg.round, roundDoc);
+      cfg.settled = (cfg.settled||[]).concat([cfg.round]);
+      cfg.status = 'idle'; if(!cfg.endAt || cfg.endAt>Date.now()) cfg.endAt = Date.now();
+      await saveCfg(cfg);
+      $('#previewWrap').innerHTML='';
+      adminMsg('ok',`Competencia ${cfg.round} liquidada. Cada equipo ya tiene su análisis en 08 · Mi empresa.`);
+    }catch(err){ adminMsg('error','No se pudo completar la liquidación. Vuelve a intentarlo: los equipos ya liquidados no se cobran dos veces.'); }
+    refreshAll();
   });
+  armConfirm($('#wipeOffersBtn'), async ()=>{
+    try{
+      await loadShared(); const R = shared.cfg.round;
+      for(const a of shared.accounts){ if(a.value.offer && a.value.offer.round===R){ a.value.offer=null; await Store.set(a.key, a.value); } }
+      adminMsg('ok',`Se borraron las ofertas de la competencia ${R}. Las empresas conservan su valor e historial.`);
+    }catch(err){ adminMsg('error','No se pudo completar la operación.'); }
+    refreshAll();
+  });
+  armConfirm($('#resetTournamentBtn'), async ()=>{
+    try{
+      await loadShared();
+      for(const a of shared.accounts){ const v = a.value; v.cash=START_CAPITAL; v.debt=0; v.offer=null; v.history=[]; v.loans=[]; await Store.set(a.key, v); }
+      for(let n=1;n<=TOTAL_ROUNDS;n++) await Store.del('rounds:r'+n);
+      const cfg = shared.cfg;
+      await saveCfg(Object.assign({}, DEFAULT_CFG, {profKey:cfg.profKey, minSalePct:cfg.minSalePct, loanRate:cfg.loanRate, creditLimit:cfg.creditLimit}));
+      adminMsg('ok','Torneo reiniciado: todas las empresas vuelven a $1,000,000 y la competencia 1 queda lista.');
+    }catch(err){ adminMsg('error','No se pudo reiniciar el torneo.'); }
+    refreshAll();
+  });
+
+  function renderAllAnalyses(){
+    const sel = $('#anRoundSel'); const wrap = $('#allAnalyses');
+    const done = Object.keys(shared.rounds).map(Number).sort((a,b)=>a-b);
+    if(!done.length){ sel.hidden = true; wrap.innerHTML = '<p class="note">Los análisis de todos los equipos aparecen aquí al liquidar cada competencia.</p>'; return; }
+    sel.hidden = false;
+    const cur = +sel.value && done.includes(+sel.value) ? +sel.value : done[done.length-1];
+    sel.innerHTML = done.map(n=>`<option value="${n}" ${n===cur?'selected':''}>Competencia ${n}</option>`).join('');
+    const items = shared.accounts.map(a=>a.value).map(v=>({v, h:(v.history||[]).find(h=>h.round===cur)})).filter(x=>x.h)
+      .sort((a,b)=>b.h.valueAfter-a.h.valueAfter);
+    wrap.innerHTML = items.map(x=>`<details class="an-card"><summary>${escapeHtml(x.v.name)}${x.v.group?' · '+escapeHtml(x.v.group):''} — valor ${fmt(x.h.valueAfter)} (${signed(x.h.profit)})</summary>${analysisHtml(x.h)}</details>`).join('');
+  }
+  $('#anRoundSel').addEventListener('change', renderAllAnalyses);
 
   /* ---------------- INIT ---------------- */
   renderMaterials();
   renderAllChoiceGroups();
   renderStations();
-  renderMarketChoices();
-  renderMarketsInfo();
-  renderDbStatus();
   renderEventCard();
   recalcAll();
   setSessionUI();
-  loadLeaderboard();
-  loadCompConfig();
+  renderMarketChoices();
+  renderLivePrices();
+  Store.ready.then(()=>{ modeBanner(); refreshAll(); });
 })();
 </script>
 </body>
