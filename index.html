@@ -1849,7 +1849,7 @@ const DATA_ROOT = "factorysim_v2";
     if(Store.mode==='local'){
       el.hidden = false;
       el.innerHTML = Store.firebaseProblem
-        ? '<b>No se pudo conectar a Firebase</b> (' + escapeHtml(String(Store.firebaseProblem)) + '). Revisa que la configuración esté completa y que las reglas de Firestore permitan leer y escribir. Mientras tanto, el simulador trabaja en modo local: los datos solo se guardan en este navegador.'
+        ? '<b>No se pudo conectar a Firebase</b> (' + escapeHtml(String(Store.firebaseProblem)) + '). ' + (/PERMISSION/i.test(String(Store.firebaseProblem)) ? 'Firebase sí respondió, pero sus reglas no dan permiso. En Realtime Database › Reglas agrega <code>"factorysim_v2": { ".read": true, ".write": true }</code> dentro de <code>"rules"</code> y pulsa Publicar.' : 'Revisa la configuración y tu conexión a internet.') + ' Mientras tanto, el simulador trabaja en modo local: los datos solo se guardan en este navegador.'
         : '<b>Modo de prueba local:</b> todavía no hay base de datos configurada, así que los equipos, ofertas y resultados solo se guardan en este navegador. Para que todos los equipos compitan juntos, el profesor debe pegar la configuración de Firebase en el archivo.';
     } else el.hidden = true;
   }
